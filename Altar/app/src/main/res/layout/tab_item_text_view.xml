@@ -4,6 +4,6 @@
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
     android:gravity="center"
-    android:textColor="@color/colorWhite">
+    android:textColor="@color/color_selector_tab_text">
 
 </TextView>

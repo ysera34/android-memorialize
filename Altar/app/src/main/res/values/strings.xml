@@ -22,5 +22,6 @@
     <string name="title_friends">Friends</string>
     <string name="title_altar">Altar</string>
     <string name="title_obituary">Obituary</string>
+    <string name="friend_photo_image_view">friend_photo_image_view</string>
 
 </resources>

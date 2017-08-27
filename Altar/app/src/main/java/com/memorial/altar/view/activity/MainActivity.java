@@ -134,17 +134,17 @@ public class MainActivity extends AppCompatActivity
     private void setupTabLayoutIcons() {
         TextView tabOne = (TextView) LayoutInflater.from(this).inflate(R.layout.tab_item_text_view, null);
         tabOne.setText(getString(R.string.title_friends));
-        tabOne.setCompoundDrawablesWithIntrinsicBounds(0, R.drawable.ic_tab_friends_grey_300_24dp, 0, 0);
+        tabOne.setCompoundDrawablesWithIntrinsicBounds(0, R.drawable.ic_tab_friends, 0, 0);
         mTabLayout.getTabAt(0).setCustomView(tabOne);
 
         TextView tabTwo = (TextView) LayoutInflater.from(this).inflate(R.layout.tab_item_text_view, null);
         tabTwo.setText(getString(R.string.title_altar));
-        tabTwo.setCompoundDrawablesWithIntrinsicBounds(0, R.drawable.ic_tab_altar_grey_300_24dp, 0, 0);
+        tabTwo.setCompoundDrawablesWithIntrinsicBounds(0, R.drawable.ic_tab_altar, 0, 0);
         mTabLayout.getTabAt(1).setCustomView(tabTwo);
 
         TextView tabThree = (TextView) LayoutInflater.from(this).inflate(R.layout.tab_item_text_view, null);
         tabThree.setText(getString(R.string.title_obituary));
-        tabThree.setCompoundDrawablesWithIntrinsicBounds(0, R.drawable.ic_tab_obituary_grey_300_24dp, 0, 0);
+        tabThree.setCompoundDrawablesWithIntrinsicBounds(0, R.drawable.ic_tab_obituary, 0, 0);
         mTabLayout.getTabAt(2).setCustomView(tabThree);
     }
 }
