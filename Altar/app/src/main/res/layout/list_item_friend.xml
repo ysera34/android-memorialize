@@ -3,11 +3,12 @@
     xmlns:card_view="http://schemas.android.com/apk/res-auto"
     xmlns:android="http://schemas.android.com/apk/res/android"
     android:id="@+id/friend_card_view"
-    android:layout_width="80dp"
+    android:layout_width="match_parent"
     android:layout_height="wrap_content"
     card_view:cardUseCompatPadding="true"
     card_view:cardCornerRadius="4dp"
-    android:layout_marginBottom="8dp">
+    card_view:cardMaxElevation="4dp"
+    card_view:cardElevation="2dp">
 
     <RelativeLayout
         android:layout_width="match_parent"
@@ -25,7 +26,6 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:textSize="13sp"
-            android:text="@string/app_name"
             android:textColor="@color/colorGray200"
             android:gravity="center"
             android:layout_below="@+id/list_item_friend_photo_image_view"
@@ -41,8 +41,7 @@
                 android:id="@+id/list_item_friend_name_text_view"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:textSize="13sp"
-                android:text="@string/app_name"
+                android:textSize="12sp"
                 android:textColor="@color/colorGray200"
                 android:gravity="center"
                 android:layout_centerVertical="true"
@@ -52,8 +51,7 @@
                 android:id="@+id/list_item_friend_age_text_view"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:textSize="13sp"
-                android:text="@string/app_name"
+                android:textSize="12sp"
                 android:textColor="@color/colorGray200"
                 android:gravity="center"
                 android:layout_centerVertical="true"

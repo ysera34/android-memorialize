@@ -120,7 +120,7 @@ public class FriendListFragment extends Fragment {
         ArrayList<Friend> friends = new ArrayList<>();
         for (int i = 0; i < 30; i++) {
             Friend friend = new Friend();
-            friend.setAge("prefix age " + (i + 50) + "age");
+            friend.setAge("age :" + (i + 50) + "age");
             friend.setName("name " + i);
             friend.setObitDate("2017-" + "9-" + i);
             friends.add(friend);
