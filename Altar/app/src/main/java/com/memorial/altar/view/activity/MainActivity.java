@@ -80,12 +80,16 @@ public class MainActivity extends AppCompatActivity
     public boolean onNavigationItemSelected(@NonNull MenuItem item) {
         switch (item.getItemId()) {
             case R.id.nav_notifications:
+                startActivity(ConfigActivity.newIntent(getApplicationContext(), 0));
                 break;
             case R.id.nav_stars:
+                startActivity(ConfigActivity.newIntent(getApplicationContext(), 1));
                 break;
             case R.id.nav_settings:
+                startActivity(ConfigActivity.newIntent(getApplicationContext(), 2));
                 break;
             case R.id.nav_faq:
+                startActivity(ConfigActivity.newIntent(getApplicationContext(), 3));
                 break;
         }
 
