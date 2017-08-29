@@ -13,13 +13,13 @@ import com.memorial.altar.R;
  * Created by yoon on 2017. 8. 26..
  */
 
-public class AltarFragment extends Fragment {
+public class HomeAltarFragment extends Fragment {
 
-    public static AltarFragment newInstance() {
+    public static HomeAltarFragment newInstance() {
 
         Bundle args = new Bundle();
 
-        AltarFragment fragment = new AltarFragment();
+        HomeAltarFragment fragment = new HomeAltarFragment();
         fragment.setArguments(args);
         return fragment;
     }
@@ -33,7 +33,7 @@ public class AltarFragment extends Fragment {
     @Override
     public View onCreateView(LayoutInflater inflater,
                              @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
-        View view = inflater.inflate(R.layout.fragment_altar, container, false);
+        View view = inflater.inflate(R.layout.fragment_home_altar, container, false);
         return view;
     }
 

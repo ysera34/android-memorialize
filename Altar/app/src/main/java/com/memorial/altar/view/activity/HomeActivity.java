@@ -20,14 +20,18 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import com.memorial.altar.R;
-import com.memorial.altar.view.fragment.AltarFragment;
-import com.memorial.altar.view.fragment.FriendListFragment;
-import com.memorial.altar.view.fragment.ObituaryFragment;
+import com.memorial.altar.view.fragment.HomeAltarFragment;
+import com.memorial.altar.view.fragment.HomeFriendListFragment;
+import com.memorial.altar.view.fragment.HomeObituaryFragment;
 
 import java.util.ArrayList;
 import java.util.List;
 
-public class MainActivity extends AppCompatActivity
+import static com.memorial.altar.common.Common.NAV_REQUEST_FAQ;
+import static com.memorial.altar.common.Common.NAV_REQUEST_NOTIFICATIONS;
+import static com.memorial.altar.common.Common.NAV_REQUEST_SETTINGS;
+
+public class HomeActivity extends AppCompatActivity
         implements View.OnClickListener, NavigationView.OnNavigationItemSelectedListener {
 
     private Toolbar mToolbar;
@@ -38,7 +42,7 @@ public class MainActivity extends AppCompatActivity
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_main);
+        setContentView(R.layout.activity_home);
 
         mToolbar = (Toolbar) findViewById(R.id.toolbar);
 
@@ -80,16 +84,16 @@ public class MainActivity extends AppCompatActivity
     public boolean onNavigationItemSelected(@NonNull MenuItem item) {
         switch (item.getItemId()) {
             case R.id.nav_notifications:
-                startActivity(ConfigActivity.newIntent(getApplicationContext(), 0));
+                startActivity(ConfigActivity.newIntent(getApplicationContext(), NAV_REQUEST_NOTIFICATIONS));
                 break;
             case R.id.nav_stars:
-                startActivity(ConfigActivity.newIntent(getApplicationContext(), 1));
+//                startActivity(ConfigActivity.newIntent(getApplicationContext(), 1));
                 break;
             case R.id.nav_settings:
-                startActivity(ConfigActivity.newIntent(getApplicationContext(), 2));
+                startActivity(ConfigActivity.newIntent(getApplicationContext(), NAV_REQUEST_SETTINGS));
                 break;
             case R.id.nav_faq:
-                startActivity(ConfigActivity.newIntent(getApplicationContext(), 3));
+                startActivity(ConfigActivity.newIntent(getApplicationContext(), NAV_REQUEST_FAQ));
                 break;
         }
 
@@ -100,9 +104,9 @@ public class MainActivity extends AppCompatActivity
 
     private void setupViewPager(ViewPager viewPager) {
         ViewPagerAdapter adapter = new ViewPagerAdapter(getSupportFragmentManager());
-        adapter.addFragment(FriendListFragment.newInstance(), getString(R.string.title_friends));
-        adapter.addFragment(AltarFragment.newInstance(), getString(R.string.title_altar));
-        adapter.addFragment(ObituaryFragment.newInstance(), getString(R.string.title_obituary));
+        adapter.addFragment(HomeFriendListFragment.newInstance(), getString(R.string.title_friends));
+        adapter.addFragment(HomeAltarFragment.newInstance(), getString(R.string.title_altar));
+        adapter.addFragment(HomeObituaryFragment.newInstance(), getString(R.string.title_obituary));
         viewPager.setAdapter(adapter);
     }
 

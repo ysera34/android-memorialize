@@ -20,13 +20,13 @@ import java.util.ArrayList;
  * Created by yoon on 2017. 8. 26..
  */
 
-public class FriendListFragment extends Fragment {
+public class HomeFriendListFragment extends Fragment {
 
-    public static FriendListFragment newInstance() {
+    public static HomeFriendListFragment newInstance() {
 
         Bundle args = new Bundle();
 
-        FriendListFragment fragment = new FriendListFragment();
+        HomeFriendListFragment fragment = new HomeFriendListFragment();
         fragment.setArguments(args);
         return fragment;
     }
@@ -45,7 +45,7 @@ public class FriendListFragment extends Fragment {
     @Override
     public View onCreateView(LayoutInflater inflater,
                              @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
-        View view = inflater.inflate(R.layout.fragment_friend_list, container, false);
+        View view = inflater.inflate(R.layout.fragment_home_friend_list, container, false);
         mFriendRecyclerView = view.findViewById(R.id.friend_recycler_view);
         mFriendRecyclerView.setHasFixedSize(true);
         mFriendRecyclerView.setLayoutManager(new GridLayoutManager(getActivity(), 4));

@@ -10,16 +10,16 @@ import android.view.ViewGroup;
 import com.memorial.altar.R;
 
 /**
- * Created by yoon on 2017. 8. 26..
+ * Created by yoon on 2017. 8. 29..
  */
 
-public class ObituaryFragment extends Fragment {
+public class ConfigSettingsFragment extends Fragment {
 
-    public static ObituaryFragment newInstance() {
+    public static ConfigSettingsFragment newInstance() {
 
         Bundle args = new Bundle();
 
-        ObituaryFragment fragment = new ObituaryFragment();
+        ConfigSettingsFragment fragment = new ConfigSettingsFragment();
         fragment.setArguments(args);
         return fragment;
     }
@@ -33,7 +33,7 @@ public class ObituaryFragment extends Fragment {
     @Override
     public View onCreateView(LayoutInflater inflater,
                              @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
-        View view = inflater.inflate(R.layout.fragment_obituary, container, false);
+        View view = inflater.inflate(R.layout.fragment_config_settings, container, false);
         return view;
     }
 
