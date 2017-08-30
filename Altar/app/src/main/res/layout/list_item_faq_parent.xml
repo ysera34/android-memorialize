@@ -1,0 +1,41 @@
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+              android:layout_width="match_parent"
+              android:layout_height="60dp"
+              android:paddingStart="18dp"
+              android:paddingEnd="18dp"
+              android:gravity="center_vertical">
+              <!--android:background="@drawable/selector_ripple_bg_white_border_bottom">-->
+
+    <LinearLayout
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_weight="1"
+        android:orientation="horizontal"
+        android:gravity="center_vertical">
+
+        <TextView
+            android:id="@+id/list_item_faq_parent_sequence_text_view"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginEnd="10dp"
+            android:textSize="15sp"
+            android:textColor="@color/colorPrimary"/>
+
+        <TextView
+            android:id="@+id/list_item_faq_parent_question_text_view"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:textSize="15sp"
+            android:maxLines="2"
+            android:ellipsize="end"/>
+
+    </LinearLayout>
+
+    <ImageView
+        android:id="@+id/list_item_faq_parent_arrow_image_view"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:padding="12dp"
+        android:src="@drawable/ic_arrow_down_grey_300_24dp"/>
+
+</LinearLayout>
