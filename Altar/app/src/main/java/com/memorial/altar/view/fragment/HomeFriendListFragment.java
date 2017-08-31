@@ -3,16 +3,21 @@ package com.memorial.altar.view.fragment;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.v4.app.Fragment;
-import android.support.v7.widget.GridLayoutManager;
+import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
+import android.support.v7.widget.StaggeredGridLayoutManager;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.view.animation.AccelerateInterpolator;
+import android.view.animation.DecelerateInterpolator;
 import android.widget.ImageView;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import com.memorial.altar.R;
 import com.memorial.altar.model.Friend;
+import com.memorial.altar.util.OnRecyclerViewScrollListener;
 
 import java.util.ArrayList;
 
@@ -20,7 +25,7 @@ import java.util.ArrayList;
  * Created by yoon on 2017. 8. 26..
  */
 
-public class HomeFriendListFragment extends Fragment {
+public class HomeFriendListFragment extends Fragment implements View.OnClickListener {
 
     public static HomeFriendListFragment newInstance() {
 
@@ -34,6 +39,7 @@ public class HomeFriendListFragment extends Fragment {
     private RecyclerView mFriendRecyclerView;
     private ArrayList<Friend> mFriends;
     private FriendAdapter mFriendAdapter;
+    private TextView mAddFriendGroupButtonTextView;
 
     @Override
     public void onCreate(@Nullable Bundle savedInstanceState) {
@@ -48,18 +54,41 @@ public class HomeFriendListFragment extends Fragment {
         View view = inflater.inflate(R.layout.fragment_home_friend_list, container, false);
         mFriendRecyclerView = view.findViewById(R.id.friend_recycler_view);
         mFriendRecyclerView.setHasFixedSize(true);
-        mFriendRecyclerView.setLayoutManager(new GridLayoutManager(getActivity(), 4));
+        mFriendRecyclerView.setLayoutManager(new StaggeredGridLayoutManager(4, LinearLayoutManager.VERTICAL));
         mFriendAdapter = new FriendAdapter(mFriends);
         mFriendRecyclerView.setAdapter(mFriendAdapter);
+        mFriendRecyclerView.addOnScrollListener(new OnRecyclerViewScrollListener() {
+            @Override
+            public void onShowView() {
+                showAddFriendGroupTextView();
+            }
+
+            @Override
+            public void onHideView() {
+                hideAddFriendGroupTextView();
+            }
+        });
         mFriends = getFriends();
         mFriendAdapter.setFriends(mFriends);
         mFriendAdapter.notifyDataSetChanged();
+
+        mAddFriendGroupButtonTextView = view.findViewById(R.id.add_friend_group_button_text_view);
+        mAddFriendGroupButtonTextView.setOnClickListener(this);
         return view;
     }
 
     @Override
     public void onViewCreated(View view, @Nullable Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
+    }
+
+    @Override
+    public void onClick(View view) {
+        switch (view.getId()) {
+            case R.id.add_friend_group_button_text_view:
+                Toast.makeText(getActivity(), "add_friend_group_button_text_view", Toast.LENGTH_SHORT).show();
+                break;
+        }
     }
 
     private class FriendAdapter extends RecyclerView.Adapter<FriendViewHolder> {
@@ -118,7 +147,7 @@ public class HomeFriendListFragment extends Fragment {
 
     private ArrayList<Friend> getFriends() {
         ArrayList<Friend> friends = new ArrayList<>();
-        for (int i = 0; i < 30; i++) {
+        for (int i = 0; i < 50; i++) {
             Friend friend = new Friend();
             friend.setAge("age :" + (i + 50) + "age");
             friend.setName("name " + i);
@@ -126,5 +155,15 @@ public class HomeFriendListFragment extends Fragment {
             friends.add(friend);
         }
         return friends;
+    }
+
+    public void showAddFriendGroupTextView() {
+        mAddFriendGroupButtonTextView.animate().translationY(0)
+                .setInterpolator(new DecelerateInterpolator(2));
+    }
+
+    public void hideAddFriendGroupTextView() {
+        mAddFriendGroupButtonTextView.animate().translationY(mAddFriendGroupButtonTextView.getHeight())
+                .setInterpolator(new AccelerateInterpolator(2));
     }
 }

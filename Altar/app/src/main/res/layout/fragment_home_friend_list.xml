@@ -1,8 +1,8 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
-              android:orientation="vertical"
-              android:layout_width="match_parent"
-              android:layout_height="match_parent">
+<RelativeLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent">
 
     <android.support.v7.widget.RecyclerView
         android:id="@+id/friend_recycler_view"
@@ -11,4 +11,17 @@
 
     </android.support.v7.widget.RecyclerView>
 
-</LinearLayout>
+    <TextView
+        android:id="@+id/add_friend_group_button_text_view"
+        android:layout_width="match_parent"
+        android:layout_height="48dp"
+        android:layout_alignParentBottom="true"
+        android:background="@color/colorGray700"
+        android:clickable="true"
+        android:elevation="8dp"
+        android:gravity="center"
+        android:text="@string/friend_list_add_group"
+        android:textColor="@color/colorWhite"
+        android:textSize="18sp"/>
+
+</RelativeLayout>
