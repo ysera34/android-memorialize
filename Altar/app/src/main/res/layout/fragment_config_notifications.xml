@@ -1,9 +1,10 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
-              xmlns:app="http://schemas.android.com/apk/res-auto"
-              android:orientation="vertical"
-              android:layout_width="match_parent"
-              android:layout_height="match_parent">
+<LinearLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical">
 
     <android.support.v4.widget.NestedScrollView
         android:layout_width="match_parent"
@@ -16,17 +17,17 @@
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:orientation="vertical"
             android:focusable="true"
-            android:focusableInTouchMode="true">
+            android:focusableInTouchMode="true"
+            android:orientation="vertical">
 
             <RelativeLayout
                 android:id="@+id/register_layout"
                 android:layout_width="match_parent"
                 android:layout_height="@dimen/config_menu_height"
-                android:paddingStart="18dp"
+                android:background="?android:attr/selectableItemBackground"
                 android:paddingEnd="18dp"
-                android:background="?android:attr/selectableItemBackground">
+                android:paddingStart="18dp">
                 <!--android:background="@drawable/selector_ripple_bg_white_border_bottom">-->
 
                 <TextView
@@ -34,7 +35,7 @@
                     android:layout_height="wrap_content"
                     android:layout_alignParentStart="true"
                     android:layout_centerVertical="true"
-                    android:text="register notifications"
+                    android:text="@string/config_notification_1"
                     android:textSize="14sp"/>
 
                 <CheckBox
@@ -50,9 +51,9 @@
                 android:id="@+id/altar_comment_layout"
                 android:layout_width="match_parent"
                 android:layout_height="@dimen/config_menu_height"
-                android:paddingStart="18dp"
+                android:background="?android:attr/selectableItemBackground"
                 android:paddingEnd="18dp"
-                android:background="?android:attr/selectableItemBackground">
+                android:paddingStart="18dp">
                 <!--android:background="@drawable/selector_ripple_bg_white_border_bottom">-->
 
                 <TextView
@@ -60,7 +61,7 @@
                     android:layout_height="wrap_content"
                     android:layout_alignParentStart="true"
                     android:layout_centerVertical="true"
-                    android:text="altar comment notifications"
+                    android:text="@string/config_notification_2"
                     android:textSize="14sp"/>
 
                 <CheckBox
@@ -76,9 +77,9 @@
                 android:id="@+id/obituary_layout"
                 android:layout_width="match_parent"
                 android:layout_height="@dimen/config_menu_height"
-                android:paddingStart="18dp"
+                android:background="?android:attr/selectableItemBackground"
                 android:paddingEnd="18dp"
-                android:background="?android:attr/selectableItemBackground">
+                android:paddingStart="18dp">
                 <!--android:background="@drawable/selector_ripple_bg_white_border_bottom">-->
 
                 <TextView
@@ -86,7 +87,7 @@
                     android:layout_height="wrap_content"
                     android:layout_alignParentStart="true"
                     android:layout_centerVertical="true"
-                    android:text="obituary notifications"
+                    android:text="@string/config_notification_3"
                     android:textSize="14sp"/>
 
                 <CheckBox

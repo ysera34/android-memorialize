@@ -1,34 +1,35 @@
-<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
-              android:layout_width="match_parent"
-              android:layout_height="60dp"
-              android:paddingStart="18dp"
-              android:paddingEnd="18dp"
-              android:gravity="center_vertical"
-              android:background="?android:attr/selectableItemBackground">
-              <!--android:background="@drawable/selector_ripple_bg_white_border_bottom">-->
+<LinearLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="60dp"
+    android:background="?android:attr/selectableItemBackground"
+    android:gravity="center_vertical"
+    android:paddingEnd="18dp"
+    android:paddingStart="18dp">
+    <!--android:background="@drawable/selector_ripple_bg_white_border_bottom">-->
 
     <LinearLayout
         android:layout_width="0dp"
         android:layout_height="wrap_content"
         android:layout_weight="1"
-        android:orientation="horizontal"
-        android:gravity="center_vertical">
+        android:gravity="center_vertical"
+        android:orientation="horizontal">
 
         <TextView
             android:id="@+id/list_item_faq_parent_sequence_text_view"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginEnd="10dp"
-            android:textSize="15sp"
-            android:textColor="@color/colorPrimary"/>
+            android:textColor="@color/colorPrimary"
+            android:textSize="15sp"/>
 
         <TextView
             android:id="@+id/list_item_faq_parent_question_text_view"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:textSize="15sp"
+            android:ellipsize="end"
             android:maxLines="2"
-            android:ellipsize="end"/>
+            android:textSize="15sp"/>
 
     </LinearLayout>
 

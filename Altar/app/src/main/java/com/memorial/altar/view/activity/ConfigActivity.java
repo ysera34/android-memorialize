@@ -56,15 +56,15 @@ public class ConfigActivity extends AppCompatActivity {
     private void handleConfigCode(int configCode) {
         switch (configCode) {
             case NAV_REQUEST_NOTIFICATIONS:
-                setTitle("notifications");
+                setTitle(getString(R.string.nav_item_notifications));
                 mConfigFragment = ConfigNotificationsFragment.newInstance();
                 break;
             case NAV_REQUEST_SETTINGS:
-                setTitle("settings");
+                setTitle(getString(R.string.nav_item_settings));
                 mConfigFragment = ConfigSettingsFragment.newInstance();
                 break;
             case NAV_REQUEST_FAQ:
-                setTitle("faq");
+                setTitle(getString(R.string.nav_item_faq));
                 mConfigFragment = ConfigFAQFragment.newInstance();
                 break;
         }

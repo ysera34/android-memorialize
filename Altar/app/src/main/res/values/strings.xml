@@ -33,5 +33,12 @@
     </string-array>
     
     <string name="faq_sample_answer">this is sample answer.</string>
+    <string name="home_info_skip_button">skip</string>
+    <string name="config_notification_1">register notifications</string>
+    <string name="config_notification_2">altar comment notifications</string>
+    <string name="config_notification_3">obituary notifications</string>
+    <string name="config_settings_1">your email @ email.com</string>
+    <string name="config_settings_2">change password</string>
+    <string name="config_settings_3">sign out</string>
 
 </resources>
