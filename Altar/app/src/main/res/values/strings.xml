@@ -24,4 +24,14 @@
     <string name="title_obituary">Obituary</string>
     <string name="friend_photo_image_view">friend_photo_image_view</string>
 
+    <string-array name="faq_sample_questions_array">
+        <item>what is this app?</item>
+        <item>what is this app?</item>
+        <item>what is this app?</item>
+        <item>what is this app?</item>
+        <item>what is this app?</item>
+    </string-array>
+    
+    <string name="faq_sample_answer">this is sample answer.</string>
+
 </resources>
