@@ -20,6 +20,7 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import com.memorial.altar.R;
+import com.memorial.altar.util.UserSharedPreferences;
 import com.memorial.altar.view.fragment.HomeAltarFragment;
 import com.memorial.altar.view.fragment.HomeFriendListFragment;
 import com.memorial.altar.view.fragment.HomeObituaryFragment;
@@ -42,6 +43,11 @@ public class HomeActivity extends AppCompatActivity
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+
+        if (!UserSharedPreferences.getStoredHomeIntroSlide(getApplicationContext())) {
+            startActivity(HomeInfoActivity.newIntent(getApplicationContext()));
+        }
+
         setContentView(R.layout.activity_home);
 
         mToolbar = (Toolbar) findViewById(R.id.toolbar);

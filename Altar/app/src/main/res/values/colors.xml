@@ -2,8 +2,11 @@
 <resources>
     <color name="colorPrimary">@color/colorGray500</color>
     <color name="colorPrimaryDark">@color/colorGray700</color>
-    <color name="colorAccent">@color/colorTeal500</color>
+    <color name="colorAccent">#efc700</color>
     <color name="colorMainBackground">@color/colorGray200</color>
+
+    <color name="indicator_selected_color">@color/colorAccent</color>
+    <color name="indicator_unselected_color">#e5e5e5</color>
 
     <color name="colorWhite">#FFFFFF</color>
 
