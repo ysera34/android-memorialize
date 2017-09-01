@@ -1,8 +1,11 @@
 package com.memorial.altar.view.fragment;
 
+import android.content.DialogInterface;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
+import android.support.design.widget.TextInputLayout;
 import android.support.v4.app.Fragment;
+import android.support.v7.app.AlertDialog;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.support.v7.widget.StaggeredGridLayoutManager;
@@ -11,7 +14,10 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.view.animation.AccelerateInterpolator;
 import android.view.animation.DecelerateInterpolator;
+import android.widget.ArrayAdapter;
+import android.widget.EditText;
 import android.widget.ImageView;
+import android.widget.Spinner;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -86,7 +92,7 @@ public class HomeFriendListFragment extends Fragment implements View.OnClickList
     public void onClick(View view) {
         switch (view.getId()) {
             case R.id.add_friend_group_button_text_view:
-                Toast.makeText(getActivity(), "add_friend_group_button_text_view", Toast.LENGTH_SHORT).show();
+                addFriendGroupShowDialog();
                 break;
         }
     }
@@ -165,5 +171,36 @@ public class HomeFriendListFragment extends Fragment implements View.OnClickList
     public void hideAddFriendGroupTextView() {
         mAddFriendGroupButtonTextView.animate().translationY(mAddFriendGroupButtonTextView.getHeight())
                 .setInterpolator(new AccelerateInterpolator(2));
+    }
+
+    public void addFriendGroupShowDialog() {
+        LayoutInflater layoutInflater = LayoutInflater.from(getActivity());
+        View view = layoutInflater.inflate(R.layout.dialog_add_friend_group, null);
+        final Spinner groupScopeSpinner = view.findViewById(R.id.add_group_scope_spinner);
+        final String[] groupScopeArray = getResources().getStringArray(R.array.add_friend_group_scope);
+        ArrayAdapter<String> adapter = new ArrayAdapter<String>(getActivity(),
+                android.R.layout.simple_dropdown_item_1line, groupScopeArray);
+        groupScopeSpinner.setAdapter(adapter);
+        TextInputLayout addFriendGroupNameTextLayout = view.findViewById(R.id.add_group_name_text_input_layout);
+        final EditText addFriendGroupNameEditText = view.findViewById(R.id.add_group_name_edit_text);
+
+        AlertDialog.Builder builder = new AlertDialog.Builder(getActivity());
+        builder.setTitle(getString(R.string.friend_list_add_group));
+        builder.setView(view);
+        builder.setPositiveButton(android.R.string.ok, new DialogInterface.OnClickListener() {
+            @Override
+            public void onClick(DialogInterface dialogInterface, int i) {
+                Toast.makeText(getActivity(), "scope : " + groupScopeArray[groupScopeSpinner.getSelectedItemPosition()] +
+                " group name : " + addFriendGroupNameEditText.getText().toString(), Toast.LENGTH_SHORT).show();
+            }
+        });
+        builder.setNegativeButton(android.R.string.no, new DialogInterface.OnClickListener() {
+            @Override
+            public void onClick(DialogInterface dialogInterface, int i) {
+
+            }
+        });
+        AlertDialog dialog = builder.create();
+        dialog.show();
     }
 }

@@ -41,5 +41,17 @@
     <string name="config_settings_2">change password</string>
     <string name="config_settings_3">sign out</string>
     <string name="friend_list_add_group">add group</string>
+    <string name="friend_list_add_group_name">group_name</string>
+    <string name="friend_group_title">People who registed with me</string>
+
+    <string-array name="add_friend_group_scope">
+        <item>elementary school</item>
+        <item>middle school</item>
+        <item>high school</item>
+        <item>university</item>
+        <item>company</item>
+        <item>social, group</item>
+        <item>the other</item>
+    </string-array>
 
 </resources>

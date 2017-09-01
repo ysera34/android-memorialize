@@ -4,10 +4,21 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent">
 
+    <TextView
+        android:id="@+id/friend_group_title_text_view"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:padding="12dp"
+        android:gravity="center"
+        android:text="@string/friend_group_title"
+        android:textColor="@color/colorGray300"
+        android:background="@color/colorGray900"/>
+
     <android.support.v7.widget.RecyclerView
         android:id="@+id/friend_recycler_view"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content">
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/friend_group_title_text_view">
 
     </android.support.v7.widget.RecyclerView>
 
