@@ -17,6 +17,7 @@ import android.view.animation.DecelerateInterpolator;
 import android.widget.ArrayAdapter;
 import android.widget.EditText;
 import android.widget.ImageView;
+import android.widget.LinearLayout;
 import android.widget.Spinner;
 import android.widget.TextView;
 import android.widget.Toast;
@@ -26,6 +27,8 @@ import com.memorial.altar.model.Friend;
 import com.memorial.altar.util.OnRecyclerViewScrollListener;
 
 import java.util.ArrayList;
+
+import static android.support.v7.widget.ListViewCompat.NO_POSITION;
 
 /**
  * Created by yoon on 2017. 8. 26..
@@ -46,11 +49,14 @@ public class HomeFriendListFragment extends Fragment implements View.OnClickList
     private ArrayList<Friend> mFriends;
     private FriendAdapter mFriendAdapter;
     private TextView mAddFriendGroupButtonTextView;
+    private LinearLayout mFriendGroupLayout;
+    private ArrayList<String> mFriendGroupNames;
 
     @Override
     public void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         mFriends = new ArrayList<>();
+        mFriendGroupNames = new ArrayList<>();
     }
 
     @Nullable
@@ -58,11 +64,13 @@ public class HomeFriendListFragment extends Fragment implements View.OnClickList
     public View onCreateView(LayoutInflater inflater,
                              @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
         View view = inflater.inflate(R.layout.fragment_home_friend_list, container, false);
+        mFriendGroupLayout = view.findViewById(R.id.friend_group_layout);
         mFriendRecyclerView = view.findViewById(R.id.friend_recycler_view);
         mFriendRecyclerView.setHasFixedSize(true);
         mFriendRecyclerView.setLayoutManager(new StaggeredGridLayoutManager(4, LinearLayoutManager.VERTICAL));
         mFriendAdapter = new FriendAdapter(mFriends);
         mFriendRecyclerView.setAdapter(mFriendAdapter);
+        mFriendRecyclerView.setNestedScrollingEnabled(false);
         mFriendRecyclerView.addOnScrollListener(new OnRecyclerViewScrollListener() {
             @Override
             public void onShowView() {
@@ -127,7 +135,7 @@ public class HomeFriendListFragment extends Fragment implements View.OnClickList
         }
     }
 
-    private class FriendViewHolder extends RecyclerView.ViewHolder {
+    private class FriendViewHolder extends RecyclerView.ViewHolder implements View.OnLongClickListener {
 
         private Friend mFriend;
         private ImageView mPhotoImageView;
@@ -137,6 +145,7 @@ public class HomeFriendListFragment extends Fragment implements View.OnClickList
 
         public FriendViewHolder(View itemView) {
             super(itemView);
+            itemView.setOnLongClickListener(this);
             mPhotoImageView = itemView.findViewById(R.id.list_item_friend_photo_image_view);
             mObitDateTextView = itemView.findViewById(R.id.list_item_friend_obit_date_text_view);
             mNameTextView = itemView.findViewById(R.id.list_item_friend_name_text_view);
@@ -148,6 +157,12 @@ public class HomeFriendListFragment extends Fragment implements View.OnClickList
             mObitDateTextView.setText(mFriend.getObitDate());
             mNameTextView.setText(mFriend.getName());
             mAgeTextView.setText(mFriend.getAge());
+        }
+
+        @Override
+        public boolean onLongClick(View view) {
+            assignFriendGroupShowDialog();
+            return false;
         }
     }
 
@@ -163,17 +178,17 @@ public class HomeFriendListFragment extends Fragment implements View.OnClickList
         return friends;
     }
 
-    public void showAddFriendGroupTextView() {
+    private void showAddFriendGroupTextView() {
         mAddFriendGroupButtonTextView.animate().translationY(0)
                 .setInterpolator(new DecelerateInterpolator(2));
     }
 
-    public void hideAddFriendGroupTextView() {
+    private void hideAddFriendGroupTextView() {
         mAddFriendGroupButtonTextView.animate().translationY(mAddFriendGroupButtonTextView.getHeight())
                 .setInterpolator(new AccelerateInterpolator(2));
     }
 
-    public void addFriendGroupShowDialog() {
+    private void addFriendGroupShowDialog() {
         LayoutInflater layoutInflater = LayoutInflater.from(getActivity());
         View view = layoutInflater.inflate(R.layout.dialog_add_friend_group, null);
         final Spinner groupScopeSpinner = view.findViewById(R.id.add_group_scope_spinner);
@@ -190,8 +205,10 @@ public class HomeFriendListFragment extends Fragment implements View.OnClickList
         builder.setPositiveButton(android.R.string.ok, new DialogInterface.OnClickListener() {
             @Override
             public void onClick(DialogInterface dialogInterface, int i) {
-                Toast.makeText(getActivity(), "scope : " + groupScopeArray[groupScopeSpinner.getSelectedItemPosition()] +
-                " group name : " + addFriendGroupNameEditText.getText().toString(), Toast.LENGTH_SHORT).show();
+//                Toast.makeText(getActivity(), "scope : " + groupScopeArray[groupScopeSpinner.getSelectedItemPosition()] +
+//                " group name : " + addFriendGroupNameEditText.getText().toString(), Toast.LENGTH_SHORT).show();
+                addFriendGroupLayout(groupScopeArray[groupScopeSpinner.getSelectedItemPosition()] + " | "
+                        + addFriendGroupNameEditText.getText().toString(), mFriendGroupLayout);
             }
         });
         builder.setNegativeButton(android.R.string.no, new DialogInterface.OnClickListener() {
@@ -202,5 +219,48 @@ public class HomeFriendListFragment extends Fragment implements View.OnClickList
         });
         AlertDialog dialog = builder.create();
         dialog.show();
+    }
+
+    private void addFriendGroupLayout(String groupName, LinearLayout parentLayout) {
+        LayoutInflater layoutInflater = LayoutInflater.from(getActivity());
+        TextView groupNameTextView = (TextView) layoutInflater.inflate(R.layout.layout_friend_group_name_text_view, null);
+        groupNameTextView.setText(String.valueOf(groupName));
+        mFriendGroupNames.add((groupName));
+        parentLayout.addView(groupNameTextView, 0);
+        RecyclerView groupRecyclerView = (RecyclerView) layoutInflater.inflate(R.layout.layout_friend_group_recycler_view, null);
+        parentLayout.addView(groupRecyclerView, 1);
+        Toast.makeText(getActivity(), "\"" + groupName + "\"" + " is added.", Toast.LENGTH_SHORT).show();
+    }
+
+    private void assignFriendGroupShowDialog() {
+        if (mFriendGroupNames.size() == 0) {
+            Toast.makeText(getActivity(), R.string.promote_add_group, Toast.LENGTH_SHORT).show();
+            return;
+        }
+        CharSequence[] cs = mFriendGroupNames.toArray(new CharSequence[mFriendGroupNames.size()]);
+        AlertDialog.Builder builder = new AlertDialog.Builder(getActivity());
+        builder.setTitle(getString(R.string.friend_list_assign_group));
+        builder.setSingleChoiceItems(cs, NO_POSITION, new DialogInterface.OnClickListener() {
+            @Override
+            public void onClick(DialogInterface dialogInterface, int i) {
+                Toast.makeText(getActivity(), "position : " + i, Toast.LENGTH_SHORT).show();
+            }
+        });
+        builder.setPositiveButton(android.R.string.ok, new DialogInterface.OnClickListener() {
+            @Override
+            public void onClick(DialogInterface dialogInterface, int i) {
+
+            }
+        });
+        builder.setNegativeButton(android.R.string.no, new DialogInterface.OnClickListener() {
+            @Override
+            public void onClick(DialogInterface dialogInterface, int i) {
+
+            }
+        });
+
+        AlertDialog dialog = builder.create();
+        dialog.show();
+
     }
 }

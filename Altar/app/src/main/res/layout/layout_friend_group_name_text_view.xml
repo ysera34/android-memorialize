@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="utf-8"?>
+<TextView
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    android:id="@+id/friend_group_name_text_view"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:background="@color/colorGray900"
+    android:gravity="center"
+    android:padding="12dp"
+    android:text="@string/friend_group_title"
+    android:textColor="@color/colorGray300"/>

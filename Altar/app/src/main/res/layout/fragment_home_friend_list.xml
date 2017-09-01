@@ -1,26 +1,40 @@
 <?xml version="1.0" encoding="utf-8"?>
 <RelativeLayout
     xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     android:layout_width="match_parent"
     android:layout_height="match_parent">
 
-    <TextView
-        android:id="@+id/friend_group_title_text_view"
+    <android.support.v4.widget.NestedScrollView
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:padding="12dp"
-        android:gravity="center"
-        android:text="@string/friend_group_title"
-        android:textColor="@color/colorGray300"
-        android:background="@color/colorGray900"/>
+        android:layout_height="match_parent"
+        android:clipToPadding="true"
+        android:fillViewport="true"
+        app:layout_behavior="@string/appbar_scrolling_view_behavior">
 
-    <android.support.v7.widget.RecyclerView
-        android:id="@+id/friend_recycler_view"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_below="@+id/friend_group_title_text_view">
+        <LinearLayout
+            android:id="@+id/friend_group_layout"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:descendantFocusability="blocksDescendants"
+            android:focusable="true"
+            android:focusableInTouchMode="true"
+            android:orientation="vertical">
 
-    </android.support.v7.widget.RecyclerView>
+            <include
+                android:id="@+id/friend_group_name_text_view"
+                layout="@layout/layout_friend_group_name_text_view"/>
+
+            <android.support.v7.widget.RecyclerView
+                android:id="@+id/friend_recycler_view"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content">
+
+            </android.support.v7.widget.RecyclerView>
+
+        </LinearLayout>
+
+    </android.support.v4.widget.NestedScrollView>
 
     <TextView
         android:id="@+id/add_friend_group_button_text_view"
@@ -34,5 +48,4 @@
         android:text="@string/friend_list_add_group"
         android:textColor="@color/colorWhite"
         android:textSize="18sp"/>
-
 </RelativeLayout>
