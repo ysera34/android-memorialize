@@ -5,6 +5,7 @@ import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.design.widget.TextInputLayout;
 import android.support.v4.app.Fragment;
+import android.support.v4.widget.NestedScrollView;
 import android.support.v7.app.AlertDialog;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
@@ -43,6 +44,7 @@ public class HomeFriendListFragment extends Fragment implements View.OnClickList
         return fragment;
     }
 
+    private NestedScrollView mFriendNestedScrollView;
     private RecyclerView mFriendRecyclerView;
     private ArrayList<Friend> mFriends;
     private FriendAdapter mFriendAdapter;
@@ -70,6 +72,19 @@ public class HomeFriendListFragment extends Fragment implements View.OnClickList
     public View onCreateView(LayoutInflater inflater,
                              @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
         View view = inflater.inflate(R.layout.fragment_home_friend_list, container, false);
+        mFriendNestedScrollView = view.findViewById(R.id.friend_nested_scroll_view);
+        mFriendNestedScrollView.setOnScrollChangeListener(new NestedScrollView.OnScrollChangeListener() {
+            @Override
+            public void onScrollChange(NestedScrollView v, int scrollX, int scrollY, int oldScrollX, int oldScrollY) {
+                View view = v.getChildAt(v.getChildCount() - 1);
+                int diff = (view.getBottom() - (v.getHeight() + v.getScrollY()));
+                if (diff == 0) { // or diff <= 10
+                    hideAddFriendGroupTextView();
+                } else {
+                    showAddFriendGroupTextView();
+                }
+            }
+        });
         mFriendGroupLayout = view.findViewById(R.id.friend_group_layout);
         mFriendRecyclerView = view.findViewById(R.id.friend_recycler_view);
         mFriendRecyclerView.setHasFixedSize(true);
@@ -77,17 +92,6 @@ public class HomeFriendListFragment extends Fragment implements View.OnClickList
         mFriendAdapter = new FriendAdapter(mFriends);
         mFriendRecyclerView.setAdapter(mFriendAdapter);
         mFriendRecyclerView.setNestedScrollingEnabled(false);
-//        mFriendRecyclerView.addOnScrollListener(new OnRecyclerViewScrollListener() {
-//            @Override
-//            public void onShowView() {
-//                showAddFriendGroupTextView();
-//            }
-//
-//            @Override
-//            public void onHideView() {
-//                hideAddFriendGroupTextView();
-//            }
-//        });
         mFriends = getFriends();
         mFriendAdapter.setFriends(mFriends);
         mFriendAdapter.notifyDataSetChanged();
@@ -474,4 +478,6 @@ public class HomeFriendListFragment extends Fragment implements View.OnClickList
             return false;
         }
     }
+
+
 }
