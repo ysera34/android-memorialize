@@ -14,6 +14,7 @@ import android.widget.LinearLayout;
 import android.widget.TextView;
 
 import com.memorial.altar.R;
+import com.memorial.altar.util.UserSharedPreferences;
 import com.memorial.altar.view.fragment.HomeInfoFragment;
 
 import java.util.ArrayList;
@@ -74,7 +75,7 @@ public class HomeInfoActivity extends AppCompatActivity implements View.OnClickL
     public void onClick(View view) {
         switch (view.getId()) {
             case R.id.home_info_skip_button_text_view:
-//                UserSharedPreferences.setStoredHomeIntroSlide(getApplicationContext(), true);
+                UserSharedPreferences.setStoredHomeIntroSlide(getApplicationContext(), true);
                 finish();
                 break;
         }

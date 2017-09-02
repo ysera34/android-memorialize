@@ -6,11 +6,24 @@ package com.memorial.altar.model;
 
 public class Friend {
 
+    private int mGroupId;
     private String mImagePath;
     private String mName;
     private String mAge;
     private String mObitDate;
     private boolean mIsCommented;
+
+    public Friend() {
+        setGroupId(-1);
+    }
+
+    public int getGroupId() {
+        return mGroupId;
+    }
+
+    public void setGroupId(int groupId) {
+        mGroupId = groupId;
+    }
 
     public String getImagePath() {
         return mImagePath;

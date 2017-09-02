@@ -41,6 +41,8 @@
     <string name="config_settings_2">change password</string>
     <string name="config_settings_3">sign out</string>
     <string name="friend_list_add_group">add group</string>
+    <string name="friend_list_remove_group">remove group</string>
+    <string name="friend_list_remove_group_message">Are you sure you want to delete the group \"%s\"? </string>
     <string name="friend_list_assign_group">assign group</string>
     <string name="friend_list_add_group_name">group_name</string>
     <string name="friend_group_title">People who registered with me</string>

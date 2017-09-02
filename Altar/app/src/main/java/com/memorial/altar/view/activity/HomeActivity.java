@@ -113,6 +113,7 @@ public class HomeActivity extends AppCompatActivity
         adapter.addFragment(HomeFriendListFragment.newInstance(), getString(R.string.title_friends));
         adapter.addFragment(HomeAltarFragment.newInstance(), getString(R.string.title_altar));
         adapter.addFragment(HomeObituaryFragment.newInstance(), getString(R.string.title_obituary));
+        viewPager.setOffscreenPageLimit(adapter.getCount() - 1);
         viewPager.setAdapter(adapter);
     }
 
