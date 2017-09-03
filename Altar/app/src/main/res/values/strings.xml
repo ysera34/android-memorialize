@@ -47,6 +47,9 @@
     <string name="friend_list_add_group_name">group_name</string>
     <string name="friend_group_title">People who registered with me</string>
     <string name="promote_add_group">Try adding a group</string>
+    <string name="friend_altar">Friend Altar</string>
+    <string name="altar_comment_button">altar read / create comment</string>
+    <string name="public_last_will_title">public last will title</string>
 
     <string-array name="add_friend_group_scope">
         <item>elementary school</item>

@@ -1,0 +1,86 @@
+<?xml version="1.0" encoding="utf-8"?>
+<android.support.v4.widget.NestedScrollView
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent">
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:orientation="vertical"
+        android:background="@color/colorGray500">
+
+        <RelativeLayout
+            android:layout_width="120dp"
+            android:layout_height="160dp"
+            android:layout_gravity="center_horizontal"
+            android:layout_marginTop="10dp"
+            android:padding="16dp">
+
+            <ImageView
+                android:id="@+id/altar_user_image_view"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:scaleType="center"/>
+
+        </RelativeLayout>
+
+        <TextView
+            android:id="@+id/altar_user_name_text_view"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center_horizontal"
+            android:layout_marginTop="10dp"
+            android:textColor="@color/colorFont"
+            android:textSize="20sp"/>
+
+        <TextView
+            android:id="@+id/altar_user_birth_text_view"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center_horizontal"
+            android:layout_marginTop="10dp"
+            android:textColor="@color/colorFont"
+            android:textSize="14sp"/>
+
+        <TextView
+            android:id="@+id/altar_user_gender_text_view"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center_horizontal"
+            android:layout_marginTop="8dp"
+            android:textColor="@color/colorFont"
+            android:textSize="14sp"/>
+
+        <android.support.v7.widget.RecyclerView
+            android:id="@+id/altar_user_group_name_recycler_view"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginBottom="16dp"
+            android:layout_marginTop="16dp">
+
+        </android.support.v7.widget.RecyclerView>
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center_horizontal"
+            android:layout_marginTop="10dp"
+            android:textColor="@color/colorFont"
+            android:textSize="20sp"
+            android:text="@string/public_last_will_title"/>
+
+        <TextView
+            android:id="@+id/altar_user_public_last_will_message_text_view"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center_horizontal"
+            android:layout_marginTop="10dp"
+            android:layout_marginBottom="16dp"
+            android:gravity="center_horizontal"
+            android:lineSpacingExtra="3sp"
+            android:textColor="@color/colorFont"
+            android:textSize="14sp"/>
+
+    </LinearLayout>
+</android.support.v4.widget.NestedScrollView>

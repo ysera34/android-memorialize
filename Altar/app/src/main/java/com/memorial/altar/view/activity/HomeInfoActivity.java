@@ -142,10 +142,10 @@ public class HomeInfoActivity extends AppCompatActivity implements View.OnClickL
         for (int i = 0; i < mInfoIndicatorTextViews.size(); i++) {
             if (i == position) {
                 mInfoIndicatorTextViews.get(i)
-                        .setBackgroundResource(R.drawable.widget_home_info_selected_indicator_circle);
+                        .setBackgroundResource(R.drawable.widget_home_info_selected_true_indicator_circle);
             } else {
                 mInfoIndicatorTextViews.get(i)
-                        .setBackgroundResource(R.drawable.widget_home_info_unselected_indicator_circle);
+                        .setBackgroundResource(R.drawable.widget_home_info_selected_false_indicator_circle);
             }
         }
     }

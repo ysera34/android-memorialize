@@ -5,11 +5,10 @@
     android:id="@+id/toolbar"
     android:layout_width="match_parent"
     android:layout_height="@dimen/toolbar_height"
-    android:background="@color/colorToolbar"
+    android:background="?attr/colorPrimary"
     android:minHeight="?attr/actionBarSize"
     app:popupTheme="@style/ThemeOverlay.AppCompat.Light"
     app:theme="@style/ThemeOverlay.AppCompat.Dark.ActionBar">
-    <!--android:background="?attr/colorPrimary"-->
     <!--app:layout_scrollFlags="scroll|enterAlways"-->
     <include
         android:id="@+id/toolbar_star_text_view"

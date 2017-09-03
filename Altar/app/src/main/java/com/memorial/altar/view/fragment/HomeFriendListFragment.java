@@ -26,6 +26,7 @@ import android.widget.Toast;
 
 import com.memorial.altar.R;
 import com.memorial.altar.model.Friend;
+import com.memorial.altar.view.activity.AltarActivity;
 
 import java.util.ArrayList;
 
@@ -147,7 +148,7 @@ public class HomeFriendListFragment extends Fragment implements View.OnClickList
     }
 
     private class FriendViewHolder extends RecyclerView.ViewHolder
-            implements View.OnLongClickListener {
+            implements View.OnClickListener, View.OnLongClickListener {
 
         private Friend mFriend;
         private ImageView mPhotoImageView;
@@ -157,6 +158,7 @@ public class HomeFriendListFragment extends Fragment implements View.OnClickList
 
         public FriendViewHolder(View itemView) {
             super(itemView);
+            itemView.setOnClickListener(this);
             itemView.setOnLongClickListener(this);
             mPhotoImageView = itemView.findViewById(R.id.list_item_friend_photo_image_view);
             mObitDateTextView = itemView.findViewById(R.id.list_item_friend_obit_date_text_view);
@@ -171,9 +173,16 @@ public class HomeFriendListFragment extends Fragment implements View.OnClickList
                 mNameTextView.setText(mFriend.getName());
                 mAgeTextView.setText(mFriend.getAge());
             } else {
-                mObitDateTextView.setText("");
-                mNameTextView.setText("");
-                mAgeTextView.setText("");
+                mObitDateTextView.setText(null);
+                mNameTextView.setText(null);
+                mAgeTextView.setText(null);
+            }
+        }
+
+        @Override
+        public void onClick(View view) {
+            if (mFriend.getObitDate() != null) {
+                startMemorialFriendActivity(mFriend.getId());
             }
         }
 
@@ -182,7 +191,7 @@ public class HomeFriendListFragment extends Fragment implements View.OnClickList
             if (mFriend.getObitDate() != null) {
                 assignFriendGroupShowDialog(mFriend);
             }
-            return false;
+            return true;
         }
     }
 
@@ -192,7 +201,7 @@ public class HomeFriendListFragment extends Fragment implements View.OnClickList
             Friend friend = new Friend();
             friend.setAge("age :" + (i + 50) + "age");
             friend.setName("name " + i);
-            if (i % 2 == 0) {
+            if (i <= 30) {
                 friend.setObitDate("2017-" + "9-" + i);
             }
             friends.add(friend);
@@ -442,7 +451,7 @@ public class HomeFriendListFragment extends Fragment implements View.OnClickList
     }
 
     private class AddedFriendViewHolder extends RecyclerView.ViewHolder
-            implements View.OnLongClickListener {
+            implements View.OnClickListener, View.OnLongClickListener {
 
         private Friend mAddedFriend;
         private ImageView mPhotoImageView;
@@ -452,6 +461,7 @@ public class HomeFriendListFragment extends Fragment implements View.OnClickList
 
         public AddedFriendViewHolder(View itemView) {
             super(itemView);
+            itemView.setOnClickListener(this);
             itemView.setOnLongClickListener(this);
             mPhotoImageView = itemView.findViewById(R.id.list_item_friend_photo_image_view);
             mObitDateTextView = itemView.findViewById(R.id.list_item_friend_obit_date_text_view);
@@ -466,18 +476,25 @@ public class HomeFriendListFragment extends Fragment implements View.OnClickList
                 mNameTextView.setText(mAddedFriend.getName());
                 mAgeTextView.setText(mAddedFriend.getAge());
             } else {
-                mObitDateTextView.setText("");
-                mNameTextView.setText("");
-                mAgeTextView.setText("");
+                mObitDateTextView.setText(null);
+                mNameTextView.setText(null);
+                mAgeTextView.setText(null);
             }
+        }
+
+        @Override
+        public void onClick(View view) {
+            startMemorialFriendActivity(mAddedFriend.getId());
         }
 
         @Override
         public boolean onLongClick(View view) {
             assignFriendGroupShowDialog(mAddedFriend);
-            return false;
+            return true;
         }
     }
 
-
+    private void startMemorialFriendActivity(int friendId) {
+        startActivity(AltarActivity.newIntent(getActivity(), friendId));
+    }
 }

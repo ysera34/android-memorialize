@@ -1,0 +1,36 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+              xmlns:app="http://schemas.android.com/apk/res-auto"
+              android:orientation="vertical"
+              android:layout_width="match_parent"
+              android:layout_height="match_parent">
+
+    <android.support.v7.widget.Toolbar
+        android:id="@+id/altar_toolbar"
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/toolbar_height"
+        android:background="?attr/colorPrimary"
+        android:minHeight="?attr/actionBarSize"
+        app:popupTheme="@style/ThemeOverlay.AppCompat.Light"
+        app:theme="@style/ThemeOverlay.AppCompat.Dark.ActionBar"/>
+
+    <FrameLayout
+        android:id="@+id/altar_container"
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:layout_weight="1">
+
+    </FrameLayout>
+
+    <TextView
+        android:id="@+id/altar_comment_button_text_view"
+        android:layout_width="match_parent"
+        android:layout_height="48dp"
+        android:background="@color/colorGray700"
+        android:clickable="true"
+        android:elevation="8dp"
+        android:gravity="center"
+        android:text="@string/altar_comment_button"
+        android:textColor="@color/colorWhite"
+        android:textSize="18sp"/>
+</LinearLayout>

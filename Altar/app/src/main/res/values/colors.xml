@@ -1,18 +1,19 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
-    <color name="colorPrimary">@color/colorGray500</color>
-    <color name="colorPrimaryDark">@color/colorGray700</color>
+    <color name="colorPrimary">@color/colorBlack</color>
+    <color name="colorPrimaryDark">@color/colorBlack</color>
     <color name="colorAccent">@color/colorTeal500</color>
     <color name="colorMainBackground">@color/colorGray200</color>
+    <color name="colorTabLayout">@color/colorGray900</color>
+    <color name="colorSelectedTrueIndicator">@color/colorAccent</color>
+    <color name="colorSelectedFalseIndicator">@color/colorGray100</color>
+    <color name="colorFont">@color/colorGuideFont</color>
 
-    <color name="indicator_selected_color">@color/colorAccent</color>
-    <color name="indicator_unselected_color">#e5e5e5</color>
-
-    <color name="colorToolbar">#000000</color>
-    <color name="colorTabLayout">#222222</color>
+    <color name="colorGuideAccent">#efc700</color>
+    <color name="colorGuideFont">@color/colorGray100</color>
 
     <color name="colorWhite">#FFFFFF</color>
-    <color name="colorGuideAccent">#efc700</color>
+    <color name="colorBlack">#000000</color>
     <color name="colorTeal500">#009688</color>
 
     <color name="colorGray100">#F5F5F5</color>
