@@ -50,8 +50,11 @@
     <string name="friend_altar">Friend Altar</string>
     <string name="altar_comment_button">altar read / create comment</string>
     <string name="public_last_will_title">public last will title</string>
-    <string name="cherish_comment">cherish comment</string>
+    <string name="cherish_comment">cherish comment (max length : 100)</string>
     <string name="cherish">cherish</string>
+    <string name="delete_comment_dialog_message">Are you sure you want to delete the memorial?</string>
+    <string name="create_comment_dialog_message">Would you like to write a memorial?</string>
+    <string name="confirm_comment_dialog_message">Your tribute is the deceased\nIt is a great strength for my family.</string>
 
     <string-array name="add_friend_group_scope">
         <item>elementary school</item>

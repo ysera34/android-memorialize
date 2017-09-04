@@ -1,8 +1,10 @@
 package com.memorial.altar.view.fragment;
 
+import android.content.DialogInterface;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.v4.app.Fragment;
+import android.support.v7.app.AlertDialog;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
@@ -108,7 +110,8 @@ public class AltarCommentFragment extends Fragment {
         }
     }
 
-    private class CommentViewHolder extends RecyclerView.ViewHolder {
+    private class CommentViewHolder extends RecyclerView.ViewHolder
+            implements View.OnLongClickListener {
 
         private Comment mComment;
 
@@ -118,7 +121,7 @@ public class AltarCommentFragment extends Fragment {
 
         public CommentViewHolder(View itemView) {
             super(itemView);
-
+            itemView.setOnLongClickListener(this);
             mCommentWriterTextView = itemView.findViewById(R.id.list_item_altar_comment_writer_text_view);
             mCommentDateTextView = itemView.findViewById(R.id.list_item_altar_comment_date_text_view);
             mCommentMessageTextView = itemView.findViewById(R.id.list_item_altar_comment_message_text_view);
@@ -126,10 +129,36 @@ public class AltarCommentFragment extends Fragment {
 
         public void bindComment(Comment comment) {
             mComment = comment;
-
             mCommentWriterTextView.setText(String.valueOf(mComment.getWriter()));
             mCommentDateTextView.setText(String.valueOf(mComment.getDate()));
             mCommentMessageTextView.setText(String.valueOf(mComment.getMessage()));
         }
+
+        @Override
+        public boolean onLongClick(View view) {
+            // if comment writer == user
+            deleteCommentShowDialog();
+            return true;
+        }
+    }
+
+    private void deleteCommentShowDialog() {
+        AlertDialog.Builder builder = new AlertDialog.Builder(getActivity());
+
+        builder.setMessage(R.string.delete_comment_dialog_message);
+        builder.setPositiveButton(android.R.string.ok, new DialogInterface.OnClickListener() {
+            @Override
+            public void onClick(DialogInterface dialogInterface, int i) {
+
+            }
+        });
+        builder.setNegativeButton(android.R.string.no, new DialogInterface.OnClickListener() {
+            @Override
+            public void onClick(DialogInterface dialogInterface, int i) {
+
+            }
+        });
+        AlertDialog dialog = builder.create();
+        dialog.show();
     }
 }

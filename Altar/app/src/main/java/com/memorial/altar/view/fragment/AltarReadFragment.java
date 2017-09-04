@@ -122,18 +122,23 @@ public class AltarReadFragment extends Fragment {
             mCommentFragmentManager.beginTransaction()
                     .add(R.id.altar_comment_container, AltarCommentFragment.newInstance())
                     .commit();
+            mAltarReadNestedScrollView.postDelayed(new Runnable() {
+                @Override
+                public void run() {
+                    mAltarReadNestedScrollView.smoothScrollTo(
+                            0, (int) mAltarUserPublicLastWillMessageTextView.getY());
+                }
+            }, 250);
         } else {
             Fragment fragment = mCommentFragmentManager.findFragmentById(R.id.altar_comment_container);
             ((AltarCommentFragment) fragment).updateUI();
+            mAltarReadNestedScrollView.postDelayed(new Runnable() {
+                @Override
+                public void run() {
+                    mAltarReadNestedScrollView.fullScroll(View.FOCUS_DOWN);
+                }
+            }, 750);
         }
-        mAltarReadNestedScrollView.postDelayed(new Runnable() {
-            @Override
-            public void run() {
-                mAltarReadNestedScrollView.smoothScrollTo(
-                        0, (int) mAltarUserPublicLastWillMessageTextView.getY());
-            }
-        }, 250);
-
     }
 
     private class UserGroupNameAdapter extends RecyclerView.Adapter<UserGroupNameViewHolder> {
