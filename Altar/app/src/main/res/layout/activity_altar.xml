@@ -1,9 +1,9 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
               xmlns:app="http://schemas.android.com/apk/res-auto"
-              android:orientation="vertical"
               android:layout_width="match_parent"
-              android:layout_height="match_parent">
+              android:layout_height="match_parent"
+              android:orientation="vertical">
 
     <android.support.v7.widget.Toolbar
         android:id="@+id/altar_toolbar"
@@ -22,15 +22,56 @@
 
     </FrameLayout>
 
-    <TextView
-        android:id="@+id/altar_comment_button_text_view"
+    <RelativeLayout
         android:layout_width="match_parent"
-        android:layout_height="48dp"
-        android:background="@color/colorGray700"
-        android:clickable="true"
-        android:elevation="8dp"
-        android:gravity="center"
-        android:text="@string/altar_comment_button"
-        android:textColor="@color/colorWhite"
-        android:textSize="18sp"/>
+        android:layout_height="40dp">
+
+        <LinearLayout
+            android:id="@+id/altar_comment_edit_layout"
+            android:layout_width="match_parent"
+            android:layout_height="40dp"
+            android:background="@color/colorWhite"
+            android:elevation="8dp">
+
+            <EditText
+                android:id="@+id/altar_comment_edit_text"
+                android:layout_width="0dp"
+                android:layout_height="match_parent"
+                android:layout_weight="1"
+                android:gravity="start|center_vertical"
+                android:hint="@string/cherish_comment"
+                android:inputType="text"
+                android:paddingBottom="8dp"
+                android:paddingEnd="10dp"
+                android:paddingStart="10dp"
+                android:paddingTop="8dp"
+                android:textColorHint="@color/colorFontHint"
+                android:textSize="14sp"/>
+
+            <Button
+                android:id="@+id/altar_comment_edit_button"
+                android:layout_width="wrap_content"
+                android:layout_height="match_parent"
+                android:background="@color/colorGray800"
+                android:gravity="center"
+                android:padding="8dp"
+                android:text="@string/cherish"
+                android:textColor="@color/colorFont"
+                android:textSize="14sp"/>
+        </LinearLayout>
+
+        <TextView
+            android:id="@+id/altar_comment_button_text_view"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:background="@color/colorGray700"
+            android:clickable="true"
+            android:elevation="8dp"
+            android:gravity="center"
+            android:text="@string/altar_comment_button"
+            android:textColor="@color/colorWhite"
+            android:textSize="18sp"/>
+
+    </RelativeLayout>
+
 </LinearLayout>

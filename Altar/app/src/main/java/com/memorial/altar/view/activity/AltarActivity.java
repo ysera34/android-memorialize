@@ -9,11 +9,12 @@ import android.support.v4.app.FragmentManager;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
 import android.view.View;
+import android.view.animation.AccelerateInterpolator;
 import android.widget.TextView;
 import android.widget.Toast;
 
 import com.memorial.altar.R;
-import com.memorial.altar.view.fragment.AltarFragment;
+import com.memorial.altar.view.fragment.AltarReadFragment;
 
 /**
  * Created by yoon on 2017. 9. 2..
@@ -54,7 +55,7 @@ public class AltarActivity extends AppCompatActivity implements View.OnClickList
 
     private void requestFriend(int friendId) {
         setTitle(getString(R.string.friend_altar));
-        mAltarFragment = AltarFragment.newInstance(friendId);
+        mAltarFragment = AltarReadFragment.newInstance(friendId);
         mAltarFragmentManager.beginTransaction()
                 .add(R.id.altar_container, mAltarFragment)
                 .commit();
@@ -65,6 +66,11 @@ public class AltarActivity extends AppCompatActivity implements View.OnClickList
         switch (view.getId()) {
             case R.id.altar_comment_button_text_view:
                 Toast.makeText(getApplicationContext(), "show altar comment", Toast.LENGTH_SHORT).show();
+                Fragment fragment = mAltarFragmentManager.findFragmentById(R.id.altar_container);
+                ((AltarReadFragment)fragment).updateComment();
+                hideCommentButtonTextView();
+
+
                 break;
         }
     }
@@ -74,5 +80,10 @@ public class AltarActivity extends AppCompatActivity implements View.OnClickList
 //        return super.onSupportNavigateUp();
         onBackPressed();
         return true;
+    }
+
+    private void hideCommentButtonTextView() {
+        mAltarCommentButtonTextView.animate().translationY(mAltarCommentButtonTextView.getHeight())
+                .setInterpolator(new AccelerateInterpolator(2));
     }
 }

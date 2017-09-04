@@ -1,24 +1,30 @@
 <?xml version="1.0" encoding="utf-8"?>
 <android.support.v4.widget.NestedScrollView
     xmlns:android="http://schemas.android.com/apk/res/android"
+    android:id="@+id/altar_read_nested_scroll_view"
     android:layout_width="match_parent"
     android:layout_height="match_parent">
 
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:orientation="vertical"
-        android:background="@color/colorGray500">
+        android:background="@color/colorGray500"
+        android:orientation="vertical">
 
         <RelativeLayout
             android:layout_width="120dp"
             android:layout_height="160dp"
             android:layout_gravity="center_horizontal"
-            android:layout_marginTop="10dp"
-            android:padding="16dp">
+            android:layout_marginTop="10dp">
 
             <ImageView
                 android:id="@+id/altar_user_image_view"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:padding="16dp"
+                android:scaleType="center"/>
+
+            <ImageView
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
                 android:scaleType="center"/>
@@ -66,21 +72,28 @@
             android:layout_height="wrap_content"
             android:layout_gravity="center_horizontal"
             android:layout_marginTop="10dp"
+            android:text="@string/public_last_will_title"
             android:textColor="@color/colorFont"
-            android:textSize="20sp"
-            android:text="@string/public_last_will_title"/>
+            android:textSize="20sp"/>
 
         <TextView
             android:id="@+id/altar_user_public_last_will_message_text_view"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_gravity="center_horizontal"
-            android:layout_marginTop="10dp"
             android:layout_marginBottom="16dp"
+            android:layout_marginTop="10dp"
             android:gravity="center_horizontal"
             android:lineSpacingExtra="3sp"
             android:textColor="@color/colorFont"
             android:textSize="14sp"/>
+
+        <FrameLayout
+            android:id="@+id/altar_comment_container"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content">
+
+        </FrameLayout>
 
     </LinearLayout>
 </android.support.v4.widget.NestedScrollView>

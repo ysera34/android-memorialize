@@ -3,6 +3,8 @@ package com.memorial.altar.view.fragment;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.v4.app.Fragment;
+import android.support.v4.app.FragmentManager;
+import android.support.v4.widget.NestedScrollView;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
@@ -20,18 +22,18 @@ import java.util.ArrayList;
  * Created by yoon on 2017. 9. 2..
  */
 
-public class AltarFragment extends Fragment {
+public class AltarReadFragment extends Fragment {
 
-    private static final String TAG = AltarFragment.class.getSimpleName();
+    private static final String TAG = AltarReadFragment.class.getSimpleName();
 
     private static final String ARG_ALTAR_USER_ID = "altar_user_id";
 
-    public static AltarFragment newInstance(int altarUserId) {
+    public static AltarReadFragment newInstance(int altarUserId) {
 
         Bundle args = new Bundle();
         args.putInt(ARG_ALTAR_USER_ID, altarUserId);
 
-        AltarFragment fragment = new AltarFragment();
+        AltarReadFragment fragment = new AltarReadFragment();
         fragment.setArguments(args);
         return fragment;
     }
@@ -39,6 +41,7 @@ public class AltarFragment extends Fragment {
     private int mAltarUserId;
     private User mAltarUser;
 
+    private NestedScrollView mAltarReadNestedScrollView;
     private ImageView mAltarUserImageView;
     private TextView mAltarUserNameTextView;
     private TextView mAltarUserBirthTextView;
@@ -46,6 +49,8 @@ public class AltarFragment extends Fragment {
     private RecyclerView mAltarUserGroupNameRecyclerView;
     private UserGroupNameAdapter mUserGroupNameAdapter;
     private TextView mAltarUserPublicLastWillMessageTextView;
+
+    private FragmentManager mCommentFragmentManager;
 
     @Override
     public void onCreate(@Nullable Bundle savedInstanceState) {
@@ -57,7 +62,8 @@ public class AltarFragment extends Fragment {
     @Override
     public View onCreateView(LayoutInflater inflater,
                              @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
-        View view = inflater.inflate(R.layout.fragment_altar, container, false);
+        View view = inflater.inflate(R.layout.fragment_altar_read, container, false);
+        mAltarReadNestedScrollView = view.findViewById(R.id.altar_read_nested_scroll_view);
         mAltarUserImageView = view.findViewById(R.id.altar_user_image_view);
         mAltarUserNameTextView = view.findViewById(R.id.altar_user_name_text_view);
         mAltarUserBirthTextView = view.findViewById(R.id.altar_user_birth_text_view);
@@ -82,7 +88,7 @@ public class AltarFragment extends Fragment {
         user.setId(altarUserId);
         user.setName("sample name");
         user.setGender("sample gender");
-        user.setBirth("sample obit date");
+        user.setBirth("sample birth date");
         ArrayList<String> groupNames = new ArrayList<>();
         for (int i = 0; i < 10; i++) {
             String groupName = "sample group name" + i;
@@ -108,6 +114,26 @@ public class AltarFragment extends Fragment {
         mAltarUserBirthTextView.setText(String.valueOf(mAltarUser.getBirth()));
         mAltarUserGenderTextView.setText(String.valueOf(mAltarUser.getGender()));
         mAltarUserPublicLastWillMessageTextView.setText(String.valueOf(mAltarUser.getPublicLastWillMessage()));
+    }
+
+    public void updateComment() {
+        if (mCommentFragmentManager == null) {
+            mCommentFragmentManager = getChildFragmentManager();
+            mCommentFragmentManager.beginTransaction()
+                    .add(R.id.altar_comment_container, AltarCommentFragment.newInstance())
+                    .commit();
+        } else {
+            Fragment fragment = mCommentFragmentManager.findFragmentById(R.id.altar_comment_container);
+            ((AltarCommentFragment) fragment).updateUI();
+        }
+        mAltarReadNestedScrollView.postDelayed(new Runnable() {
+            @Override
+            public void run() {
+                mAltarReadNestedScrollView.smoothScrollTo(
+                        0, (int) mAltarUserPublicLastWillMessageTextView.getY());
+            }
+        }, 250);
+
     }
 
     private class UserGroupNameAdapter extends RecyclerView.Adapter<UserGroupNameViewHolder> {

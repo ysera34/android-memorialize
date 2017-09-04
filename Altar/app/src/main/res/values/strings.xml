@@ -50,6 +50,8 @@
     <string name="friend_altar">Friend Altar</string>
     <string name="altar_comment_button">altar read / create comment</string>
     <string name="public_last_will_title">public last will title</string>
+    <string name="cherish_comment">cherish comment</string>
+    <string name="cherish">cherish</string>
 
     <string-array name="add_friend_group_scope">
         <item>elementary school</item>
