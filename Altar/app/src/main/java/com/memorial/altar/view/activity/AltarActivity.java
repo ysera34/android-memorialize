@@ -127,6 +127,7 @@ public class AltarActivity extends AppCompatActivity implements View.OnClickList
 
     private void confirmCommentShowDialog() {
         mInputMethodManager.hideSoftInputFromWindow(mAltarCommentEditText.getWindowToken(), 0);
+        mAltarCommentEditText.getText().clear();
         AlertDialog.Builder builder = new AlertDialog.Builder(this);
 
         builder.setMessage(R.string.confirm_comment_dialog_message);

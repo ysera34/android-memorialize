@@ -21,7 +21,7 @@ import android.widget.Toast;
 
 import com.memorial.altar.R;
 import com.memorial.altar.util.UserSharedPreferences;
-import com.memorial.altar.view.fragment.HomeAltarFragment;
+import com.memorial.altar.view.fragment.AltarCreateFragment;
 import com.memorial.altar.view.fragment.HomeFriendListFragment;
 import com.memorial.altar.view.fragment.HomeObituaryFragment;
 
@@ -111,7 +111,8 @@ public class HomeActivity extends AppCompatActivity
     private void setupViewPager(ViewPager viewPager) {
         ViewPagerAdapter adapter = new ViewPagerAdapter(getSupportFragmentManager());
         adapter.addFragment(HomeFriendListFragment.newInstance(), getString(R.string.title_friends));
-        adapter.addFragment(HomeAltarFragment.newInstance(), getString(R.string.title_altar));
+//        adapter.addFragment(HomeAltarFragment.newInstance(), getString(R.string.title_altar));
+        adapter.addFragment(AltarCreateFragment.newInstance(), getString(R.string.title_altar));
         adapter.addFragment(HomeObituaryFragment.newInstance(), getString(R.string.title_obituary));
         viewPager.setOffscreenPageLimit(adapter.getCount() - 1);
         viewPager.setAdapter(adapter);

@@ -55,6 +55,21 @@
     <string name="delete_comment_dialog_message">Are you sure you want to delete the memorial?</string>
     <string name="create_comment_dialog_message">Would you like to write a memorial?</string>
     <string name="confirm_comment_dialog_message">Your tribute is the deceased\nIt is a great strength for my family.</string>
+    <string name="altar_user_name">name</string>
+    <string name="altar_user_birth">birth day</string>
+    <string name="altar_user_female">female</string>
+    <string name="altar_user_male">male</string>
+    <string name="altar_user_school">school information</string>
+    <string name="altar_user_company">company information</string>
+    <string name="altar_user_society">society information</string>
+    <string name="altar_user_last_will">last will</string>
+    <string name="altar_user_contact_people">contact people</string>
+    <string name="dialog_create_image_take_a_picture">take a picture</string>
+    <string name="dialog_create_image_select_photo_in_album">select photo in album</string>
+    <string name="dialog_title_information">Information.</string>
+    <string name="dialog_create_birth_validate_info_message">After your death, your resident registration number Required.</string>
+    <string name="resident_registration_number">resident registration number</string>
+    <string name="confirm_repetition">confirm repetition</string>
 
     <string-array name="add_friend_group_scope">
         <item>elementary school</item>
