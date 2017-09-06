@@ -197,11 +197,11 @@ public class HomeFriendListFragment extends Fragment implements View.OnClickList
 
     private ArrayList<Friend> getFriends() {
         ArrayList<Friend> friends = new ArrayList<>();
-        for (int i = 0; i < 50; i++) {
+        for (int i = 0; i < 25; i++) {
             Friend friend = new Friend();
             friend.setAge("age :" + (i + 50) + "age");
             friend.setName("name " + i);
-            if (i <= 30) {
+            if (i <= 15) {
                 friend.setObitDate("2017-" + "9-" + i);
             }
             friends.add(friend);

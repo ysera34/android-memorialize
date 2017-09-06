@@ -3,6 +3,7 @@ package com.memorial.altar.view.fragment;
 import android.content.DialogInterface;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
+import android.support.design.widget.BottomSheetDialogFragment;
 import android.support.design.widget.TextInputLayout;
 import android.support.v4.app.Fragment;
 import android.support.v7.app.AlertDialog;
@@ -15,6 +16,8 @@ import android.widget.TextView;
 
 import com.memorial.altar.R;
 
+import static com.memorial.altar.view.fragment.PermissionHeadlessFragment.CONTACT_PERMISSION_REQUEST;
+
 /**
  * Created by yoon on 2017. 9. 4..
  */
@@ -23,6 +26,8 @@ public class AltarCreateFragment extends Fragment
         implements View.OnClickListener, View.OnFocusChangeListener {
 
     private static final String TAG = AltarCreateFragment.class.getSimpleName();
+
+    public static final int ALTAR_CREATE_CONTACT_PERMISSION_REQUEST = 1001;
 
     public static AltarCreateFragment newInstance() {
 
@@ -37,6 +42,7 @@ public class AltarCreateFragment extends Fragment
     private ImageView mAltarCreateUserImageView;
     private TextInputLayout mBirthTextInputLayout;
     private EditText mBirthEditText;
+    private TextView mContactFriendButtonTextView;
     private boolean mIsBirthValidateInfoConfirmed;
 
     @Override
@@ -55,6 +61,8 @@ public class AltarCreateFragment extends Fragment
         mBirthEditText.setKeyListener(null);
         mBirthEditText.setOnFocusChangeListener(this);
         mBirthEditText.setOnClickListener(this);
+        mContactFriendButtonTextView = view.findViewById(R.id.contact_friend_button_text_view);
+        mContactFriendButtonTextView.setOnClickListener(this);
         return view;
     }
 
@@ -74,17 +82,25 @@ public class AltarCreateFragment extends Fragment
             case R.id.create_image_take_a_picture:
                 if (mDialog.isShowing()) {
                     mDialog.dismiss();
-                }
 
+                }
                 break;
             case R.id.create_image_select_photo_in_album:
                 if (mDialog.isShowing()) {
                     mDialog.dismiss();
-                }
 
+                }
                 break;
             case R.id.altar_create_user_birth_edit_text:
                 createUserBirthInputShowDialog();
+                break;
+            case R.id.contact_friend_button_text_view:
+                getActivity().getSupportFragmentManager().beginTransaction()
+                        .add(PermissionHeadlessFragment.newInstance(
+                                ALTAR_CREATE_CONTACT_PERMISSION_REQUEST,
+                                CONTACT_PERMISSION_REQUEST),
+                                PermissionHeadlessFragment.TAG)
+                        .commit();
                 break;
         }
     }
@@ -147,4 +163,22 @@ public class AltarCreateFragment extends Fragment
         mDialog.show();
     }
 
+    public void onPermissionCallback(int requestCode, int requestPermissionId, boolean isGranted) {
+        switch (requestCode) {
+            case ALTAR_CREATE_CONTACT_PERMISSION_REQUEST:
+                if (requestPermissionId == CONTACT_PERMISSION_REQUEST) {
+                    if (isGranted) {
+                        BottomSheetDialogFragment altarContactFragment =
+                                AltarContactFragment.newInstance();
+                        altarContactFragment.show(getChildFragmentManager(), "altar_contact");
+                    }
+                }
+                break;
+        }
+    }
+
+    public void onAltarContactDialogDismissed(String contactName) {
+        String contactStr = getString(R.string.altar_user_contact_people) + " : " + contactName;
+        mContactFriendButtonTextView.setText(contactStr);
+    }
 }

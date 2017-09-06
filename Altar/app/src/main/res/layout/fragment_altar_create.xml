@@ -129,10 +129,13 @@
             </android.support.design.widget.TextInputLayout>
 
             <TextView
+                android:id="@+id/contact_friend_button_text_view"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:text="@string/altar_user_contact_people"
-                android:textSize="16sp"/>
+                android:padding="8dp"
+                android:textSize="18sp"
+                android:clickable="true"/>
 
             <android.support.design.widget.TextInputLayout
                 android:id="@+id/last_will_text_input_layout"

@@ -20,9 +20,11 @@ import android.widget.TextView;
 
 import com.memorial.altar.R;
 import com.memorial.altar.util.UserSharedPreferences;
+import com.memorial.altar.view.fragment.AltarContactFragment;
 import com.memorial.altar.view.fragment.AltarCreateFragment;
 import com.memorial.altar.view.fragment.HomeFriendListFragment;
 import com.memorial.altar.view.fragment.HomeObituaryFragment;
+import com.memorial.altar.view.fragment.PermissionHeadlessFragment;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -30,14 +32,20 @@ import java.util.List;
 import static com.memorial.altar.common.Common.NAV_REQUEST_FAQ;
 import static com.memorial.altar.common.Common.NAV_REQUEST_NOTIFICATIONS;
 import static com.memorial.altar.common.Common.NAV_REQUEST_SETTINGS;
+import static com.memorial.altar.view.fragment.AltarCreateFragment.ALTAR_CREATE_CONTACT_PERMISSION_REQUEST;
 
 public class HomeActivity extends AppCompatActivity
-        implements View.OnClickListener, NavigationView.OnNavigationItemSelectedListener {
+        implements View.OnClickListener, NavigationView.OnNavigationItemSelectedListener,
+        PermissionHeadlessFragment.PermissionCallbackListener,
+        AltarContactFragment.OnAltarContactDialogDismissListener {
+
+    private static final String TAG = HomeActivity.class.getSimpleName();
 
     private Toolbar mToolbar;
     private TextView mToolbarStarTextView;
     private TabLayout mTabLayout;
     private ViewPager mViewPager;
+    private HomeViewPagerAdapter mHomeViewPagerAdapter;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -107,20 +115,20 @@ public class HomeActivity extends AppCompatActivity
     }
 
     private void setupViewPager(ViewPager viewPager) {
-        ViewPagerAdapter adapter = new ViewPagerAdapter(getSupportFragmentManager());
-        adapter.addFragment(HomeFriendListFragment.newInstance(), getString(R.string.title_friends));
+        mHomeViewPagerAdapter = new HomeViewPagerAdapter(getSupportFragmentManager());
+        mHomeViewPagerAdapter.addFragment(HomeFriendListFragment.newInstance(), getString(R.string.title_friends));
 //        adapter.addFragment(HomeAltarFragment.newInstance(), getString(R.string.title_altar));
-        adapter.addFragment(AltarCreateFragment.newInstance(), getString(R.string.title_altar));
-        adapter.addFragment(HomeObituaryFragment.newInstance(), getString(R.string.title_obituary));
-        viewPager.setOffscreenPageLimit(adapter.getCount() - 1);
-        viewPager.setAdapter(adapter);
+        mHomeViewPagerAdapter.addFragment(AltarCreateFragment.newInstance(), getString(R.string.title_altar));
+        mHomeViewPagerAdapter.addFragment(HomeObituaryFragment.newInstance(), getString(R.string.title_obituary));
+        viewPager.setOffscreenPageLimit(mHomeViewPagerAdapter.getCount() - 1);
+        viewPager.setAdapter(mHomeViewPagerAdapter);
     }
 
-    private class ViewPagerAdapter extends FragmentPagerAdapter {
+    private class HomeViewPagerAdapter extends FragmentPagerAdapter {
         private final List<Fragment> mFragmentList = new ArrayList<>();
         private final List<String> mFragmentTitleList = new ArrayList<>();
 
-        public ViewPagerAdapter(FragmentManager manager) {
+        public HomeViewPagerAdapter(FragmentManager manager) {
             super(manager);
         }
 
@@ -160,5 +168,27 @@ public class HomeActivity extends AppCompatActivity
         tabThree.setText(getString(R.string.title_obituary));
         tabThree.setCompoundDrawablesWithIntrinsicBounds(0, R.drawable.ic_tab_obituary, 0, 0);
         mTabLayout.getTabAt(2).setCustomView(tabThree);
+    }
+
+//    @Override
+//    public void onPermissionCallback(int requestPermissionId, boolean isGranted) {
+//        Log.i(TAG, "onPermissionCallback: requestPermissionId : " + requestPermissionId);
+//        Log.i(TAG, "onPermissionCallback: isGranted : " + isGranted);
+//    }
+
+    @Override
+    public void onPermissionCallback(int requestCode, int requestPermissionId, boolean isGranted) {
+        switch (requestCode) {
+            case ALTAR_CREATE_CONTACT_PERMISSION_REQUEST:
+                ((AltarCreateFragment) mHomeViewPagerAdapter.getItem(1))
+                        .onPermissionCallback(requestCode, requestPermissionId, isGranted);
+                break;
+        }  
+    }
+
+    @Override
+    public void onAltarContactDialogDismissed(String contactName) {
+        ((AltarCreateFragment) mHomeViewPagerAdapter.getItem(1))
+                .onAltarContactDialogDismissed(contactName);
     }
 }

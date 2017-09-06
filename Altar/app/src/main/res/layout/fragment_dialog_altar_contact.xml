@@ -1,0 +1,47 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@color/colorBlack">
+
+    <TextView
+        android:id="@+id/altar_contact_count_text_view"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:gravity="center_horizontal"
+        android:padding="12dp"
+        android:text="@string/altar_contact_count_format"
+        android:textColor="@color/colorAccent"
+        android:textSize="14sp"/>
+
+    <ProgressBar
+        android:id="@+id/altar_contact_progress_bar"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_centerInParent="true"
+        android:layout_gravity="center"/>
+
+    <android.support.v7.widget.RecyclerView
+        android:id="@+id/altar_contact_recycler_view"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/altar_contact_count_text_view"
+        android:layout_above="@+id/altar_contact_confirm_button_text_view">
+
+    </android.support.v7.widget.RecyclerView>
+
+    <TextView
+        android:id="@+id/altar_contact_confirm_button_text_view"
+        android:layout_width="match_parent"
+        android:layout_height="48dp"
+        android:layout_alignParentBottom="true"
+        android:background="@color/colorGray700"
+        android:clickable="true"
+        android:elevation="8dp"
+        android:gravity="center"
+        android:text="@android:string/ok"
+        android:textColor="@color/colorWhite"
+        android:textSize="18sp"/>
+
+</RelativeLayout>

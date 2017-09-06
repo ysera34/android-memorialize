@@ -74,6 +74,11 @@
     <string name="billing_star_extra_star_format">+ star %s</string>
     <string name="billing_star_count_format">Star : %s</string>
     <string name="billing_star_price_format">$ %s</string>
+    <string name="permission_explanation">In order to use the app, you need to authorize the following permissions.</string>
+    <string name="altar_contact_count_format">contact person [ %1$s / %2$s ]</string>
+    <string name="dialog_contact_confirm_info_message">Register selected contacts will you do it?</string>
+    <string name="billing_star">billing star</string>
+    <string name="dialog_promote_billing_starinfo_message">There are not enough available stars.</string>
 
     <string-array name="add_friend_group_scope">
         <item>elementary school</item>
