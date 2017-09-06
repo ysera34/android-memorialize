@@ -70,6 +70,10 @@
     <string name="dialog_create_birth_validate_info_message">After your death, your resident registration number Required.</string>
     <string name="resident_registration_number">resident registration number</string>
     <string name="confirm_repetition">confirm repetition</string>
+    <string name="billing_star_title">Billing Star</string>
+    <string name="billing_star_extra_star_format">+ star %s</string>
+    <string name="billing_star_count_format">Star : %s</string>
+    <string name="billing_star_price_format">$ %s</string>
 
     <string-array name="add_friend_group_scope">
         <item>elementary school</item>

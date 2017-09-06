@@ -17,7 +17,6 @@ import android.view.LayoutInflater;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.TextView;
-import android.widget.Toast;
 
 import com.memorial.altar.R;
 import com.memorial.altar.util.UserSharedPreferences;
@@ -79,8 +78,7 @@ public class HomeActivity extends AppCompatActivity
     public void onClick(View view) {
         switch (view.getId()) {
             case R.id.toolbar_star_text_view:
-                Toast.makeText(getApplicationContext(), "star_text_view", Toast.LENGTH_SHORT).show();
-                mToolbarStarTextView.setText(String.valueOf(20));
+                startActivity(BillingStarActivity.newIntent(getApplicationContext()));
                 break;
         }
     }
@@ -93,7 +91,7 @@ public class HomeActivity extends AppCompatActivity
                 startActivity(ConfigActivity.newIntent(getApplicationContext(), NAV_REQUEST_NOTIFICATIONS));
                 break;
             case R.id.nav_stars:
-//                startActivity(ConfigActivity.newIntent(getApplicationContext(), 1));
+                startActivity(BillingStarActivity.newIntent(getApplicationContext()));
                 break;
             case R.id.nav_settings:
                 startActivity(ConfigActivity.newIntent(getApplicationContext(), NAV_REQUEST_SETTINGS));
