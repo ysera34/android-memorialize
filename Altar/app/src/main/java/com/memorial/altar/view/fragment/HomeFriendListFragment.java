@@ -15,12 +15,10 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.view.animation.AccelerateInterpolator;
 import android.view.animation.DecelerateInterpolator;
-import android.widget.ArrayAdapter;
 import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.ListView;
-import android.widget.Spinner;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -169,6 +167,7 @@ public class HomeFriendListFragment extends Fragment implements View.OnClickList
         public void bindFriend(Friend friend) {
             mFriend = friend;
             if (mFriend.getObitDate() != null) {
+                mPhotoImageView.setImageResource(R.drawable.img_person);
                 mObitDateTextView.setText(mFriend.getObitDate());
                 mNameTextView.setText(mFriend.getName());
                 mAgeTextView.setText(mFriend.getAge());
@@ -248,42 +247,42 @@ public class HomeFriendListFragment extends Fragment implements View.OnClickList
         dialog.show();
     }
 
-    private void addFriendGroupScopeShowDialog() {
-        LayoutInflater layoutInflater = LayoutInflater.from(getActivity());
-        View view = layoutInflater.inflate(R.layout.dialog_add_friend_group_scope, null);
-        final Spinner groupScopeSpinner = view.findViewById(R.id.add_group_scope_spinner);
-        final String[] groupScopeArray = getResources().getStringArray(R.array.add_friend_group_scope);
-        ArrayAdapter<String> adapter = new ArrayAdapter<String>(getActivity(),
-                android.R.layout.simple_dropdown_item_1line, groupScopeArray);
-        groupScopeSpinner.setAdapter(adapter);
-        TextInputLayout addFriendGroupNameTextLayout = view.findViewById(R.id.add_group_name_text_input_layout);
-        final EditText addFriendGroupNameEditText = view.findViewById(R.id.add_group_name_edit_text);
-
-        AlertDialog.Builder builder = new AlertDialog.Builder(getActivity());
-        builder.setTitle(getString(R.string.friend_list_add_group));
-        builder.setView(view);
-        builder.setPositiveButton(android.R.string.ok, new DialogInterface.OnClickListener() {
-            @Override
-            public void onClick(DialogInterface dialogInterface, int i) {
-//                Toast.makeText(getActivity(), "scope : " + groupScopeArray[groupScopeSpinner.getSelectedItemPosition()] +
-//                " group name : " + addFriendGroupNameEditText.getText().toString(), Toast.LENGTH_SHORT).show();
-                if (addFriendGroupNameEditText.getText().toString().length() > 0) {
-                    addFriendGroupLayout(groupScopeArray[groupScopeSpinner.getSelectedItemPosition()] + " | "
-                            + addFriendGroupNameEditText.getText().toString(), mFriendGroupLayout);
-                } else {
-                    Toast.makeText(getActivity(), "Please check the input window.", Toast.LENGTH_SHORT).show();
-                }
-            }
-        });
-        builder.setNegativeButton(android.R.string.no, new DialogInterface.OnClickListener() {
-            @Override
-            public void onClick(DialogInterface dialogInterface, int i) {
-
-            }
-        });
-        AlertDialog dialog = builder.create();
-        dialog.show();
-    }
+//    private void addFriendGroupScopeShowDialog() {
+//        LayoutInflater layoutInflater = LayoutInflater.from(getActivity());
+//        View view = layoutInflater.inflate(R.layout.dialog_add_friend_group_scope, null);
+//        final Spinner groupScopeSpinner = view.findViewById(R.id.add_group_scope_spinner);
+//        final String[] groupScopeArray = getResources().getStringArray(R.array.add_friend_group_scope);
+//        ArrayAdapter<String> adapter = new ArrayAdapter<String>(getActivity(),
+//                android.R.layout.simple_dropdown_item_1line, groupScopeArray);
+//        groupScopeSpinner.setAdapter(adapter);
+//        TextInputLayout addFriendGroupNameTextLayout = view.findViewById(R.id.add_group_name_text_input_layout);
+//        final EditText addFriendGroupNameEditText = view.findViewById(R.id.add_group_name_edit_text);
+//
+//        AlertDialog.Builder builder = new AlertDialog.Builder(getActivity());
+//        builder.setTitle(getString(R.string.friend_list_add_group));
+//        builder.setView(view);
+//        builder.setPositiveButton(android.R.string.ok, new DialogInterface.OnClickListener() {
+//            @Override
+//            public void onClick(DialogInterface dialogInterface, int i) {
+////                Toast.makeText(getActivity(), "scope : " + groupScopeArray[groupScopeSpinner.getSelectedItemPosition()] +
+////                " group name : " + addFriendGroupNameEditText.getText().toString(), Toast.LENGTH_SHORT).show();
+//                if (addFriendGroupNameEditText.getText().toString().length() > 0) {
+//                    addFriendGroupLayout(groupScopeArray[groupScopeSpinner.getSelectedItemPosition()] + " | "
+//                            + addFriendGroupNameEditText.getText().toString(), mFriendGroupLayout);
+//                } else {
+//                    Toast.makeText(getActivity(), "Please check the input window.", Toast.LENGTH_SHORT).show();
+//                }
+//            }
+//        });
+//        builder.setNegativeButton(android.R.string.no, new DialogInterface.OnClickListener() {
+//            @Override
+//            public void onClick(DialogInterface dialogInterface, int i) {
+//
+//            }
+//        });
+//        AlertDialog dialog = builder.create();
+//        dialog.show();
+//    }
 
     private void addFriendGroupLayout(final String groupName, LinearLayout parentLayout) {
         LayoutInflater layoutInflater = LayoutInflater.from(getActivity());
@@ -472,6 +471,7 @@ public class HomeFriendListFragment extends Fragment implements View.OnClickList
         public void bindAddedFriend(Friend addedFriend) {
             mAddedFriend = addedFriend;
             if (mAddedFriend.getObitDate() != null) {
+                mPhotoImageView.setImageResource(R.drawable.img_person);
                 mObitDateTextView.setText(mAddedFriend.getObitDate());
                 mNameTextView.setText(mAddedFriend.getName());
                 mAgeTextView.setText(mAddedFriend.getAge());

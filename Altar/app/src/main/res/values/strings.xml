@@ -22,7 +22,6 @@
     <string name="title_friends">Friends</string>
     <string name="title_altar">Altar</string>
     <string name="title_obituary">Obituary</string>
-    <string name="friend_photo_image_view">friend_photo_image_view</string>
 
     <string-array name="faq_sample_questions_array">
         <item>what is this app?</item>
@@ -78,7 +77,7 @@
     <string name="altar_contact_count_format">contact person [ %1$s / %2$s ]</string>
     <string name="dialog_contact_confirm_info_message">Register selected contacts will you do it?</string>
     <string name="billing_star">billing star</string>
-    <string name="dialog_promote_billing_starinfo_message">There are not enough available stars.</string>
+    <string name="dialog_promote_billing_star_info_message">There are not enough available stars.</string>
 
     <string-array name="add_friend_group_scope">
         <item>elementary school</item>

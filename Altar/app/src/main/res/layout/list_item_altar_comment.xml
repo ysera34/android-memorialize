@@ -17,7 +17,7 @@
             android:layout_height="wrap_content"
             android:layout_alignParentStart="true"
             android:layout_centerVertical="true"
-            android:drawableStart="@drawable/ic_star_grey_300_24dp"
+            android:drawableStart="@drawable/ic_small_star"
             android:drawablePadding="4dp"
             android:gravity="center_vertical"
             android:textSize="12sp"

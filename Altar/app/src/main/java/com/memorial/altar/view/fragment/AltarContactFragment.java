@@ -268,7 +268,7 @@ public class AltarContactFragment extends BottomSheetDialogFragment
         AlertDialog.Builder builder = new AlertDialog.Builder(getActivity());
         builder.setTitle(getString(R.string.dialog_title_information));
         builder.setIcon(R.drawable.ic_error_outline_grey_300_24dp);
-        builder.setMessage(getString(R.string.dialog_promote_billing_starinfo_message));
+        builder.setMessage(getString(R.string.dialog_promote_billing_star_info_message));
         builder.setCancelable(false);
         builder.setPositiveButton(R.string.billing_star, new DialogInterface.OnClickListener() {
             @Override

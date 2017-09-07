@@ -64,7 +64,7 @@ public class AltarReadFragment extends Fragment {
                              @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
         View view = inflater.inflate(R.layout.fragment_altar_read, container, false);
         mAltarReadNestedScrollView = view.findViewById(R.id.altar_read_nested_scroll_view);
-        mAltarUserImageView = view.findViewById(R.id.altar_user_image_view);
+        mAltarUserImageView = view.findViewById(R.id.altar_read_user_image_view);
         mAltarUserNameTextView = view.findViewById(R.id.altar_user_name_text_view);
         mAltarUserBirthTextView = view.findViewById(R.id.altar_user_birth_text_view);
         mAltarUserGenderTextView = view.findViewById(R.id.altar_user_gender_text_view);

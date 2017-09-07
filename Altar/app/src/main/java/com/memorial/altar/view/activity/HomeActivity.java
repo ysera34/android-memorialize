@@ -156,7 +156,7 @@ public class HomeActivity extends AppCompatActivity
     private void setupTabLayoutIcons() {
         TextView tabOne = (TextView) LayoutInflater.from(this).inflate(R.layout.tab_item_text_view, null);
         tabOne.setText(getString(R.string.title_friends));
-        tabOne.setCompoundDrawablesWithIntrinsicBounds(0, R.drawable.ic_tab_friends, 0, 0);
+        tabOne.setCompoundDrawablesWithIntrinsicBounds(0, R.drawable.ic_tab_friend, 0, 0);
         mTabLayout.getTabAt(0).setCustomView(tabOne);
 
         TextView tabTwo = (TextView) LayoutInflater.from(this).inflate(R.layout.tab_item_text_view, null);

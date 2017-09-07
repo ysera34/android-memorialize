@@ -14,18 +14,35 @@
         android:layout_width="match_parent"
         android:layout_height="match_parent">
 
-        <ImageView
-            android:id="@+id/list_item_friend_photo_image_view"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:contentDescription="@string/friend_photo_image_view"
-            android:scaleType="centerCrop"/>
+        <RelativeLayout
+            android:id="@+id/list_item_friend_photo_layout"
+            android:layout_width="80dp"
+            android:layout_height="107dp"
+            android:layout_gravity="center_horizontal"
+            android:layout_marginTop="10dp"
+            android:background="@drawable/bg_picture_frame"
+            android:padding="10dp">
+
+            <ImageView
+                android:id="@+id/list_item_friend_photo_image_view"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:src="@drawable/img_person"
+                android:scaleType="fitEnd"/>
+
+        </RelativeLayout>
+
+        <!--<ImageView-->
+            <!--android:id="@+id/list_item_friend_photo_image_view"-->
+            <!--android:layout_width="wrap_content"-->
+            <!--android:layout_height="wrap_content"-->
+            <!--android:scaleType="centerCrop"/>-->
 
         <TextView
             android:id="@+id/list_item_friend_obit_date_text_view"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_below="@+id/list_item_friend_photo_image_view"
+            android:layout_below="@+id/list_item_friend_photo_layout"
             android:gravity="center"
             android:padding="4dp"
             android:textColor="@color/colorGray200"

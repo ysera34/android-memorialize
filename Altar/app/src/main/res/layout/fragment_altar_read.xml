@@ -8,26 +8,23 @@
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:background="@color/colorGray500"
         android:orientation="vertical">
 
         <RelativeLayout
             android:layout_width="120dp"
             android:layout_height="160dp"
             android:layout_gravity="center_horizontal"
-            android:layout_marginTop="10dp">
+            android:layout_marginTop="10dp"
+            android:background="@drawable/bg_picture_frame"
+            android:padding="16dp">
 
             <ImageView
-                android:id="@+id/altar_user_image_view"
+                android:id="@+id/altar_read_user_image_view"
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
-                android:padding="16dp"
-                android:scaleType="center"/>
-
-            <ImageView
-                android:layout_width="match_parent"
-                android:layout_height="match_parent"
-                android:scaleType="center"/>
+                android:src="@drawable/img_person"
+                android:scaleType="fitEnd"
+                />
 
         </RelativeLayout>
 

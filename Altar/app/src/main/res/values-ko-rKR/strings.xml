@@ -1,0 +1,94 @@
+<resources>
+    <string name="app_name">사망후</string>
+
+    <string name="toolbar_menu_stars">별</string>
+
+    <string name="navigation_drawer_open">Open navigation drawer</string>
+    <string name="navigation_drawer_close">Close navigation drawer</string>
+
+    <string name="nav_item_notifications">알람 및 푸쉬</string>
+    <string name="nav_item_star">별</string>
+    <string name="nav_item_settings">설정</string>
+    <string name="nav_item_faq">자주 묻는 질문</string>
+
+    <!-- navigation drawer item labels  -->
+    <string-array name="nav_drawer_labels">
+        <item>@string/nav_item_notifications</item>
+        <item>@string/nav_item_star</item>
+        <item>@string/nav_item_settings</item>
+        <item>@string/nav_item_faq</item>
+    </string-array>
+
+    <string name="title_friends">지인목록</string>
+    <string name="title_altar">모바일 분향소</string>
+    <string name="title_obituary">부고알림</string>
+
+    <string-array name="faq_sample_questions_array">
+        <item>사망후는 무엇인가요?</item>
+        <item>사망후를 사용하려면 돈을 내야하나요?</item>
+        <item>이메일 인증 효과는 무엇인가요?</item>
+        <item>비밀번호 변경은 어떻게 하나요?</item>
+        <item>비밀번호를 잊어버렸을때는 어떻게 하나요?</item>
+        <item>이메일 주소는 어떻게 바꾸나요?</item>
+        <item>아이디는 어떻게 바꾸나요?</item>
+    </string-array>
+    
+    <string name="faq_sample_answer">자주묻는 질문 답변 예시 입니다.</string>
+    <string name="home_info_skip_button">건너뛰기</string>
+    <string name="config_notification_1">지인 등록 알림</string>
+    <string name="config_notification_2">지인 분향소 댓글 알림</string>
+    <string name="config_notification_3">부고 알림</string>
+    <string name="config_settings_1">your email @ email.com</string>
+    <string name="config_settings_2">비밀번호 변경</string>
+    <string name="config_settings_3">로그아웃</string>
+    <string name="friend_list_add_group">그룹 추가</string>
+    <string name="friend_list_remove_group">그룹 삭제</string>
+    <string name="friend_list_remove_group_message">\"%s\" 그룹을 삭제하시겠습니까? </string>
+    <string name="friend_list_assign_group">그룹 지정</string>
+    <string name="friend_list_add_group_name">그룹 이름</string>
+    <string name="friend_group_title">나를 등록한 지인들</string>
+    <string name="promote_add_group">그룹을 만들어보세요.</string>
+    <string name="friend_altar">지인 분향소</string>
+    <string name="altar_comment_button">추모글 보기 및 작성</string>
+    <string name="public_last_will_title">남긴말</string>
+    <string name="cherish_comment">나의 추모글 (100)</string>
+    <string name="cherish">추모하기</string>
+    <string name="delete_comment_dialog_message">추모글을 지우시겠습니까?</string>
+    <string name="create_comment_dialog_message">추모글을 작성하시겠습니까?</string>
+    <string name="confirm_comment_dialog_message">추모해주셔서 감사합니다. 당신의 추모글을 고인과 가족들에게 큰 힘이 됩니다.</string>
+    <string name="altar_user_name">이름</string>
+    <string name="altar_user_birth">생년월일</string>
+    <string name="altar_user_female">여자</string>
+    <string name="altar_user_male">남자</string>
+    <string name="altar_user_school">학교 정보</string>
+    <string name="altar_user_company">회사 정보</string>
+    <string name="altar_user_society">그외 소속 단체</string>
+    <string name="altar_user_last_will">남긴말</string>
+    <string name="altar_user_contact_people">연락 받을 사람 등록</string>
+    <string name="dialog_create_image_take_a_picture">사진 촬영</string>
+    <string name="dialog_create_image_select_photo_in_album">앨범에서 선택</string>
+    <string name="dialog_title_information">안내사항</string>
+    <string name="dialog_create_birth_validate_info_message">본인 사망후 사망진단서 대조를 위한 주민등록번호가 필요합니다.</string>
+    <string name="resident_registration_number">주민등록번호</string>
+    <string name="confirm_repetition">중복확인</string>
+    <string name="billing_star_title">별 구매하기</string>
+    <string name="billing_star_extra_star_format">+ 별 %s</string>
+    <string name="billing_star_count_format">별 : %s</string>
+    <string name="billing_star_price_format"> %s원</string>
+    <string name="permission_explanation">애플리케이션 사용을 위해 아래 권한을 허용해야합니다.</string>
+    <string name="altar_contact_count_format">연락받을 사람 늘리기 [ %1$s / %2$s ]</string>
+    <string name="dialog_contact_confirm_info_message">선택한 지인들을 등록하시겠습니까?</string>
+    <string name="billing_star">별 구매하기</string>
+    <string name="dialog_promote_billing_star_info_message">신청 가능한 별이 부족합니다.</string>
+
+    <string-array name="add_friend_group_scope">
+        <item>elementary school</item>
+        <item>middle school</item>
+        <item>high school</item>
+        <item>university</item>
+        <item>company</item>
+        <item>social, group</item>
+        <item>the other</item>
+    </string-array>
+
+</resources>
