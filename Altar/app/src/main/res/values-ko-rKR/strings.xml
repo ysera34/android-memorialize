@@ -51,7 +51,8 @@
     <string name="friend_altar">지인 분향소</string>
     <string name="altar_comment_button">추모글 보기 및 작성</string>
     <string name="public_last_will_title">남긴말</string>
-    <string name="cherish_comment">나의 추모글 (100)</string>
+    <string name="cherish_comment_hint">나의 추모글 (100)</string>
+    <string name="cherish_comment">추모댓글</string>
     <string name="cherish">추모하기</string>
     <string name="delete_comment_dialog_message">추모글을 지우시겠습니까?</string>
     <string name="create_comment_dialog_message">추모글을 작성하시겠습니까?</string>

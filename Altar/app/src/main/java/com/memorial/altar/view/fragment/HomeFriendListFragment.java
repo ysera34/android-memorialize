@@ -27,6 +27,10 @@ import com.memorial.altar.model.Friend;
 import com.memorial.altar.view.activity.AltarActivity;
 
 import java.util.ArrayList;
+import java.util.Collections;
+import java.util.Comparator;
+
+import static com.memorial.altar.R.id.friend_group_name_text_view;
 
 /**
  * Created by yoon on 2017. 8. 26..
@@ -153,6 +157,7 @@ public class HomeFriendListFragment extends Fragment implements View.OnClickList
         private TextView mObitDateTextView;
         private TextView mNameTextView;
         private TextView mAgeTextView;
+        private TextView mCommentTextView;
 
         public FriendViewHolder(View itemView) {
             super(itemView);
@@ -162,6 +167,7 @@ public class HomeFriendListFragment extends Fragment implements View.OnClickList
             mObitDateTextView = itemView.findViewById(R.id.list_item_friend_obit_date_text_view);
             mNameTextView = itemView.findViewById(R.id.list_item_friend_name_text_view);
             mAgeTextView = itemView.findViewById(R.id.list_item_friend_age_text_view);
+            mCommentTextView = itemView.findViewById(R.id.list_item_friend_comment_text_view);
         }
 
         public void bindFriend(Friend friend) {
@@ -171,10 +177,17 @@ public class HomeFriendListFragment extends Fragment implements View.OnClickList
                 mObitDateTextView.setText(mFriend.getObitDate());
                 mNameTextView.setText(mFriend.getName());
                 mAgeTextView.setText(mFriend.getAge());
+                mCommentTextView.setText(R.string.cherish_comment);
+                if (mFriend.isCommented()) {
+                    mCommentTextView.setBackgroundResource(R.drawable.ic_commented_true);
+                } else {
+                    mCommentTextView.setBackgroundResource(R.drawable.ic_commented_false);
+                }
             } else {
                 mObitDateTextView.setText(null);
                 mNameTextView.setText(null);
                 mAgeTextView.setText(null);
+                mCommentTextView.setText(null);
             }
         }
 
@@ -188,7 +201,7 @@ public class HomeFriendListFragment extends Fragment implements View.OnClickList
         @Override
         public boolean onLongClick(View view) {
             if (mFriend.getObitDate() != null) {
-                assignFriendGroupShowDialog(mFriend);
+                assignFriendGroupShowDialog(mFriend, false);
             }
             return true;
         }
@@ -198,11 +211,13 @@ public class HomeFriendListFragment extends Fragment implements View.OnClickList
         ArrayList<Friend> friends = new ArrayList<>();
         for (int i = 0; i < 25; i++) {
             Friend friend = new Friend();
+            friend.setId(i);
             friend.setAge("age :" + (i + 50) + "age");
             friend.setName("name " + i);
             if (i <= 15) {
                 friend.setObitDate("2017-" + "9-" + i);
             }
+            friend.setCommented(i % 2 == 0);
             friends.add(friend);
         }
         return friends;
@@ -286,7 +301,8 @@ public class HomeFriendListFragment extends Fragment implements View.OnClickList
 
     private void addFriendGroupLayout(final String groupName, LinearLayout parentLayout) {
         LayoutInflater layoutInflater = LayoutInflater.from(getActivity());
-        TextView groupNameTextView = (TextView) layoutInflater.inflate(R.layout.layout_friend_group_name_text_view, null);
+        View view = layoutInflater.inflate(R.layout.layout_friend_group_name_text_view, null);
+        TextView groupNameTextView = view.findViewById(friend_group_name_text_view);
         groupNameTextView.setText(String.valueOf(groupName));
         mAddedFriendGroupTextViews.add(groupNameTextView);
         mFriendGroupNames.add(groupName);
@@ -296,10 +312,10 @@ public class HomeFriendListFragment extends Fragment implements View.OnClickList
         mAddedFriendAdapters.add(new AddedFriendAdapter(mAddedFriendGroups.get(mAddedFriendGroups.size() - 1)));
         groupRecyclerView.setAdapter(mAddedFriendAdapters.get(mAddedFriendAdapters.size() - 1));
         mAddedFriendGroupRecyclerViews.add(groupRecyclerView);
-        parentLayout.addView(groupNameTextView, 2 * mAddedFriendGroups.size() - 2);
+        parentLayout.addView(view, 2 * mAddedFriendGroups.size() - 2);
         parentLayout.addView(groupRecyclerView, 2 * mAddedFriendGroups.size() - 1);
         Toast.makeText(getActivity(), "\"" + groupName + "\"" + " is added.", Toast.LENGTH_SHORT).show();
-        groupNameTextView.setOnLongClickListener(new View.OnLongClickListener() {
+        view.setOnLongClickListener(new View.OnLongClickListener() {
             @Override
             public boolean onLongClick(View view) {
                 removeFriendGroupShowDialog(groupName);
@@ -351,15 +367,19 @@ public class HomeFriendListFragment extends Fragment implements View.OnClickList
         notifyAdapters();
     }
 
-    private void assignFriendGroupShowDialog(final Friend friend) {
+    private void assignFriendGroupShowDialog(final Friend friend, final boolean isAdded) {
         if (mFriendGroupNames.size() == 0) {
             Toast.makeText(getActivity(), R.string.promote_add_group, Toast.LENGTH_SHORT).show();
             return;
+        }
+        if (isAdded) {
+            mFriendGroupNames.add(getString(R.string.friend_group_title));
         }
         CharSequence[] cs = mFriendGroupNames.toArray(new CharSequence[mFriendGroupNames.size()]);
         int checkedItem = friend.getGroupId();
         AlertDialog.Builder builder = new AlertDialog.Builder(getActivity());
         builder.setTitle(getString(R.string.friend_list_assign_group));
+        builder.setCancelable(false);
 
         builder.setSingleChoiceItems(cs, checkedItem, new DialogInterface.OnClickListener() {
             @Override
@@ -382,8 +402,14 @@ public class HomeFriendListFragment extends Fragment implements View.OnClickList
                     int selectedPosition = Integer.valueOf((String) listView.getTag());
                     if (selectedPosition > -1) {
                         Toast.makeText(getActivity(), "selected position : " + selectedPosition, Toast.LENGTH_SHORT).show();
+                        if (isAdded && selectedPosition == mFriendGroupNames.size() - 1) {
+                            selectedPosition = -1;
+                        }
                         moveFriend(friend, selectedPosition);
                     }
+                }
+                if (isAdded) {
+                    mFriendGroupNames.remove(getString(R.string.friend_group_title));
                 }
 //                else {
 //                    Toast.makeText(getActivity(), "It is a group that already belongs.", Toast.LENGTH_SHORT).show();
@@ -393,7 +419,9 @@ public class HomeFriendListFragment extends Fragment implements View.OnClickList
         builder.setNegativeButton(android.R.string.no, new DialogInterface.OnClickListener() {
             @Override
             public void onClick(DialogInterface dialogInterface, int i) {
-
+                if (isAdded) {
+                    mFriendGroupNames.remove(getString(R.string.friend_group_title));
+                }
             }
         });
         AlertDialog dialog = builder.create();
@@ -404,11 +432,18 @@ public class HomeFriendListFragment extends Fragment implements View.OnClickList
         int groupId = friend.getGroupId();
         if (groupId == -1) {
             mFriends.remove(friend);
+            friend.setGroupId(selectedGroupIndex);
+            mAddedFriendGroups.get(selectedGroupIndex).add(friend);
         } else {
             mAddedFriendGroups.get(groupId).remove(friend);
+            friend.setGroupId(selectedGroupIndex);
+
+            if (selectedGroupIndex == -1) {
+                mFriends.add(friend);
+            } else {
+                mAddedFriendGroups.get(selectedGroupIndex).add(friend);
+            }
         }
-        friend.setGroupId(selectedGroupIndex);
-        mAddedFriendGroups.get(selectedGroupIndex).add(friend);
         notifyAdapters();
     }
 
@@ -416,6 +451,18 @@ public class HomeFriendListFragment extends Fragment implements View.OnClickList
         for (int i = 0; i < mAddedFriendGroups.size(); i++) {
             mAddedFriendAdapters.get(i).notifyDataSetChanged();
         }
+        Collections.sort(mFriends, new Comparator<Friend>() {
+            @Override
+            public int compare(Friend friend1, Friend friend2) {
+                if (friend1.getId() > friend2.getId()) {
+                    return 1;
+                } else if (friend1.getId() < friend2.getId()) {
+                    return -1;
+                } else {
+                    return 0;
+                }
+            }
+        });
         mFriendAdapter.notifyDataSetChanged();
     }
 
@@ -457,6 +504,7 @@ public class HomeFriendListFragment extends Fragment implements View.OnClickList
         private TextView mObitDateTextView;
         private TextView mNameTextView;
         private TextView mAgeTextView;
+        private TextView mCommentTextView;
 
         public AddedFriendViewHolder(View itemView) {
             super(itemView);
@@ -466,6 +514,7 @@ public class HomeFriendListFragment extends Fragment implements View.OnClickList
             mObitDateTextView = itemView.findViewById(R.id.list_item_friend_obit_date_text_view);
             mNameTextView = itemView.findViewById(R.id.list_item_friend_name_text_view);
             mAgeTextView = itemView.findViewById(R.id.list_item_friend_age_text_view);
+            mCommentTextView = itemView.findViewById(R.id.list_item_friend_comment_text_view);
         }
 
         public void bindAddedFriend(Friend addedFriend) {
@@ -475,10 +524,17 @@ public class HomeFriendListFragment extends Fragment implements View.OnClickList
                 mObitDateTextView.setText(mAddedFriend.getObitDate());
                 mNameTextView.setText(mAddedFriend.getName());
                 mAgeTextView.setText(mAddedFriend.getAge());
+                mCommentTextView.setText(R.string.cherish_comment);
+                if (mAddedFriend.isCommented()) {
+                    mCommentTextView.setBackgroundResource(R.drawable.ic_commented_true);
+                } else {
+                    mCommentTextView.setBackgroundResource(R.drawable.ic_commented_false);
+                }
             } else {
                 mObitDateTextView.setText(null);
                 mNameTextView.setText(null);
                 mAgeTextView.setText(null);
+                mCommentTextView.setText(null);
             }
         }
 
@@ -489,7 +545,7 @@ public class HomeFriendListFragment extends Fragment implements View.OnClickList
 
         @Override
         public boolean onLongClick(View view) {
-            assignFriendGroupShowDialog(mAddedFriend);
+            assignFriendGroupShowDialog(mAddedFriend, true);
             return true;
         }
     }
@@ -497,4 +553,13 @@ public class HomeFriendListFragment extends Fragment implements View.OnClickList
     private void startMemorialFriendActivity(int friendId) {
         startActivity(AltarActivity.newIntent(getActivity(), friendId));
     }
+
+//    private final static Comparator mFriendAscComparator = new Comparator() {
+//
+////        private final Collator mCollator = Collator.getInstance();
+//        @Override
+//        public int compare(Object o, Object t1) {
+//
+//        }
+//    }
 }

@@ -125,8 +125,9 @@ public class AltarReadFragment extends Fragment {
             mAltarReadNestedScrollView.postDelayed(new Runnable() {
                 @Override
                 public void run() {
-                    mAltarReadNestedScrollView.smoothScrollTo(
-                            0, (int) mAltarUserPublicLastWillMessageTextView.getY());
+//                    mAltarReadNestedScrollView.smoothScrollTo(
+//                            0, (int) mAltarUserPublicLastWillMessageTextView.getY());
+                    mAltarReadNestedScrollView.fullScroll(View.FOCUS_UP);
                 }
             }, 250);
         } else {

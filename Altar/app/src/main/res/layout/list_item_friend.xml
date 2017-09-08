@@ -1,14 +1,9 @@
 <?xml version="1.0" encoding="utf-8"?>
-<android.support.v7.widget.CardView
+<LinearLayout
     xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:card_view="http://schemas.android.com/apk/res-auto"
     android:id="@+id/friend_card_view"
-    android:layout_width="match_parent"
-    android:layout_height="wrap_content"
-    card_view:cardCornerRadius="4dp"
-    card_view:cardElevation="2dp"
-    card_view:cardMaxElevation="4dp"
-    card_view:cardUseCompatPadding="true">
+    android:layout_width="90dp"
+    android:layout_height="wrap_content">
 
     <RelativeLayout
         android:layout_width="match_parent"
@@ -18,8 +13,9 @@
             android:id="@+id/list_item_friend_photo_layout"
             android:layout_width="80dp"
             android:layout_height="107dp"
+            android:layout_centerHorizontal="true"
             android:layout_gravity="center_horizontal"
-            android:layout_marginTop="10dp"
+            android:layout_marginTop="4dp"
             android:background="@drawable/bg_picture_frame"
             android:padding="10dp">
 
@@ -36,23 +32,26 @@
         <!--android:layout_width="wrap_content"-->
         <!--android:layout_height="wrap_content"-->
         <!--android:scaleType="centerCrop"/>-->
-
-
         <TextView
             android:id="@+id/list_item_friend_obit_date_text_view"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_below="@+id/list_item_friend_photo_layout"
+            android:layout_marginBottom="2dp"
             android:gravity="center"
-            android:padding="4dp"
+            android:paddingEnd="4dp"
+            android:paddingStart="4dp"
             android:textColor="@color/colorGray200"
             android:textSize="13sp"/>
 
         <RelativeLayout
+            android:id="@+id/list_item_friend_name_layout"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_below="@+id/list_item_friend_obit_date_text_view"
-            android:padding="4dp">
+            android:layout_marginBottom="4dp"
+            android:paddingEnd="4dp"
+            android:paddingStart="4dp">
 
             <TextView
                 android:id="@+id/list_item_friend_name_text_view"
@@ -76,6 +75,22 @@
 
         </RelativeLayout>
 
+        <TextView
+            android:id="@+id/list_item_friend_comment_text_view"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_below="@+id/list_item_friend_name_layout"
+            android:layout_centerHorizontal="true"
+            android:layout_marginBottom="6dp"
+            android:gravity="center"
+            android:paddingBottom="4dp"
+            android:paddingEnd="10dp"
+            android:paddingStart="10dp"
+            android:paddingTop="4dp"
+            android:text="@string/cherish_comment"
+            android:textColor="@color/colorGray200"
+            android:textSize="12sp"/>
+
     </RelativeLayout>
 
-</android.support.v7.widget.CardView>
+</LinearLayout>

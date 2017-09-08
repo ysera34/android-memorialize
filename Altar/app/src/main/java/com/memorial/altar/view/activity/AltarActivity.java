@@ -78,7 +78,7 @@ public class AltarActivity extends AppCompatActivity implements View.OnClickList
             case R.id.altar_comment_read_button_text_view:
 //                Toast.makeText(getApplicationContext(), "show altar comment", Toast.LENGTH_SHORT).show();
                 Fragment fragment = mAltarFragmentManager.findFragmentById(R.id.altar_container);
-                ((AltarReadFragment)fragment).updateComment();
+                ((AltarReadFragment) fragment).updateComment();
                 hideCommentButtonTextView();
                 break;
             case R.id.altar_comment_create_button_text_view:

@@ -36,7 +36,7 @@
             android:layout_height="wrap_content"
             android:background="@color/colorWhite"
             android:gravity="start|center_vertical"
-            android:hint="@string/cherish_comment"
+            android:hint="@string/cherish_comment_hint"
             android:inputType="textMultiLine"
             android:maxLength="100"
             android:maxLines="5"
