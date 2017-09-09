@@ -85,6 +85,12 @@
     <string name="check_the_input_window">입력창을 확인해주세요.</string>
     <string name="birth_number_validation_false">유효하지 않는 번호 입니다.</string>
     <string name="birth_number_validation_true">가입 가능한 번호 입니다.</string>
+    <string name="altar_user_school_hint">예) 삼현초등학교</string>
+    <string name="altar_user_company_hint">예) 대한자동차</string>
+    <string name="altar_user_social_hint">예) 대한동아리</string>
+    <string name="altar_create_user_school">학교</string>
+    <string name="altar_create_user_company">회사</string>
+    <string name="altar_create_user_society">동아리</string>
 
     <string-array name="add_friend_group_scope">
         <item>elementary school</item>

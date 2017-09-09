@@ -1,6 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <android.support.v4.widget.NestedScrollView
     xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent">
 
@@ -12,7 +13,6 @@
         android:orientation="vertical">
 
         <RelativeLayout
-            android:visibility="invisible"
             android:layout_width="120dp"
             android:layout_height="160dp"
             android:layout_gravity="center_horizontal"
@@ -23,18 +23,18 @@
                 android:id="@+id/altar_create_user_image_view"
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
+                android:layout_marginBottom="20dp"
                 android:layout_marginEnd="20dp"
                 android:layout_marginStart="16dp"
                 android:layout_marginTop="16dp"
-                android:layout_marginBottom="20dp"
                 android:scaleType="centerCrop"
                 android:src="@drawable/img_person"/>
 
             <ImageView
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_marginEnd="5dp"
                 android:layout_alignParentTop="true"
+                android:layout_marginEnd="5dp"
                 android:src="@drawable/bg_picture_frame_head"/>
 
         </RelativeLayout>
@@ -50,21 +50,21 @@
                 android:id="@+id/altar_create_user_name_text_view"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
+                android:background="@drawable/edit_text_under_line_focus_false"
                 android:clickable="true"
-                android:padding="8dp"
-                android:textSize="18sp"
                 android:hint="@string/altar_user_name"
-                android:background="@drawable/edit_text_under_line_focus_false"/>
+                android:padding="8dp"
+                android:textSize="18sp"/>
 
             <TextView
                 android:id="@+id/altar_create_user_birth_text_view"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
+                android:background="@drawable/edit_text_under_line_focus_false"
                 android:clickable="true"
-                android:padding="8dp"
-                android:textSize="18sp"
                 android:hint="@string/altar_user_birth"
-                android:background="@drawable/edit_text_under_line_focus_false"/>
+                android:padding="8dp"
+                android:textSize="18sp"/>
 
             <RadioGroup
                 android:layout_width="match_parent"
@@ -84,47 +84,13 @@
                     android:text="@string/altar_user_male"/>
             </RadioGroup>
 
-            <android.support.design.widget.TextInputLayout
-                android:id="@+id/school_text_input_layout"
+            <android.support.v7.widget.RecyclerView
+                android:id="@+id/altar_create_user_group_recycler_view"
                 android:layout_width="match_parent"
-                android:layout_height="wrap_content">
+                android:layout_height="wrap_content"
+                tools:listitem="@layout/list_item_group_parent">
 
-                <EditText
-                    android:id="@+id/school_edit_text"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:hint="@string/altar_user_school"
-                    android:inputType="text"/>
-
-            </android.support.design.widget.TextInputLayout>
-
-            <android.support.design.widget.TextInputLayout
-                android:id="@+id/company_text_input_layout"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content">
-
-                <EditText
-                    android:id="@+id/company_edit_text"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:hint="@string/altar_user_company"
-                    android:inputType="text"/>
-
-            </android.support.design.widget.TextInputLayout>
-
-            <android.support.design.widget.TextInputLayout
-                android:id="@+id/society_text_input_layout"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content">
-
-                <EditText
-                    android:id="@+id/society_edit_text"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:hint="@string/altar_user_society"
-                    android:inputType="text"/>
-
-            </android.support.design.widget.TextInputLayout>
+            </android.support.v7.widget.RecyclerView>
 
             <TextView
                 android:id="@+id/contact_friend_button_text_view"
@@ -135,19 +101,15 @@
                 android:text="@string/altar_user_contact_people"
                 android:textSize="18sp"/>
 
-            <android.support.design.widget.TextInputLayout
-                android:id="@+id/last_will_text_input_layout"
+            <TextView
+                android:id="@+id/altar_create_user_last_will_text_view"
                 android:layout_width="match_parent"
-                android:layout_height="wrap_content">
-
-                <EditText
-                    android:id="@+id/last_will_edit_text"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:hint="@string/altar_user_last_will"
-                    android:inputType="text"/>
-
-            </android.support.design.widget.TextInputLayout>
+                android:layout_height="wrap_content"
+                android:background="@drawable/edit_text_under_line_focus_false"
+                android:clickable="true"
+                android:hint="@string/altar_user_last_will"
+                android:padding="8dp"
+                android:textSize="18sp"/>
 
         </LinearLayout>
     </LinearLayout>
