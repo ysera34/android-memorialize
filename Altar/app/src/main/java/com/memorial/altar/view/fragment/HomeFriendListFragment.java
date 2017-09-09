@@ -3,6 +3,7 @@ package com.memorial.altar.view.fragment;
 import android.content.DialogInterface;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
+import android.support.design.widget.TextInputEditText;
 import android.support.design.widget.TextInputLayout;
 import android.support.v4.app.Fragment;
 import android.support.v4.widget.NestedScrollView;
@@ -15,7 +16,6 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.view.animation.AccelerateInterpolator;
 import android.view.animation.DecelerateInterpolator;
-import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.ListView;
@@ -237,7 +237,7 @@ public class HomeFriendListFragment extends Fragment implements View.OnClickList
         LayoutInflater layoutInflater = LayoutInflater.from(getActivity());
         View view = layoutInflater.inflate(R.layout.dialog_add_friend_group, null);
         TextInputLayout addFriendGroupNameTextLayout = view.findViewById(R.id.add_group_name_text_input_layout);
-        final EditText addFriendGroupNameEditText = view.findViewById(R.id.add_group_name_edit_text);
+        final TextInputEditText addFriendGroupNameEditText = view.findViewById(R.id.add_group_name_edit_text);
 
         AlertDialog.Builder builder = new AlertDialog.Builder(getActivity());
         builder.setTitle(getString(R.string.friend_list_add_group));
@@ -248,7 +248,7 @@ public class HomeFriendListFragment extends Fragment implements View.OnClickList
                 if (addFriendGroupNameEditText.getText().toString().length() > 0) {
                     addFriendGroupLayout(addFriendGroupNameEditText.getText().toString(), mFriendGroupLayout);
                 } else {
-                    Toast.makeText(getActivity(), "Please check the input window.", Toast.LENGTH_SHORT).show();
+                    Toast.makeText(getActivity(), R.string.check_the_input_window, Toast.LENGTH_SHORT).show();
                 }
             }
         });
@@ -271,7 +271,7 @@ public class HomeFriendListFragment extends Fragment implements View.OnClickList
 //                android.R.layout.simple_dropdown_item_1line, groupScopeArray);
 //        groupScopeSpinner.setAdapter(adapter);
 //        TextInputLayout addFriendGroupNameTextLayout = view.findViewById(R.id.add_group_name_text_input_layout);
-//        final EditText addFriendGroupNameEditText = view.findViewById(R.id.add_group_name_edit_text);
+//        final TextInputEditText addFriendGroupNameEditText = view.findViewById(R.id.add_group_name_edit_text);
 //
 //        AlertDialog.Builder builder = new AlertDialog.Builder(getActivity());
 //        builder.setTitle(getString(R.string.friend_list_add_group));

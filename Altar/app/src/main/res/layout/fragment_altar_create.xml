@@ -12,20 +12,30 @@
         android:orientation="vertical">
 
         <RelativeLayout
+            android:visibility="invisible"
             android:layout_width="120dp"
             android:layout_height="160dp"
             android:layout_gravity="center_horizontal"
             android:layout_marginTop="10dp"
-            android:background="@drawable/bg_picture_frame"
-            android:padding="16dp">
+            android:background="@drawable/bg_picture_frame">
 
             <ImageView
                 android:id="@+id/altar_create_user_image_view"
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
-                android:src="@drawable/img_person"
-                android:scaleType="fitEnd"
-                />
+                android:layout_marginEnd="20dp"
+                android:layout_marginStart="16dp"
+                android:layout_marginTop="16dp"
+                android:layout_marginBottom="20dp"
+                android:scaleType="centerCrop"
+                android:src="@drawable/img_person"/>
+
+            <ImageView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginEnd="5dp"
+                android:layout_alignParentTop="true"
+                android:src="@drawable/bg_picture_frame_head"/>
 
         </RelativeLayout>
 
@@ -36,34 +46,25 @@
             android:paddingEnd="20dp"
             android:paddingStart="20dp">
 
-            <android.support.design.widget.TextInputLayout
-                android:id="@+id/name_text_input_layout"
+            <TextView
+                android:id="@+id/altar_create_user_name_text_view"
                 android:layout_width="match_parent"
-                android:layout_height="wrap_content">
+                android:layout_height="wrap_content"
+                android:clickable="true"
+                android:padding="8dp"
+                android:textSize="18sp"
+                android:hint="@string/altar_user_name"
+                android:background="@drawable/edit_text_under_line_focus_false"/>
 
-                <EditText
-                    android:id="@+id/name_edit_text"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:hint="@string/altar_user_name"
-                    android:inputType="text"/>
-
-            </android.support.design.widget.TextInputLayout>
-
-            <android.support.design.widget.TextInputLayout
-                android:id="@+id/birth_text_input_layout"
+            <TextView
+                android:id="@+id/altar_create_user_birth_text_view"
                 android:layout_width="match_parent"
-                android:layout_height="wrap_content">
-
-                <EditText
-                    android:id="@+id/altar_create_user_birth_edit_text"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:editable="false"
-                    android:hint="@string/altar_user_birth"
-                    android:inputType="date"/>
-
-            </android.support.design.widget.TextInputLayout>
+                android:layout_height="wrap_content"
+                android:clickable="true"
+                android:padding="8dp"
+                android:textSize="18sp"
+                android:hint="@string/altar_user_birth"
+                android:background="@drawable/edit_text_under_line_focus_false"/>
 
             <RadioGroup
                 android:layout_width="match_parent"

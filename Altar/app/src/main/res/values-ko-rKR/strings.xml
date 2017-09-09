@@ -76,11 +76,15 @@
     <string name="billing_star_extra_star_format">+ 별 %s</string>
     <string name="billing_star_count_format">별 : %s</string>
     <string name="billing_star_price_format"> %s원</string>
-    <string name="permission_explanation">애플리케이션 사용을 위해 아래 권한을 허용해야합니다.</string>
+    <string name="permission_explanation">애플리케이션 사용을 위해 다음 권한을 허용해야합니다.</string>
     <string name="altar_contact_count_format">연락받을 사람 늘리기 [ %1$s / %2$s ]</string>
     <string name="dialog_contact_confirm_info_message">선택한 지인들을 등록하시겠습니까?</string>
     <string name="billing_star">별 구매하기</string>
     <string name="dialog_promote_billing_star_info_message">신청 가능한 별이 부족합니다.</string>
+    <string name="camera_not_available">카메라를 사용할 수 없습니다.</string>
+    <string name="check_the_input_window">입력창을 확인해주세요.</string>
+    <string name="birth_number_validation_false">유효하지 않는 번호 입니다.</string>
+    <string name="birth_number_validation_true">가입 가능한 번호 입니다.</string>
 
     <string-array name="add_friend_group_scope">
         <item>elementary school</item>

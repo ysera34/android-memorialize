@@ -20,7 +20,7 @@
         android:layout_height="match_parent"
         android:layout_weight="2">
 
-        <EditText
+        <android.support.design.widget.TextInputEditText
             android:id="@+id/add_group_name_edit_text"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"

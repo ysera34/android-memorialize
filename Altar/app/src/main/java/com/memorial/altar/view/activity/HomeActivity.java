@@ -33,6 +33,7 @@ import static com.memorial.altar.common.Common.NAV_REQUEST_FAQ;
 import static com.memorial.altar.common.Common.NAV_REQUEST_NOTIFICATIONS;
 import static com.memorial.altar.common.Common.NAV_REQUEST_SETTINGS;
 import static com.memorial.altar.view.fragment.AltarCreateFragment.ALTAR_CREATE_CONTACT_PERMISSION_REQUEST;
+import static com.memorial.altar.view.fragment.AltarCreateFragment.ALTAR_CREATE_STORAGE_PERMISSION_REQUEST;
 
 public class HomeActivity extends AppCompatActivity
         implements View.OnClickListener, NavigationView.OnNavigationItemSelectedListener,
@@ -179,6 +180,7 @@ public class HomeActivity extends AppCompatActivity
     @Override
     public void onPermissionCallback(int requestCode, int requestPermissionId, boolean isGranted) {
         switch (requestCode) {
+            case ALTAR_CREATE_STORAGE_PERMISSION_REQUEST:
             case ALTAR_CREATE_CONTACT_PERMISSION_REQUEST:
                 ((AltarCreateFragment) mHomeViewPagerAdapter.getItem(1))
                         .onPermissionCallback(requestCode, requestPermissionId, isGranted);
