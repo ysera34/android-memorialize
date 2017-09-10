@@ -22,6 +22,7 @@ import com.memorial.altar.R;
 import com.memorial.altar.util.UserSharedPreferences;
 import com.memorial.altar.view.fragment.AltarContactFragment;
 import com.memorial.altar.view.fragment.AltarCreateFragment;
+import com.memorial.altar.view.fragment.AltarPublicLastWillFragment;
 import com.memorial.altar.view.fragment.HomeFriendListFragment;
 import com.memorial.altar.view.fragment.HomeObituaryFragment;
 import com.memorial.altar.view.fragment.PermissionHeadlessFragment;
@@ -38,7 +39,8 @@ import static com.memorial.altar.view.fragment.AltarCreateFragment.ALTAR_CREATE_
 public class HomeActivity extends AppCompatActivity
         implements View.OnClickListener, NavigationView.OnNavigationItemSelectedListener,
         PermissionHeadlessFragment.PermissionCallbackListener,
-        AltarContactFragment.OnAltarContactDialogDismissListener {
+        AltarContactFragment.OnAltarContactDialogDismissListener,
+        AltarPublicLastWillFragment.OnAltarPublicLastWillDialogDismissListener {
 
     private static final String TAG = HomeActivity.class.getSimpleName();
 
@@ -192,5 +194,11 @@ public class HomeActivity extends AppCompatActivity
     public void onAltarContactDialogDismissed(String contactName) {
         ((AltarCreateFragment) mHomeViewPagerAdapter.getItem(1))
                 .onAltarContactDialogDismissed(contactName);
+    }
+
+    @Override
+    public void onAltarPublicLastWillDialogDismissed(String publicLastWillMessage) {
+        ((AltarCreateFragment) mHomeViewPagerAdapter.getItem(1))
+                .onAltarPublicLastWillDialogDismissed(publicLastWillMessage);
     }
 }

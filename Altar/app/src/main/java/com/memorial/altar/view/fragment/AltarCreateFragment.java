@@ -21,6 +21,7 @@ import android.view.inputmethod.InputMethodManager;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ImageView;
+import android.widget.RadioButton;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -73,6 +74,8 @@ public class AltarCreateFragment extends Fragment
     private GroupAdapter mGroupAdapter;
     private ArrayList<GroupParent> mGroupParents;
     private TextView mContactFriendButtonTextView;
+    private TextView mLastWillTextView;
+
     private boolean mIsBirthValidateInfoConfirmed;
     private boolean mIsBirthNumberValidated;
 
@@ -101,6 +104,8 @@ public class AltarCreateFragment extends Fragment
         mGroupRecyclerView.setAdapter(mGroupAdapter);
         mContactFriendButtonTextView = view.findViewById(R.id.contact_friend_button_text_view);
         mContactFriendButtonTextView.setOnClickListener(this);
+        mLastWillTextView = view.findViewById(R.id.altar_create_user_last_will_text_view);
+        mLastWillTextView.setOnClickListener(this);
         return view;
     }
 
@@ -151,6 +156,9 @@ public class AltarCreateFragment extends Fragment
                                 CONTACT_PERMISSION_REQUEST),
                                 PermissionHeadlessFragment.TAG)
                         .commit();
+                break;
+            case R.id.altar_create_user_last_will_text_view:
+                createLastWillTypeButtonShowDialog();
                 break;
         }
     }
@@ -493,6 +501,36 @@ public class AltarCreateFragment extends Fragment
         return null;
     }
 
+    private void createLastWillTypeButtonShowDialog() {
+        LayoutInflater layoutInflater = LayoutInflater.from(getActivity());
+        View view = layoutInflater.inflate(R.layout.dialog_create_user_last_will, null);
+        final RadioButton publicRadioButton = view.findViewById(R.id.last_will_public_radio_button);
+        final RadioButton privateRadioButton = view.findViewById(R.id.last_will_private_radio_button);
+
+        AlertDialog.Builder builder = new AlertDialog.Builder(getActivity());
+        builder.setTitle(getString(R.string.altar_create_user_last_will));
+        builder.setView(view);
+        builder.setPositiveButton(android.R.string.ok, new DialogInterface.OnClickListener() {
+            @Override
+            public void onClick(DialogInterface dialogInterface, int i) {
+                if (publicRadioButton.isChecked()) {
+                    BottomSheetDialogFragment altarPublicLastWillFragment =
+                            AltarPublicLastWillFragment.newInstance(mLastWillTextView.getText().toString());
+                    altarPublicLastWillFragment.show(getChildFragmentManager(), "altar_public_last_will");
+//                    getChildFragmentManager().beginTransaction()
+//                            .add(altarPublicLastWillFragment, "altar_public_last_will")
+//                            .commitAllowingStateLoss();
+                } else if (privateRadioButton.isChecked()) {
+
+                }
+            }
+        });
+        builder.setNegativeButton(android.R.string.no, null);
+
+        mDialog = builder.create();
+        mDialog.show();
+    }
+
     public void onPermissionCallback(int requestCode, int requestPermissionId, boolean isGranted) {
         switch (requestCode) {
             case ALTAR_CREATE_STORAGE_PERMISSION_REQUEST:
@@ -504,10 +542,13 @@ public class AltarCreateFragment extends Fragment
                 break;
             case ALTAR_CREATE_CONTACT_PERMISSION_REQUEST:
                 if (requestPermissionId == CONTACT_PERMISSION_REQUEST) {
-                    if (isGranted) {
+                    if (isGranted /*&& isResumed()*/) {
                         BottomSheetDialogFragment altarContactFragment =
                                 AltarContactFragment.newInstance();
-                        altarContactFragment.show(getChildFragmentManager(), "altar_contact");
+//                        altarContactFragment.show(getChildFragmentManager(), "altar_contact");
+                        getChildFragmentManager().beginTransaction()
+                                .add(altarContactFragment, "altar_contact")
+                                .commitAllowingStateLoss();
                     }
                 }
                 break;
@@ -517,6 +558,10 @@ public class AltarCreateFragment extends Fragment
     public void onAltarContactDialogDismissed(String contactName) {
         String contactStr = getString(R.string.altar_user_contact_people) + " : " + contactName;
         mContactFriendButtonTextView.setText(contactStr);
+    }
+
+    public void onAltarPublicLastWillDialogDismissed(String publicLastWillMessage) {
+        mLastWillTextView.setText(String.valueOf(publicLastWillMessage));
     }
 
     private boolean checkInputTextAndSetText(EditText inputEditText, TextView setTargetTextView) {
@@ -636,7 +681,7 @@ public class AltarCreateFragment extends Fragment
                 }
                 mGroupChildNamesBuilder.append(mGroupParent.getChildList().get(i).getName());
             }
-            if (mGroupChildNamesBuilder.length() > 0) {
+            if (mGroupChildNamesBuilder.length() > 0 && !isExpanded()) {
                 mGroupNameTextView.setText(mGroupChildNamesBuilder.toString());
             }
         }

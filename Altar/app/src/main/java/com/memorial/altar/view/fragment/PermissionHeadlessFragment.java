@@ -60,10 +60,10 @@ public class PermissionHeadlessFragment extends Fragment {
                 mRequestPermission = Manifest.permission.READ_EXTERNAL_STORAGE;
                 break;
         }
-        checkContactPermission();
+        checkRequestedPermission();
     }
 
-    private void checkContactPermission() {
+    private void checkRequestedPermission() {
         if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.M) {
             if (ActivityCompat.checkSelfPermission(getActivity(), mRequestPermission)
                     != PackageManager.PERMISSION_GRANTED) {

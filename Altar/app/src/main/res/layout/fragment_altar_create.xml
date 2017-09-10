@@ -43,6 +43,7 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:orientation="vertical"
+            android:paddingBottom="16dp"
             android:paddingEnd="20dp"
             android:paddingStart="20dp">
 
@@ -50,6 +51,7 @@
                 android:id="@+id/altar_create_user_name_text_view"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
+                android:layout_marginTop="10dp"
                 android:background="@drawable/edit_text_under_line_focus_false"
                 android:clickable="true"
                 android:hint="@string/altar_user_name"
@@ -60,6 +62,7 @@
                 android:id="@+id/altar_create_user_birth_text_view"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
+                android:layout_marginTop="10dp"
                 android:background="@drawable/edit_text_under_line_focus_false"
                 android:clickable="true"
                 android:hint="@string/altar_user_birth"
@@ -96,6 +99,7 @@
                 android:id="@+id/contact_friend_button_text_view"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
+                android:layout_marginTop="10dp"
                 android:clickable="true"
                 android:padding="8dp"
                 android:text="@string/altar_user_contact_people"
@@ -105,9 +109,12 @@
                 android:id="@+id/altar_create_user_last_will_text_view"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
+                android:layout_marginTop="10dp"
                 android:background="@drawable/edit_text_under_line_focus_false"
                 android:clickable="true"
+                android:ellipsize="end"
                 android:hint="@string/altar_user_last_will"
+                android:maxLines="1"
                 android:padding="8dp"
                 android:textSize="18sp"/>
 
