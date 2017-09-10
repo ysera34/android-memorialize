@@ -1,10 +1,12 @@
 package com.memorial.altar.model;
 
+import java.io.Serializable;
+
 /**
  * Created by yoon on 2017. 9. 6..
  */
 
-public class Contact {
+public class Contact implements Serializable {
 
     private String mName;
     private String mPhoneNumber;

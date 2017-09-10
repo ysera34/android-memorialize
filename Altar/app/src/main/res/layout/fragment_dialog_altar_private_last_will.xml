@@ -1,0 +1,95 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@color/colorBlack">
+
+    <android.support.v7.widget.Toolbar
+        android:id="@+id/altar_private_last_will_toolbar"
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/toolbar_height"
+        android:background="?attr/colorPrimary"
+        android:minHeight="?attr/actionBarSize"
+        android:theme="@style/ThemeOverlay.AppCompat.Dark.ActionBar"
+        app:popupTheme="@style/ThemeOverlay.AppCompat.Light"/>
+
+    <RelativeLayout
+        android:id="@+id/altar_private_last_will_limit_layout"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/altar_private_last_will_toolbar"
+        android:padding="12dp">
+
+        <TextView
+            android:id="@+id/altar_private_last_will_limit_text_view"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_centerInParent="true"
+            android:gravity="center_horizontal"
+            android:text="@string/altar_last_will_limit"
+            android:textColor="@color/colorAccent"
+            android:textSize="14sp"/>
+
+        <TextView
+            android:id="@+id/altar_private_last_will_text_count_text_view"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentEnd="true"
+            android:layout_centerVertical="true"
+            android:text="@string/altar_last_will_count_format"
+            android:textColor="@color/colorGray700"
+            android:textSize="14sp"/>
+
+    </RelativeLayout>
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_above="@+id/altar_private_last_will_confirm_button_text_view"
+        android:layout_below="@+id/altar_private_last_will_limit_layout"
+        android:layout_margin="10dp">
+
+        <TextView
+            android:id="@+id/altar_private_last_will_send_to_text_view"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:background="@drawable/widget_rectangle_border_gray_solid_gray"
+            android:padding="8dp"
+            android:textColor="@color/colorFont"
+            android:textSize="16sp"/>
+
+        <EditText
+            android:id="@+id/altar_private_last_will_edit_text"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_below="@+id/altar_private_last_will_send_to_text_view"
+            android:layout_alignParentBottom="true"
+            android:background="@drawable/widget_rectangle_border_gray"
+            android:gravity="top|start"
+            android:hint="@string/altar_public_last_will_hint"
+            android:inputType="textMultiLine"
+            android:lineSpacingExtra="7sp"
+            android:maxLength="200"
+            android:padding="8dp"
+            android:textColor="@color/colorFont"
+            android:textColorHint="@color/colorFontHint"
+            android:textSize="16sp"/>
+
+    </RelativeLayout>
+
+    <TextView
+        android:id="@+id/altar_private_last_will_confirm_button_text_view"
+        android:layout_width="match_parent"
+        android:layout_height="48dp"
+        android:layout_alignParentBottom="true"
+        android:background="@color/colorGray700"
+        android:clickable="true"
+        android:elevation="8dp"
+        android:gravity="center"
+        android:text="@android:string/ok"
+        android:textColor="@color/colorWhite"
+        android:textSize="18sp"/>
+
+</RelativeLayout>

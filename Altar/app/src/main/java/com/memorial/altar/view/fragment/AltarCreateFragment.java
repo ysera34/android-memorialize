@@ -31,6 +31,7 @@ import com.bignerdranch.expandablerecyclerview.ParentViewHolder;
 import com.memorial.altar.R;
 import com.memorial.altar.model.GroupChild;
 import com.memorial.altar.model.GroupParent;
+import com.memorial.altar.model.LastWill;
 import com.memorial.altar.util.ImageHandler;
 
 import java.util.ArrayList;
@@ -38,6 +39,7 @@ import java.util.Calendar;
 import java.util.List;
 
 import static android.app.Activity.RESULT_OK;
+import static com.memorial.altar.view.fragment.AltarPrivateLastWillListFragment.ALTAR_PRIVATE_LAST_WILL_CONTACT_PERMISSION_REQUEST;
 import static com.memorial.altar.view.fragment.PermissionHeadlessFragment.CONTACT_PERMISSION_REQUEST;
 import static com.memorial.altar.view.fragment.PermissionHeadlessFragment.STORAGE_PERMISSION_REQUEST;
 
@@ -521,7 +523,11 @@ public class AltarCreateFragment extends Fragment
 //                            .add(altarPublicLastWillFragment, "altar_public_last_will")
 //                            .commitAllowingStateLoss();
                 } else if (privateRadioButton.isChecked()) {
-
+                    BottomSheetDialogFragment altarPrivateLastWillListFragment =
+                            AltarPrivateLastWillListFragment.newInstance();
+                    altarPrivateLastWillListFragment.show(getChildFragmentManager(), "altar_private_last_will_list");
+                } else {
+                    Toast.makeText(getActivity(), R.string.altar_last_will_select_message, Toast.LENGTH_SHORT).show();
                 }
             }
         });
@@ -552,16 +558,37 @@ public class AltarCreateFragment extends Fragment
                     }
                 }
                 break;
+            case ALTAR_PRIVATE_LAST_WILL_CONTACT_PERMISSION_REQUEST:
+                Fragment fragment = getChildFragmentManager().findFragmentByTag("altar_private_last_will_list");
+                if (fragment instanceof AltarPrivateLastWillListFragment) {
+                    ((AltarPrivateLastWillListFragment) fragment)
+                            .onPermissionCallback(requestCode, requestPermissionId, isGranted);
+                }
+                break;
         }
     }
 
     public void onAltarContactDialogDismissed(String contactName) {
-        String contactStr = getString(R.string.altar_user_contact_people) + " : " + contactName;
-        mContactFriendButtonTextView.setText(contactStr);
+        Fragment fragment = getChildFragmentManager().findFragmentByTag("altar_private_last_will_list");
+        if (fragment != null && fragment instanceof AltarPrivateLastWillListFragment) {
+            ((AltarPrivateLastWillListFragment) fragment)
+                    .onAltarContactDialogDismissed(contactName);
+        } else {
+            String contactStr = getString(R.string.altar_user_contact_people) + " : " + contactName;
+            mContactFriendButtonTextView.setText(contactStr);
+        }
     }
 
     public void onAltarPublicLastWillDialogDismissed(String publicLastWillMessage) {
         mLastWillTextView.setText(String.valueOf(publicLastWillMessage));
+    }
+
+    public void onAltarPrivateLastWillDialogDismissed(LastWill lastWill) {
+        Fragment fragment = getChildFragmentManager().findFragmentByTag("altar_private_last_will_list");
+        if (fragment != null && fragment instanceof AltarPrivateLastWillListFragment) {
+            ((AltarPrivateLastWillListFragment) fragment)
+                    .onAltarPrivateLastWillDialogDismissed(lastWill);
+        }
     }
 
     private boolean checkInputTextAndSetText(EditText inputEditText, TextView setTargetTextView) {

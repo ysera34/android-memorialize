@@ -99,6 +99,7 @@
     <string name="altar_create_public_last_will">공개형 마지막 한마디 작성</string>
     <string name="altar_public_last_will_hint">사랑하는 사람들에게 남기고 싶은 얘기를 \n자유롭게 적어주세요.</string>
     <string name="dialog_public_last_will_confirm_info_message">메세지를 등록하시겠습니까?</string>
+    <string name="altar_private_last_will_empty_message">작성하신 메세지가 아직 없습니다.</string>
 
     <string-array name="add_friend_group_scope">
         <item>elementary school</item>

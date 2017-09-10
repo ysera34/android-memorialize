@@ -19,9 +19,11 @@ import android.view.View;
 import android.widget.TextView;
 
 import com.memorial.altar.R;
+import com.memorial.altar.model.LastWill;
 import com.memorial.altar.util.UserSharedPreferences;
 import com.memorial.altar.view.fragment.AltarContactFragment;
 import com.memorial.altar.view.fragment.AltarCreateFragment;
+import com.memorial.altar.view.fragment.AltarPrivateLastWillFragment;
 import com.memorial.altar.view.fragment.AltarPublicLastWillFragment;
 import com.memorial.altar.view.fragment.HomeFriendListFragment;
 import com.memorial.altar.view.fragment.HomeObituaryFragment;
@@ -35,12 +37,14 @@ import static com.memorial.altar.common.Common.NAV_REQUEST_NOTIFICATIONS;
 import static com.memorial.altar.common.Common.NAV_REQUEST_SETTINGS;
 import static com.memorial.altar.view.fragment.AltarCreateFragment.ALTAR_CREATE_CONTACT_PERMISSION_REQUEST;
 import static com.memorial.altar.view.fragment.AltarCreateFragment.ALTAR_CREATE_STORAGE_PERMISSION_REQUEST;
+import static com.memorial.altar.view.fragment.AltarPrivateLastWillListFragment.ALTAR_PRIVATE_LAST_WILL_CONTACT_PERMISSION_REQUEST;
 
 public class HomeActivity extends AppCompatActivity
         implements View.OnClickListener, NavigationView.OnNavigationItemSelectedListener,
         PermissionHeadlessFragment.PermissionCallbackListener,
         AltarContactFragment.OnAltarContactDialogDismissListener,
-        AltarPublicLastWillFragment.OnAltarPublicLastWillDialogDismissListener {
+        AltarPublicLastWillFragment.OnAltarPublicLastWillDialogDismissListener,
+        AltarPrivateLastWillFragment.OnAltarPrivateLastWillDialogDismissListener {
 
     private static final String TAG = HomeActivity.class.getSimpleName();
 
@@ -187,6 +191,10 @@ public class HomeActivity extends AppCompatActivity
                 ((AltarCreateFragment) mHomeViewPagerAdapter.getItem(1))
                         .onPermissionCallback(requestCode, requestPermissionId, isGranted);
                 break;
+            case ALTAR_PRIVATE_LAST_WILL_CONTACT_PERMISSION_REQUEST:
+                ((AltarCreateFragment) mHomeViewPagerAdapter.getItem(1))
+                        .onPermissionCallback(requestCode, requestPermissionId, isGranted);
+                break;
         }  
     }
 
@@ -200,5 +208,11 @@ public class HomeActivity extends AppCompatActivity
     public void onAltarPublicLastWillDialogDismissed(String publicLastWillMessage) {
         ((AltarCreateFragment) mHomeViewPagerAdapter.getItem(1))
                 .onAltarPublicLastWillDialogDismissed(publicLastWillMessage);
+    }
+
+    @Override
+    public void onAltarPrivateLastWillDialogDismissed(LastWill lastWill) {
+        ((AltarCreateFragment) mHomeViewPagerAdapter.getItem(1))
+                .onAltarPrivateLastWillDialogDismissed(lastWill);
     }
 }

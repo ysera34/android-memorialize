@@ -301,13 +301,23 @@ public class AltarContactFragment extends BottomSheetDialogFragment
             @Override
             public void onClick(DialogInterface dialogInterface, int i) {
                 StringBuilder stringBuilder = new StringBuilder();
-                for (Contact c : mContacts) {
-                    if (c.isSelected()) {
-                        stringBuilder.append(c.getName());
-                        stringBuilder.append(" ");
+                stringBuilder.setLength(0);
+                ArrayList<Contact> selectedContacts = new ArrayList<Contact>();
+                for (int j = 0; j < mContacts.size(); j++) {
+                    if (mContacts.get(j).isSelected()) {
+                        selectedContacts.add(mContacts.get(j));
                     }
                 }
-                mOnAltarContactDialogDismissListener.onAltarContactDialogDismissed(stringBuilder.toString());
+
+                for (int j = 0; j < selectedContacts.size(); j++) {
+                    if (j != 0) {
+                        stringBuilder.append(", ");
+                    }
+                    stringBuilder.append(selectedContacts.get(j).getName());
+                }
+                if (stringBuilder.length() > 0) {
+                    mOnAltarContactDialogDismissListener.onAltarContactDialogDismissed(stringBuilder.toString());
+                }
                 getDialog().dismiss();
             }
         });
