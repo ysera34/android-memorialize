@@ -21,6 +21,8 @@
             android:ellipsize="end"
             android:maxLines="1"
             android:padding="8dp"
+            android:textColor="@color/colorFont"
+            android:textColorHint="@color/colorFont"
             android:textSize="18sp"/>
 
     </LinearLayout>

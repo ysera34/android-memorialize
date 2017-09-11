@@ -209,12 +209,12 @@ public class HomeFriendListFragment extends Fragment implements View.OnClickList
 
     private ArrayList<Friend> getFriends() {
         ArrayList<Friend> friends = new ArrayList<>();
-        for (int i = 0; i < 25; i++) {
+        for (int i = 0; i < 20; i++) {
             Friend friend = new Friend();
             friend.setId(i);
-            friend.setAge("age :" + (i + 50) + "age");
+            friend.setAge("향년 " + (i + 50) + "세");
             friend.setName("name " + i);
-            if (i <= 15) {
+            if (i <= 9) {
                 friend.setObitDate("2017-" + "9-" + i);
             }
             friend.setCommented(i % 2 == 0);

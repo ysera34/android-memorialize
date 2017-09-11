@@ -32,7 +32,9 @@ import com.memorial.altar.R;
 import com.memorial.altar.model.GroupChild;
 import com.memorial.altar.model.GroupParent;
 import com.memorial.altar.model.LastWill;
+import com.memorial.altar.model.User;
 import com.memorial.altar.util.ImageHandler;
+import com.memorial.altar.view.activity.AltarActivity;
 
 import java.util.ArrayList;
 import java.util.Calendar;
@@ -72,12 +74,16 @@ public class AltarCreateFragment extends Fragment
     private ImageView mUserImageView;
     private TextView mNameTextView;
     private TextView mBirthTextView;
+    private RadioButton mFemaleRadioButton;
+    private RadioButton mMaleRadioButton;
     private RecyclerView mGroupRecyclerView;
     private GroupAdapter mGroupAdapter;
     private ArrayList<GroupParent> mGroupParents;
     private TextView mContactFriendButtonTextView;
     private TextView mLastWillTextView;
+    private TextView mConfirmButtonTextView;
 
+    private boolean mIsPickUserImage;
     private boolean mIsBirthValidateInfoConfirmed;
     private boolean mIsBirthNumberValidated;
 
@@ -99,6 +105,8 @@ public class AltarCreateFragment extends Fragment
         mNameTextView.setOnClickListener(this);
         mBirthTextView = view.findViewById(R.id.altar_create_user_birth_text_view);
         mBirthTextView.setOnClickListener(this);
+        mFemaleRadioButton = view.findViewById(R.id.altar_create_female_radio_button);
+        mMaleRadioButton = view.findViewById(R.id.altar_create_male_radio_button);
         mGroupRecyclerView = view.findViewById(R.id.altar_create_user_group_recycler_view);
         mGroupRecyclerView.setLayoutManager(new LinearLayoutManager(getActivity()));
         mGroupRecyclerView.setNestedScrollingEnabled(false);
@@ -108,6 +116,8 @@ public class AltarCreateFragment extends Fragment
         mContactFriendButtonTextView.setOnClickListener(this);
         mLastWillTextView = view.findViewById(R.id.altar_create_user_last_will_text_view);
         mLastWillTextView.setOnClickListener(this);
+        mConfirmButtonTextView = view.findViewById(R.id.altar_create_confirm_button_text_view);
+        mConfirmButtonTextView.setOnClickListener(this);
         return view;
     }
 
@@ -162,6 +172,22 @@ public class AltarCreateFragment extends Fragment
             case R.id.altar_create_user_last_will_text_view:
                 createLastWillTypeButtonShowDialog();
                 break;
+            case R.id.altar_create_confirm_button_text_view:
+                if (createAltarConfirmValidate()) {
+                    User user = new User();
+                    user.setName(mNameTextView.getText().toString());
+                    if (mFemaleRadioButton.isChecked()) {
+                        user.setGender(mFemaleRadioButton.getText().toString());
+                    } else if (mMaleRadioButton.isChecked()) {
+                        user.setGender(mMaleRadioButton.getText().toString());
+                    }
+                    user.setBirth(mBirthTextView.getText().toString());
+                    user.setGroupParents(mGroupParents);
+                    user.setPublicLastWillMessage(mLastWillTextView.getText().toString());
+
+                    startActivity(AltarActivity.newIntent(getActivity(), user));
+                }
+                break;
         }
     }
 
@@ -172,11 +198,13 @@ public class AltarCreateFragment extends Fragment
             case CAMERA_CAPTURE_IMAGE_REQUEST_CODE:
                 if (resultCode == RESULT_OK) {
                     mImageHandler.handleCameraImage(mUserImageView);
+                    mIsPickUserImage = true;
                 }
                 break;
             case GALLERY_IMAGE_REQUEST_CODE:
                 if (resultCode == RESULT_OK) {
                     mImageHandler.handleGalleryImage(data, mUserImageView);
+                    mIsPickUserImage = true;
                 }
                 break;
         }
@@ -777,5 +805,41 @@ public class AltarCreateFragment extends Fragment
             removeChildNameShowDialog(mGroupChild);
             return true;
         }
+    }
+
+    private boolean createAltarConfirmValidate() {
+        if (!mIsPickUserImage) {
+            Toast.makeText(getActivity(), "이미지를 선택해주세요.", Toast.LENGTH_SHORT).show();
+            return false;
+        }
+        if (mNameTextView.getText().toString().length() <= 0) {
+            Toast.makeText(getActivity(), "이름을 입력해주세요.", Toast.LENGTH_SHORT).show();
+            return false;
+        }
+        if (mBirthTextView.getText().toString().length() <= 0) {
+            Toast.makeText(getActivity(), "생년월일을 입력해주세요.", Toast.LENGTH_SHORT).show();
+            return false;
+        }
+        if (!mFemaleRadioButton.isChecked() && !mMaleRadioButton.isChecked()) {
+            Toast.makeText(getActivity(), "성별을 입력해주세요.", Toast.LENGTH_SHORT).show();
+            return false;
+        }
+        if (mGroupParents.get(0).getChildList().size() <= 0) {
+            Toast.makeText(getActivity(), "학교정보를 입력해주세요.", Toast.LENGTH_SHORT).show();
+            return false;
+        }
+        if (mGroupParents.get(1).getChildList().size() <= 0) {
+            Toast.makeText(getActivity(), "회사정보를 입력해주세요.", Toast.LENGTH_SHORT).show();
+            return false;
+        }
+        if (mGroupParents.get(2).getChildList().size() <= 0) {
+            Toast.makeText(getActivity(), "기타 소속을 입력해주세요.", Toast.LENGTH_SHORT).show();
+            return false;
+        }
+        if (mLastWillTextView.getText().toString().length() <= 0) {
+            Toast.makeText(getActivity(), "마지막 한마디를 입력해주세요.", Toast.LENGTH_SHORT).show();
+            return false;
+        }
+        return true;
     }
 }

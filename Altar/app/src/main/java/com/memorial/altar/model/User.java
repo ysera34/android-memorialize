@@ -1,12 +1,13 @@
 package com.memorial.altar.model;
 
+import java.io.Serializable;
 import java.util.ArrayList;
 
 /**
  * Created by yoon on 2017. 9. 3..
  */
 
-public class User {
+public class User implements Serializable {
 
     private int mId;
     private String mImagePath;
@@ -14,6 +15,7 @@ public class User {
     private String mBirth;
     private String mGender;
     private ArrayList<String> mGroupNames;
+    private ArrayList<GroupParent> mGroupParents;
     private String mPublicLastWillMessage;
 
     public int getId() {
@@ -62,6 +64,14 @@ public class User {
 
     public void setGroupNames(ArrayList<String> groupNames) {
         mGroupNames = groupNames;
+    }
+
+    public ArrayList<GroupParent> getGroupParents() {
+        return mGroupParents;
+    }
+
+    public void setGroupParents(ArrayList<GroupParent> groupParents) {
+        mGroupParents = groupParents;
     }
 
     public String getPublicLastWillMessage() {

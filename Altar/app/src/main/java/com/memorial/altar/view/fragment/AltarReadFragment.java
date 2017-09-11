@@ -14,9 +14,11 @@ import android.widget.ImageView;
 import android.widget.TextView;
 
 import com.memorial.altar.R;
+import com.memorial.altar.model.GroupChild;
 import com.memorial.altar.model.User;
 
 import java.util.ArrayList;
+import java.util.List;
 
 /**
  * Created by yoon on 2017. 9. 2..
@@ -27,11 +29,22 @@ public class AltarReadFragment extends Fragment {
     private static final String TAG = AltarReadFragment.class.getSimpleName();
 
     private static final String ARG_ALTAR_USER_ID = "altar_user_id";
+    private static final String ARG_ALTAR_USER = "altar_user";
 
     public static AltarReadFragment newInstance(int altarUserId) {
 
         Bundle args = new Bundle();
         args.putInt(ARG_ALTAR_USER_ID, altarUserId);
+
+        AltarReadFragment fragment = new AltarReadFragment();
+        fragment.setArguments(args);
+        return fragment;
+    }
+
+    public static AltarReadFragment newInstance(User user) {
+
+        Bundle args = new Bundle();
+        args.putSerializable(ARG_ALTAR_USER, user);
 
         AltarReadFragment fragment = new AltarReadFragment();
         fragment.setArguments(args);
@@ -56,6 +69,7 @@ public class AltarReadFragment extends Fragment {
     public void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         mAltarUserId = getArguments().getInt(ARG_ALTAR_USER_ID);
+        mAltarUser = (User) getArguments().getSerializable(ARG_ALTAR_USER);
     }
 
     @Nullable
@@ -79,28 +93,40 @@ public class AltarReadFragment extends Fragment {
     public void onViewCreated(View view, @Nullable Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
 
-        requestAltarUser(mAltarUserId);
+        requestAltarUser();
     }
 
-    private void requestAltarUser(int altarUserId) {
+    private void requestAltarUser() {
 
-        User user = new User();
-        user.setId(altarUserId);
-        user.setName("sample name");
-        user.setGender("sample gender");
-        user.setBirth("sample birth date");
-        ArrayList<String> groupNames = new ArrayList<>();
-        for (int i = 0; i < 10; i++) {
-            String groupName = "sample group name" + i;
-            groupNames.add(groupName);
+        if (mAltarUser == null) {
+            User user = new User();
+            user.setId(mAltarUserId);
+            user.setName("sample name");
+            user.setGender("sample gender");
+            user.setBirth("sample birth date");
+            ArrayList<String> groupNames = new ArrayList<>();
+            for (int i = 0; i < 10; i++) {
+                String groupName = "sample group name" + i;
+                groupNames.add(groupName);
+            }
+            user.setGroupNames(groupNames);
+            user.setPublicLastWillMessage(
+                    "sample last will message\nsample last will message last will message\n" +
+                            "sample last will message\nsample last will message last will message\n" +
+                            "sample last will message\nsample last will message last will message\n" +
+                            "sample last will message\nsample last will message last will message");
+            mAltarUser = user;
+        } else {
+
+            ArrayList<String> groupNames = new ArrayList<>();
+            for (int i = 0; i < mAltarUser.getGroupParents().size(); i++) {
+                List<GroupChild> groupChildren = mAltarUser.getGroupParents().get(i).getChildList();
+                for (int j = 0; j < groupChildren.size(); j++) {
+                    groupNames.add(groupChildren.get(j).getName());
+                }
+            }
+            mAltarUser.setGroupNames(groupNames);
         }
-        user.setGroupNames(groupNames);
-        user.setPublicLastWillMessage(
-                "sample last will message\nsample last will message last will message\n" +
-                "sample last will message\nsample last will message last will message\n" +
-                "sample last will message\nsample last will message last will message\n" +
-                "sample last will message\nsample last will message last will message");
-        mAltarUser = user;
         mUserGroupNameAdapter = new UserGroupNameAdapter(mAltarUser.getGroupNames());
         mAltarUserGroupNameRecyclerView.setAdapter(mUserGroupNameAdapter);
         updateUI();

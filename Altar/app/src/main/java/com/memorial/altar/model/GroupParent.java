@@ -2,6 +2,7 @@ package com.memorial.altar.model;
 
 import com.bignerdranch.expandablerecyclerview.model.Parent;
 
+import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -9,7 +10,7 @@ import java.util.List;
  * Created by yoon on 2017. 9. 9..
  */
 
-public class GroupParent implements Parent<GroupChild> {
+public class GroupParent implements Parent<GroupChild>, Serializable {
 
     private int mId;
     private String mName;

@@ -65,7 +65,7 @@
             android:id="@+id/altar_comment_read_button_text_view"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:background="@color/colorGray700"
+            android:background="@color/colorBlack"
             android:clickable="true"
             android:elevation="8dp"
             android:gravity="center"

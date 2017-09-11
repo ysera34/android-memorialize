@@ -17,6 +17,7 @@ import android.widget.EditText;
 import android.widget.TextView;
 
 import com.memorial.altar.R;
+import com.memorial.altar.model.User;
 import com.memorial.altar.view.fragment.AltarReadFragment;
 
 /**
@@ -28,6 +29,7 @@ public class AltarActivity extends AppCompatActivity implements View.OnClickList
     private static final String TAG = AltarActivity.class.getSimpleName();
 
     private static final String EXTRA_FRIEND_ID = "com.memorial.altar.friend_id";
+    private static final String EXTRA_ALTAR_USER = "com.memorial.altar.user";
 
     public static Intent newIntent(Context packageContext, int friendId) {
         Intent intent = new Intent(packageContext, AltarActivity.class);
@@ -35,9 +37,16 @@ public class AltarActivity extends AppCompatActivity implements View.OnClickList
         return intent;
     }
 
+    public static Intent newIntent(Context packageContext, User user) {
+        Intent intent = new Intent(packageContext, AltarActivity.class);
+        intent.putExtra(EXTRA_ALTAR_USER, user);
+        return intent;
+    }
+
     private InputMethodManager mInputMethodManager;
 
     private int mFriendId;
+    private User mUser;
     private Toolbar mAltarToolbar;
     private Fragment mAltarFragment;
     private FragmentManager mAltarFragmentManager;
@@ -50,13 +59,14 @@ public class AltarActivity extends AppCompatActivity implements View.OnClickList
         super.onCreate(savedInstanceState);
         mInputMethodManager = (InputMethodManager) getSystemService(Context.INPUT_METHOD_SERVICE);
         mFriendId = getIntent().getIntExtra(EXTRA_FRIEND_ID, -1);
+        mUser = (User) getIntent().getSerializableExtra(EXTRA_ALTAR_USER);
         setContentView(R.layout.activity_altar);
         mAltarFragmentManager = getSupportFragmentManager();
-
         mAltarToolbar = (Toolbar) findViewById(R.id.altar_toolbar);
         setSupportActionBar(mAltarToolbar);
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
-        requestFriend(mFriendId);
+        requestFriend();
+
         mAltarCommentReadButtonTextView = (TextView) findViewById(R.id.altar_comment_read_button_text_view);
         mAltarCommentReadButtonTextView.setOnClickListener(this);
         mAltarCommentCreateButtonTextView = (TextView) findViewById(R.id.altar_comment_create_button_text_view);
@@ -64,12 +74,21 @@ public class AltarActivity extends AppCompatActivity implements View.OnClickList
         mAltarCommentEditText = (EditText) findViewById(R.id.altar_comment_edit_text);
     }
 
-    private void requestFriend(int friendId) {
-        setTitle(getString(R.string.friend_altar));
-        mAltarFragment = AltarReadFragment.newInstance(friendId);
-        mAltarFragmentManager.beginTransaction()
-                .add(R.id.altar_container, mAltarFragment)
-                .commit();
+    private void requestFriend() {
+
+        if (mUser == null) {
+            setTitle(getString(R.string.friend_altar));
+            mAltarFragment = AltarReadFragment.newInstance(mFriendId);
+            mAltarFragmentManager.beginTransaction()
+                    .add(R.id.altar_container, mAltarFragment)
+                    .commit();
+        } else {
+            setTitle(getString(R.string.altar_create_preview));
+            mAltarFragment = AltarReadFragment.newInstance(mUser);
+            mAltarFragmentManager.beginTransaction()
+                    .add(R.id.altar_container, mAltarFragment)
+                    .commit();
+        }
     }
 
     @Override
@@ -104,7 +123,8 @@ public class AltarActivity extends AppCompatActivity implements View.OnClickList
             }
         }, 250);
     }
-
+        // 레이아웃을 하단 버튼 없애고 미리보기(최종확인) 프레그먼트랑 보기 프레그먼트랑 나눔.
+        // 미리보기 프레그먼트는 startActivityforResult로 돌아가면 미리보기 버튼을 수정하기로 .
     private void createCommentShowDialog() {
         AlertDialog.Builder builder = new AlertDialog.Builder(this);
 

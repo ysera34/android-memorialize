@@ -56,6 +56,8 @@
                 android:clickable="true"
                 android:hint="@string/altar_user_name"
                 android:padding="8dp"
+                android:textColor="@color/colorFont"
+                android:textColorHint="@color/colorFont"
                 android:textSize="18sp"/>
 
             <TextView
@@ -67,6 +69,8 @@
                 android:clickable="true"
                 android:hint="@string/altar_user_birth"
                 android:padding="8dp"
+                android:textColor="@color/colorFont"
+                android:textColorHint="@color/colorFont"
                 android:textSize="18sp"/>
 
             <RadioGroup
@@ -76,15 +80,21 @@
                 android:padding="8dp">
 
                 <RadioButton
+                    android:id="@+id/altar_create_female_radio_button"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_marginEnd="8dp"
-                    android:text="@string/altar_user_female"/>
+                    android:buttonTint="@color/colorGray100"
+                    android:text="@string/altar_user_female"
+                    android:textColor="@color/colorFont"/>
 
                 <RadioButton
+                    android:id="@+id/altar_create_male_radio_button"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:text="@string/altar_user_male"/>
+                    android:buttonTint="@color/colorGray100"
+                    android:text="@string/altar_user_male"
+                    android:textColor="@color/colorFont"/>
             </RadioGroup>
 
             <android.support.v7.widget.RecyclerView
@@ -103,6 +113,8 @@
                 android:clickable="true"
                 android:padding="8dp"
                 android:text="@string/altar_user_contact_people"
+                android:textColor="@color/colorFont"
+                android:textColorHint="@color/colorFont"
                 android:textSize="18sp"/>
 
             <TextView
@@ -116,8 +128,25 @@
                 android:hint="@string/altar_user_last_will"
                 android:maxLines="1"
                 android:padding="8dp"
+                android:textColor="@color/colorFont"
+                android:textColorHint="@color/colorFont"
                 android:textSize="18sp"/>
 
         </LinearLayout>
+
+        <TextView
+            android:id="@+id/altar_create_confirm_button_text_view"
+            android:layout_width="match_parent"
+            android:layout_height="48dp"
+            android:layout_marginTop="10dp"
+            android:background="@color/colorBlack"
+            android:clickable="true"
+            android:gravity="center"
+            android:padding="8dp"
+            android:text="미리보기"
+            android:textColor="@color/colorFont"
+            android:textColorHint="@color/colorFont"
+            android:textSize="18sp"/>
+
     </LinearLayout>
 </android.support.v4.widget.NestedScrollView>
