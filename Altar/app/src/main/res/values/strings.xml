@@ -103,6 +103,7 @@
     <string name="altar_private_last_will_empty_message">작성하신 메세지가 아직 없습니다.</string>
     <string name="altar_private_last_will_send_to_format">To : %s</string>
     <string name="altar_create_preview">분향소 미리보기</string>
+    <string name="altar_preview_confirm_button">최종확인</string>
 
     <string-array name="add_friend_group_scope">
         <item>elementary school</item>

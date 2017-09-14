@@ -1,15 +1,22 @@
 package com.memorial.altar.view.fragment;
 
+import android.content.Context;
+import android.content.DialogInterface;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentManager;
 import android.support.v4.widget.NestedScrollView;
+import android.support.v7.app.AlertDialog;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.view.animation.AccelerateInterpolator;
+import android.view.inputmethod.InputMethodManager;
+import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.TextView;
 
@@ -24,7 +31,7 @@ import java.util.List;
  * Created by yoon on 2017. 9. 2..
  */
 
-public class AltarReadFragment extends Fragment {
+public class AltarReadFragment extends Fragment implements View.OnClickListener {
 
     private static final String TAG = AltarReadFragment.class.getSimpleName();
 
@@ -65,11 +72,18 @@ public class AltarReadFragment extends Fragment {
 
     private FragmentManager mCommentFragmentManager;
 
+    private InputMethodManager mInputMethodManager;
+    private TextView mAltarCommentReadButtonTextView;
+    private TextView mAltarCommentCreateButtonTextView;
+    private EditText mAltarCommentEditText;
+
     @Override
     public void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+        Log.i(TAG, "onCreate: ");
         mAltarUserId = getArguments().getInt(ARG_ALTAR_USER_ID);
         mAltarUser = (User) getArguments().getSerializable(ARG_ALTAR_USER);
+        mInputMethodManager = (InputMethodManager) getActivity().getSystemService(Context.INPUT_METHOD_SERVICE);
     }
 
     @Nullable
@@ -86,6 +100,12 @@ public class AltarReadFragment extends Fragment {
         mAltarUserGroupNameRecyclerView.setLayoutManager(new LinearLayoutManager(getActivity()));
         mAltarUserGroupNameRecyclerView.setNestedScrollingEnabled(false);
         mAltarUserPublicLastWillMessageTextView = view.findViewById(R.id.altar_user_public_last_will_message_text_view);
+
+        mAltarCommentReadButtonTextView = view.findViewById(R.id.altar_comment_read_button_text_view);
+        mAltarCommentReadButtonTextView.setOnClickListener(this);
+        mAltarCommentCreateButtonTextView = view.findViewById(R.id.altar_comment_create_button_text_view);
+        mAltarCommentCreateButtonTextView.setOnClickListener(this);
+        mAltarCommentEditText = view.findViewById(R.id.altar_comment_edit_text);
         return view;
     }
 
@@ -94,6 +114,22 @@ public class AltarReadFragment extends Fragment {
         super.onViewCreated(view, savedInstanceState);
 
         requestAltarUser();
+    }
+
+    @Override
+    public void onClick(View view) {
+        switch (view.getId()) {
+            case R.id.altar_comment_read_button_text_view:
+//                Toast.makeText(getApplicationContext(), "show altar comment", Toast.LENGTH_SHORT).show();
+//                Fragment fragment = mAltarFragmentManager.findFragmentById(R.id.altar_container);
+//                ((AltarReadFragment) fragment).
+                updateComment();
+                hideCommentButtonTextView();
+                break;
+            case R.id.altar_comment_create_button_text_view:
+                createCommentShowDialog();
+                break;
+        }
     }
 
     private void requestAltarUser() {
@@ -211,5 +247,54 @@ public class AltarReadFragment extends Fragment {
             mAltarUserGroupNameTextView.setText(String.valueOf(mAltarUserGroupName));
         }
 
+    }
+
+    private void hideCommentButtonTextView() {
+        mAltarCommentReadButtonTextView.animate().translationY(mAltarCommentReadButtonTextView.getHeight())
+                .setInterpolator(new AccelerateInterpolator(2));
+        mAltarCommentReadButtonTextView.postDelayed(new Runnable() {
+            @Override
+            public void run() {
+                mAltarCommentReadButtonTextView.setVisibility(View.GONE);
+            }
+        }, 250);
+    }
+
+    private void createCommentShowDialog() {
+        AlertDialog.Builder builder = new AlertDialog.Builder(getActivity());
+
+        builder.setMessage(R.string.create_comment_dialog_message);
+        builder.setPositiveButton(android.R.string.ok, new DialogInterface.OnClickListener() {
+            @Override
+            public void onClick(DialogInterface dialogInterface, int i) {
+                confirmCommentShowDialog();
+            }
+        });
+        builder.setNegativeButton(android.R.string.no, new DialogInterface.OnClickListener() {
+            @Override
+            public void onClick(DialogInterface dialogInterface, int i) {
+
+            }
+        });
+        AlertDialog dialog = builder.create();
+        dialog.show();
+    }
+
+    private void confirmCommentShowDialog() {
+        mInputMethodManager.hideSoftInputFromWindow(mAltarCommentEditText.getWindowToken(), 0);
+        mAltarCommentEditText.getText().clear();
+        AlertDialog.Builder builder = new AlertDialog.Builder(getActivity());
+
+        builder.setMessage(R.string.confirm_comment_dialog_message);
+        builder.setPositiveButton(android.R.string.ok, new DialogInterface.OnClickListener() {
+            @Override
+            public void onClick(DialogInterface dialogInterface, int i) {
+//                Fragment fragment = mAltarFragmentManager.findFragmentById(R.id.altar_container);
+//                ((AltarReadFragment)fragment).
+                updateComment();
+            }
+        });
+        AlertDialog dialog = builder.create();
+        dialog.show();
     }
 }

@@ -1,5 +1,6 @@
 package com.memorial.altar.view.activity;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
 import android.support.design.widget.NavigationView;
@@ -13,6 +14,7 @@ import android.support.v4.widget.DrawerLayout;
 import android.support.v7.app.ActionBarDrawerToggle;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.MenuItem;
 import android.view.View;
@@ -20,18 +22,21 @@ import android.widget.TextView;
 
 import com.memorial.altar.R;
 import com.memorial.altar.model.LastWill;
+import com.memorial.altar.model.User;
 import com.memorial.altar.util.UserSharedPreferences;
 import com.memorial.altar.view.fragment.AltarContactFragment;
 import com.memorial.altar.view.fragment.AltarCreateFragment;
 import com.memorial.altar.view.fragment.AltarPrivateLastWillFragment;
 import com.memorial.altar.view.fragment.AltarPublicLastWillFragment;
+import com.memorial.altar.view.fragment.AltarReadFragment;
 import com.memorial.altar.view.fragment.HomeFriendListFragment;
 import com.memorial.altar.view.fragment.HomeObituaryFragment;
 import com.memorial.altar.view.fragment.PermissionHeadlessFragment;
 
 import java.util.ArrayList;
-import java.util.List;
 
+import static com.memorial.altar.common.Common.ALTAR_CREATE_PREVIEW_REQUEST_CODE;
+import static com.memorial.altar.common.Common.ALTAR_PREVIEW_RESULT;
 import static com.memorial.altar.common.Common.NAV_REQUEST_FAQ;
 import static com.memorial.altar.common.Common.NAV_REQUEST_NOTIFICATIONS;
 import static com.memorial.altar.common.Common.NAV_REQUEST_SETTINGS;
@@ -123,24 +128,39 @@ public class HomeActivity extends AppCompatActivity
 
     private void setupViewPager(ViewPager viewPager) {
         mHomeViewPagerAdapter = new HomeViewPagerAdapter(getSupportFragmentManager());
-        mHomeViewPagerAdapter.addFragment(HomeFriendListFragment.newInstance(), getString(R.string.title_friends));
+//        mHomeViewPagerAdapter.addFragment(HomeFriendListFragment.newInstance(), getString(R.string.title_friends));
 //        adapter.addFragment(HomeAltarFragment.newInstance(), getString(R.string.title_altar));
-        mHomeViewPagerAdapter.addFragment(AltarCreateFragment.newInstance(), getString(R.string.title_altar));
-        mHomeViewPagerAdapter.addFragment(HomeObituaryFragment.newInstance(), getString(R.string.title_obituary));
+//        mHomeViewPagerAdapter.addFragment(AltarCreateFragment.newInstance(), getString(R.string.title_altar));
+//        mHomeViewPagerAdapter.addFragment(HomeObituaryFragment.newInstance(), getString(R.string.title_obituary));
+        ArrayList<Fragment> fragments = new ArrayList<>();
+        ArrayList<String> fragmentTitles = new ArrayList<>();
+        fragments.add(HomeFriendListFragment.newInstance());
+        fragments.add(AltarCreateFragment.newInstance());
+        fragments.add(HomeObituaryFragment.newInstance());
+        fragmentTitles.add(getString(R.string.title_friends));
+        fragmentTitles.add(getString(R.string.title_altar));
+        fragmentTitles.add(getString(R.string.title_obituary));
+        mHomeViewPagerAdapter.setFragments(fragments, fragmentTitles);
+
         viewPager.setOffscreenPageLimit(mHomeViewPagerAdapter.getCount() - 1);
         viewPager.setAdapter(mHomeViewPagerAdapter);
     }
 
     private class HomeViewPagerAdapter extends FragmentPagerAdapter {
-        private final List<Fragment> mFragmentList = new ArrayList<>();
-        private final List<String> mFragmentTitleList = new ArrayList<>();
+        private ArrayList<Fragment> mFragmentList = new ArrayList<>();
+        private ArrayList<String> mFragmentTitleList = new ArrayList<>();
+        private FragmentManager mFragmentManager;
 
         public HomeViewPagerAdapter(FragmentManager manager) {
             super(manager);
+            mFragmentManager = manager;
         }
 
         @Override
         public Fragment getItem(int position) {
+            if (position >= mFragmentList.size()) {
+                return null;
+            }
             return mFragmentList.get(position);
         }
 
@@ -152,6 +172,18 @@ public class HomeActivity extends AppCompatActivity
         public void addFragment(Fragment fragment, String title) {
             mFragmentList.add(fragment);
             mFragmentTitleList.add(title);
+        }
+
+        public void setFragments(ArrayList<Fragment> fragments, ArrayList<String> fragmentTitles) {
+//            mFragmentList.clear();
+//            mFragmentTitleList.clear();
+//            mFragmentList.addAll(fragments);
+//            mFragmentTitleList.addAll(fragmentTitles);
+            mFragmentList = null;
+            mFragmentTitleList = null;
+            mFragmentList = fragments;
+            mFragmentTitleList = fragmentTitles;
+            notifyDataSetChanged();
         }
 
         @Override
@@ -177,11 +209,36 @@ public class HomeActivity extends AppCompatActivity
         mTabLayout.getTabAt(2).setCustomView(tabThree);
     }
 
-//    @Override
-//    public void onPermissionCallback(int requestPermissionId, boolean isGranted) {
-//        Log.i(TAG, "onPermissionCallback: requestPermissionId : " + requestPermissionId);
-//        Log.i(TAG, "onPermissionCallback: isGranted : " + isGranted);
-//    }
+    @Override
+    protected void onActivityResult(int requestCode, int resultCode, Intent data) {
+        super.onActivityResult(requestCode, resultCode, data);
+        switch (requestCode) {
+            case ALTAR_CREATE_PREVIEW_REQUEST_CODE:
+                if (resultCode == RESULT_OK) {
+                    Log.i(TAG, "onActivityResult: requestCode" + requestCode);
+                    Log.i(TAG, "onActivityResult: resultCode" + resultCode);
+                    User user = (User) data.getSerializableExtra(ALTAR_PREVIEW_RESULT);
+
+                    ArrayList<Fragment> fragments = new ArrayList<>();
+                    ArrayList<String> fragmentTitles = new ArrayList<>();
+                    fragments.add(HomeFriendListFragment.newInstance());
+                    fragments.add(AltarReadFragment.newInstance(user));
+                    fragments.add(HomeObituaryFragment.newInstance());
+                    fragmentTitles.add(getString(R.string.title_friends));
+                    fragmentTitles.add(getString(R.string.title_altar));
+                    fragmentTitles.add(getString(R.string.title_obituary));
+                    mHomeViewPagerAdapter.setFragments(fragments, fragmentTitles);
+                    setupTabLayoutIcons();
+//                    mHomeViewPagerAdapter.mFragmentList.set(1, altarReadFragment);
+//                    mHomeViewPagerAdapter.mFragmentManager.beginTransaction()
+//                            .remove(mHomeViewPagerAdapter.mFragmentList.get(1))
+//                            .add(altarReadFragment, "altar_read")
+//                            .commit();
+//                    mViewPager.invalidate();
+                }
+                break;
+        }
+    }
 
     @Override
     public void onPermissionCallback(int requestCode, int requestPermissionId, boolean isGranted) {

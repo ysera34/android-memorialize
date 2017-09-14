@@ -17,63 +17,8 @@
         android:id="@+id/altar_container"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:layout_below="@+id/altar_toolbar"
-        android:layout_above="@+id/altar_comment_edit_layout">
+        android:layout_below="@+id/altar_toolbar">
 
     </FrameLayout>
-
-    <RelativeLayout
-        android:id="@+id/altar_comment_edit_layout"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_alignParentBottom="true"
-        android:focusable="true"
-        android:focusableInTouchMode="true">
-
-        <EditText
-            android:id="@+id/altar_comment_edit_text"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:background="@color/colorWhite"
-            android:gravity="start|center_vertical"
-            android:hint="@string/cherish_comment_hint"
-            android:inputType="textMultiLine"
-            android:maxLength="100"
-            android:maxLines="5"
-            android:paddingBottom="10dp"
-            android:paddingEnd="80dp"
-            android:paddingStart="10dp"
-            android:paddingTop="10dp"
-            android:textColorHint="@color/colorFontHint"
-            android:textSize="14sp"/>
-
-        <TextView
-            android:id="@+id/altar_comment_create_button_text_view"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_alignBottom="@+id/altar_comment_edit_text"
-            android:layout_alignParentEnd="true"
-            android:background="@color/colorGray800"
-            android:clickable="true"
-            android:gravity="center"
-            android:padding="10dp"
-            android:text="@string/cherish"
-            android:textColor="@color/colorFont"
-            android:textSize="14sp"/>
-
-        <TextView
-            android:id="@+id/altar_comment_read_button_text_view"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:background="@color/colorBlack"
-            android:clickable="true"
-            android:elevation="8dp"
-            android:gravity="center"
-            android:padding="12dp"
-            android:text="@string/altar_comment_button"
-            android:textColor="@color/colorWhite"
-            android:textSize="18sp"/>
-
-    </RelativeLayout>
 
 </RelativeLayout>

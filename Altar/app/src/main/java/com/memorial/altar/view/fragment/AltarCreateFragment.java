@@ -35,12 +35,14 @@ import com.memorial.altar.model.LastWill;
 import com.memorial.altar.model.User;
 import com.memorial.altar.util.ImageHandler;
 import com.memorial.altar.view.activity.AltarActivity;
+import com.memorial.altar.view.activity.HomeActivity;
 
 import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.List;
 
 import static android.app.Activity.RESULT_OK;
+import static com.memorial.altar.common.Common.ALTAR_CREATE_PREVIEW_REQUEST_CODE;
 import static com.memorial.altar.view.fragment.AltarPrivateLastWillListFragment.ALTAR_PRIVATE_LAST_WILL_CONTACT_PERMISSION_REQUEST;
 import static com.memorial.altar.view.fragment.PermissionHeadlessFragment.CONTACT_PERMISSION_REQUEST;
 import static com.memorial.altar.view.fragment.PermissionHeadlessFragment.STORAGE_PERMISSION_REQUEST;
@@ -185,7 +187,9 @@ public class AltarCreateFragment extends Fragment
                     user.setGroupParents(mGroupParents);
                     user.setPublicLastWillMessage(mLastWillTextView.getText().toString());
 
-                    startActivity(AltarActivity.newIntent(getActivity(), user));
+                    ((HomeActivity)getActivity())
+                            .startActivityForResult(AltarActivity.newIntent(getActivity(), user),
+                            ALTAR_CREATE_PREVIEW_REQUEST_CODE);
                 }
                 break;
         }

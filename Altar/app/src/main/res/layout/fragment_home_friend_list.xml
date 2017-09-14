@@ -49,4 +49,5 @@
         android:text="@string/friend_list_add_group"
         android:textColor="@color/colorWhite"
         android:textSize="18sp"/>
+
 </RelativeLayout>
