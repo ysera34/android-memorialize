@@ -9,6 +9,7 @@
     <color name="colorSelectedFalseIndicator">@color/colorGray100</color>
     <color name="colorFont">@color/colorGuideFont</color>
     <color name="colorFontHint">@color/colorGray400</color>
+    <color name="colorTint">#999999</color>
 
     <color name="colorGuideAccent">#efc700</color>
     <color name="colorGuideFont">@color/colorGray100</color>

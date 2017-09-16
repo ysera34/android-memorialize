@@ -36,7 +36,7 @@
     <string name="config_notification_1">register notifications</string>
     <string name="config_notification_2">altar comment notifications</string>
     <string name="config_notification_3">obituary notifications</string>
-    <string name="config_settings_1">your email @ email.com</string>
+    <string name="config_settings_1">email@email.com</string>
     <string name="config_settings_2">change password</string>
     <string name="config_settings_3">sign out</string>
     <string name="friend_list_add_group">add group</string>
@@ -113,6 +113,13 @@
     <string name="obituary_submit_contacts">연락처</string>
     <string name="obituary_submit_image">사망진단서 사진올리기</string>
     <string name="obituary_confirm_message">부고알림 요청이 완료되었습 니다. 소정의 확인 절차를 거쳐 부고알림 소식이 전해집니다.</string>
+    <string name="config_settings_send_email"><![CDATA[인증메일 보내기 >>]]></string>
+    <string name="dialog_send_email_message">인증 메일을 발송 했습니다.</string>
+    <string name="change_password_now">현재 비밀번호</string>
+    <string name="change_password_new">새 비밀번호</string>
+    <string name="change_password_new_confirm">새 비밀번호 확인</string>
+    <string name="dialog_sign_out_message">로그아웃 하시면 지인들의  부고 알림을 받지 못합니다. 로그아웃 하시겠습니까?</string>
+    <string name="dialog_change_password_title">비밀번호 변경</string>
 
     <string-array name="add_friend_group_scope">
         <item>elementary school</item>

@@ -35,7 +35,44 @@
                     android:layout_alignParentStart="true"
                     android:layout_centerVertical="true"
                     android:text="@string/config_settings_1"
-                    android:textSize="14sp"/>
+                    android:textColor="@color/colorFont"
+                    android:textSize="16sp"/>
+
+                <TextView
+                    android:id="@+id/config_settings_send_email_text_view"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_alignParentEnd="true"
+                    android:layout_centerVertical="true"
+                    android:clickable="true"
+                    android:text="@string/config_settings_send_email"
+                    android:textColor="@color/colorFont"
+                    android:textSize="16sp"/>
+
+                <LinearLayout
+                    android:id="@+id/config_settings_auth_email_layout"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_alignParentEnd="true"
+                    android:layout_centerVertical="true"
+                    android:visibility="gone">
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginEnd="8dp"
+                        android:text="인증"
+                        android:textColor="@color/colorFont"
+                        android:textSize="16sp"/>
+
+                    <CheckBox
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:buttonTint="@color/colorTint"
+                        android:checked="true"
+                        android:clickable="false"/>
+
+                </LinearLayout>
 
             </RelativeLayout>
 
@@ -48,12 +85,15 @@
                 <!--android:background="@drawable/selector_ripple_bg_white_border_bottom">-->
 
                 <TextView
+                    android:id="@+id/config_settings_change_password_text_view"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_alignParentStart="true"
                     android:layout_centerVertical="true"
+                    android:clickable="true"
                     android:text="@string/config_settings_2"
-                    android:textSize="14sp"/>
+                    android:textColor="@color/colorFont"
+                    android:textSize="16sp"/>
 
             </RelativeLayout>
 
@@ -66,12 +106,15 @@
                 <!--android:background="@drawable/selector_ripple_bg_white_border_bottom">-->
 
                 <TextView
+                    android:id="@+id/config_settings_sign_out_text_view"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_alignParentStart="true"
                     android:layout_centerVertical="true"
+                    android:clickable="true"
                     android:text="@string/config_settings_3"
-                    android:textSize="14sp"/>
+                    android:textColor="@color/colorFont"
+                    android:textSize="16sp"/>
 
             </RelativeLayout>
 
