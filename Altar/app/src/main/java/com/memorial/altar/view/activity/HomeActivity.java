@@ -1,5 +1,6 @@
 package com.memorial.altar.view.activity;
 
+import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
@@ -52,6 +53,11 @@ public class HomeActivity extends AppCompatActivity
         AltarPrivateLastWillFragment.OnAltarPrivateLastWillDialogDismissListener {
 
     private static final String TAG = HomeActivity.class.getSimpleName();
+
+    public static Intent newIntent(Context packageContext) {
+        Intent intent = new Intent(packageContext, HomeActivity.class);
+        return intent;
+    }
 
     private Toolbar mToolbar;
     private TextView mToolbarStarTextView;
