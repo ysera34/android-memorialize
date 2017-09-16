@@ -27,6 +27,20 @@
             </intent-filter>
         </activity>
         <activity
+            android:name=".view.activity.SignInActivity"
+            android:theme="@style/AppTheme.NoActionBar"
+            android:screenOrientation="portrait"
+            android:launchMode="singleTop">
+
+        </activity>
+        <activity
+            android:name=".view.activity.SignUpActivity"
+            android:theme="@style/AppTheme.NoActionBar"
+            android:screenOrientation="portrait"
+            android:launchMode="singleTop">
+
+        </activity>
+        <activity
             android:name=".view.activity.HomeInfoActivity"
             android:theme="@style/TransparentTheme"
             android:screenOrientation="portrait"

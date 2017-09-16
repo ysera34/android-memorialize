@@ -1,0 +1,144 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+              android:layout_width="match_parent"
+              android:layout_height="match_parent"
+              android:orientation="vertical">
+
+    <ImageView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center_horizontal"
+        android:layout_marginTop="52dp"
+        android:src="@drawable/img_sign_in_star"/>
+
+    <ImageView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center_horizontal"
+        android:layout_marginBottom="40dp"
+        android:layout_marginTop="28dp"
+        android:src="@drawable/img_sign_in_logo"/>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginEnd="46dp"
+        android:layout_marginStart="46dp"
+        android:background="@drawable/edit_text_under_line_focus_false"
+        android:gravity="center_vertical">
+
+        <EditText
+            android:id="@+id/sign_up_phone_number_edit_text"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:background="@null"
+            android:padding="8dp"
+            android:hint="@string/sign_up_phone_number"
+            android:inputType="phone"
+            android:textColor="@color/colorFont"
+            android:textColorHint="@color/colorFontHint"
+            android:textSize="14sp"/>
+
+    </LinearLayout>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginEnd="46dp"
+        android:layout_marginStart="46dp"
+        android:background="@drawable/edit_text_under_line_focus_false"
+        android:gravity="center_vertical">
+
+        <EditText
+            android:id="@+id/sign_up_email_edit_text"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:background="@null"
+            android:padding="8dp"
+            android:hint="@string/sign_up_email"
+            android:inputType="textEmailAddress"
+            android:textColor="@color/colorFont"
+            android:textColorHint="@color/colorFontHint"
+            android:textSize="14sp"/>
+
+    </LinearLayout>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginEnd="46dp"
+        android:layout_marginStart="46dp"
+        android:background="@drawable/edit_text_under_line_focus_false"
+        android:gravity="center_vertical">
+
+        <EditText
+            android:id="@+id/sign_up_password_edit_text"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:background="@null"
+            android:padding="8dp"
+            android:hint="@string/sign_up_password"
+            android:inputType="textPassword"
+            android:textColor="@color/colorFont"
+            android:textColorHint="@color/colorFontHint"
+            android:textSize="14sp"/>
+
+    </LinearLayout>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginEnd="46dp"
+        android:layout_marginStart="46dp"
+        android:background="@drawable/edit_text_under_line_focus_false"
+        android:gravity="center_vertical">
+
+        <EditText
+            android:id="@+id/sign_up_confirm_password_edit_text"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:background="@null"
+            android:padding="8dp"
+            android:hint="@string/sign_up_confirm_password"
+            android:inputType="textPassword"
+            android:textColor="@color/colorFont"
+            android:textColorHint="@color/colorFontHint"
+            android:textSize="14sp"/>
+
+    </LinearLayout>
+
+    <TextView
+        android:id="@+id/sign_up_button_text_view"
+        android:layout_width="267dp"
+        android:layout_height="46dp"
+        android:layout_gravity="center_horizontal"
+        android:layout_marginTop="40dp"
+        android:background="@drawable/widget_rectangle_sign_in"
+        android:clickable="true"
+        android:gravity="center"
+        android:text="@string/sign_up"
+        android:textColor="@color/colorFont"
+        android:textSize="16sp"/>
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center_horizontal"
+        android:layout_marginTop="29dp"
+        android:gravity="center_horizontal"
+        android:text="회원가입 시 이용약관 및 개인정보 취급방침에
+        동의하는 것으로 간주 됩니다."
+        android:textColor="@color/colorFont"
+        android:textSize="10sp"/>
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center_horizontal"
+        android:layout_marginTop="45dp"
+        android:gravity="center_horizontal"
+        android:text="Copyright © 2017 사망 . All rights reserved."
+        android:textColor="@color/colorFont"
+        android:textSize="10sp"/>
+
+</LinearLayout>

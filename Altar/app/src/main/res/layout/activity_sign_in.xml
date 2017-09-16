@@ -1,0 +1,137 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+              android:layout_width="match_parent"
+              android:layout_height="match_parent"
+              android:orientation="vertical">
+
+    <ImageView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center_horizontal"
+        android:layout_marginTop="52dp"
+        android:src="@drawable/img_sign_in_star"/>
+
+    <ImageView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center_horizontal"
+        android:layout_marginBottom="40dp"
+        android:layout_marginTop="28dp"
+        android:src="@drawable/img_sign_in_logo"/>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginEnd="46dp"
+        android:layout_marginStart="46dp"
+        android:background="@drawable/edit_text_under_line_focus_false"
+        android:gravity="center_vertical">
+
+        <ImageView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center_vertical"
+            android:padding="8dp"
+            android:src="@drawable/ic_sign_in_email"/>
+
+        <View
+            android:layout_width="0.7dp"
+            android:layout_height="match_parent"
+            android:layout_marginEnd="8dp"
+            android:background="@color/colorTint"/>
+
+        <EditText
+            android:id="@+id/sign_in_email_edit_text"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:background="@null"
+            android:hint="@string/sign_in_email"
+            android:inputType="textEmailAddress"
+            android:textColor="@color/colorFont"
+            android:textColorHint="@color/colorFontHint"
+            android:textSize="14sp"/>
+
+    </LinearLayout>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginEnd="46dp"
+        android:layout_marginStart="46dp"
+        android:background="@drawable/edit_text_under_line_focus_false"
+        android:gravity="center_vertical">
+
+        <ImageView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center_vertical"
+            android:padding="8dp"
+            android:src="@drawable/ic_sign_in_email"/>
+
+        <View
+            android:layout_width="0.7dp"
+            android:layout_height="match_parent"
+            android:layout_marginEnd="8dp"
+            android:background="@color/colorTint"/>
+
+        <EditText
+            android:id="@+id/sign_in_password_edit_text"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:background="@null"
+            android:hint="@string/sign_in_password"
+            android:inputType="textPassword"
+            android:textColor="@color/colorFont"
+            android:textColorHint="@color/colorFontHint"
+            android:textSize="14sp"/>
+
+    </LinearLayout>
+
+    <TextView
+        android:id="@+id/forget_user_info_text_view"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center_horizontal"
+        android:layout_marginTop="20dp"
+        android:clickable="true"
+        android:text="@string/sign_in_forget_user_info"
+        android:textColor="@color/colorFont"
+        android:textSize="14sp"/>
+
+    <TextView
+        android:id="@+id/sign_in_button_text_view"
+        android:layout_width="267dp"
+        android:layout_height="46dp"
+        android:layout_gravity="center_horizontal"
+        android:layout_marginTop="55dp"
+        android:background="@drawable/widget_rectangle_sign_in"
+        android:clickable="true"
+        android:gravity="center"
+        android:text="@string/sign_in"
+        android:textColor="@color/colorFont"
+        android:textSize="16sp"/>
+
+    <TextView
+        android:id="@+id/sign_up_button_text_view"
+        android:layout_width="267dp"
+        android:layout_height="46dp"
+        android:layout_gravity="center_horizontal"
+        android:layout_marginTop="40dp"
+        android:background="@drawable/widget_rectangle_sign_up"
+        android:clickable="true"
+        android:gravity="center"
+        android:text="@string/sign_up"
+        android:textColor="@color/colorBlack"
+        android:textSize="16sp"/>
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center_horizontal"
+        android:layout_marginTop="56dp"
+        android:gravity="center_horizontal"
+        android:text="Copyright © 2017 사망 . All rights reserved."
+        android:textColor="@color/colorFont"
+        android:textSize="10sp"/>
+
+</LinearLayout>

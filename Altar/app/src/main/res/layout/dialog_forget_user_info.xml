@@ -1,0 +1,36 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+              android:layout_width="match_parent"
+              android:layout_height="wrap_content"
+              android:orientation="vertical">
+
+    <TextView
+        android:id="@+id/find_forgotten_email_text_view"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:clickable="true"
+        android:drawablePadding="10dp"
+        android:drawableStart="@drawable/ic_sign_in_email"
+        android:gravity="center_vertical"
+        android:padding="14dp"
+        android:text="@string/dialog_find_forgotten_email_text_view"
+        android:textColor="@color/colorGray800"/>
+
+    <View
+        android:layout_width="match_parent"
+        android:layout_height="0.7dp"
+        android:background="@color/colorGray700"/>
+
+    <TextView
+        android:id="@+id/find_forgotten_password_text_view"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:clickable="true"
+        android:drawablePadding="10dp"
+        android:drawableStart="@drawable/ic_sign_in_password"
+        android:gravity="center_vertical"
+        android:padding="14dp"
+        android:text="@string/dialog_find_forgotten_password_text_view"
+        android:textColor="@color/colorGray800"/>
+
+</LinearLayout>

@@ -15,7 +15,7 @@ public class SplashActivity extends AppCompatActivity {
 
     private static final String TAG = SplashActivity.class.getSimpleName();
 
-    private static final int SPLASH_TIME_OUT = 500;
+    private static final int SPLASH_TIME_OUT = 800;
 
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
@@ -30,7 +30,7 @@ public class SplashActivity extends AppCompatActivity {
         new Handler().postDelayed(new Runnable() {
             @Override
             public void run() {
-                startActivity(HomeActivity.newIntent(getApplicationContext()));
+                startActivity(SignInActivity.newIntent(getApplicationContext()));
                 overridePendingTransition(R.anim.fade_in, R.anim.fade_out);
                 finish();
 

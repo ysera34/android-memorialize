@@ -117,6 +117,24 @@
     <string name="change_password_new_confirm">새 비밀번호 확인</string>
     <string name="dialog_sign_out_message">로그아웃 하시면 지인들의  부고 알림을 받지 못합니다. 로그아웃 하시겠습니까?</string>
     <string name="dialog_change_password_title">비밀번호 변경</string>
+    <string name="sign_in_email">이메일</string>
+    <string name="sign_in_password">비밀번호</string>
+    <string name="sign_in_forget_user_info">계정 정보를 잊으셨나요?</string>
+    <string name="sign_in">로그인</string>
+    <string name="sign_up">회원가입</string>
+    <string name="dialog_find_forgotten_email_text_view">이메일 찾기</string>
+    <string name="dialog_find_forgotten_password_text_view">비밀번호 찾기</string>
+    <string name="dialog_title_forget_user_info">로그인 정보 찾기</string>
+    <string name="dialog_title_find_email">이메일 찾기</string>
+    <string name="dialog_title_find_password">비밀번호 찾기</string>
+    <string name="dialog_message_find_email">가입하신 전화번호로 이메일 주소를  보내드립니다.</string>
+    <string name="dialog_message_find_password">등록한 이메일 주소로 임시비밀번호를  보내드립니다.</string>
+    <string name="find_email_hint">예) 01012346572</string>
+    <string name="find_password_hint">예) abc@abcde.com</string>
+    <string name="sign_up_confirm_password">비밀번호 확인</string>
+    <string name="sign_up_password">비밀번호 (영문+숫자 6글자 이상)</string>
+    <string name="sign_up_email">이메일</string>
+    <string name="sign_up_phone_number">휴대폰</string>
 
     <string-array name="add_friend_group_scope">
         <item>elementary school</item>
