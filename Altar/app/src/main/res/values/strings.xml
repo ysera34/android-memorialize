@@ -104,6 +104,15 @@
     <string name="altar_private_last_will_send_to_format">To : %s</string>
     <string name="altar_create_preview">분향소 미리보기</string>
     <string name="altar_preview_confirm_button">최종확인</string>
+    <string name="obituary_submit">부고 알림 신청하시겠습니까?</string>
+    <string name="obituary_advice_message">사망확인은 당사의 소정확인을 거쳐진행 됩니다. 거짓으로 사망신고시에 법적인 처벌을 받을 수 있습니다.</string>
+    <string name="obituary_submit_title">부고 알림 신청</string>
+    <string name="obituary_submit_name">본인이름</string>
+    <string name="obituary_submit_name_2">사망인</string>
+    <string name="obituary_submit_relations">관계</string>
+    <string name="obituary_submit_contacts">연락처</string>
+    <string name="obituary_submit_image">사망진단서 사진올리기</string>
+    <string name="obituary_confirm_message">부고알림 요청이 완료되었습 니다. 소정의 확인 절차를 거쳐 부고알림 소식이 전해집니다.</string>
 
     <string-array name="add_friend_group_scope">
         <item>elementary school</item>

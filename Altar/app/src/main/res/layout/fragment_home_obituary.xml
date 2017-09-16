@@ -1,12 +1,34 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
-              android:orientation="vertical"
               android:layout_width="match_parent"
-              android:layout_height="match_parent">
+              android:layout_height="match_parent"
+              android:orientation="vertical">
 
-    <TextView
-        android:layout_width="wrap_content"
+    <EditText
+        android:id="@+id/obituary_search_edit_text"
+        android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:text="@string/title_obituary"/>
+        android:layout_margin="6dp"
+        android:background="@drawable/widget_rectangle_solid_light_gray"
+        android:drawablePadding="16dp"
+        android:drawableStart="@drawable/ic_obituary_search"
+        android:hint="검색"
+        android:imeOptions="actionDone"
+        android:inputType="text"
+        android:maxLines="1"
+        android:paddingBottom="8dp"
+        android:paddingEnd="16dp"
+        android:paddingStart="16dp"
+        android:paddingTop="8dp"
+        android:textColor="@color/colorGray800"
+        android:textColorHint="@color/colorFontHint"
+        android:textSize="14sp"/>
+
+    <android.support.v7.widget.RecyclerView
+        android:id="@+id/searched_friend_recycler_view"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+
+    </android.support.v7.widget.RecyclerView>
 
 </LinearLayout>

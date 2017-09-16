@@ -8,10 +8,11 @@
     <color name="colorSelectedTrueIndicator">@color/colorAccent</color>
     <color name="colorSelectedFalseIndicator">@color/colorGray100</color>
     <color name="colorFont">@color/colorGuideFont</color>
-    <color name="colorFontHint">@color/colorGray500</color>
+    <color name="colorFontHint">@color/colorGray400</color>
 
     <color name="colorGuideAccent">#efc700</color>
     <color name="colorGuideFont">@color/colorGray100</color>
+    <color name="colorGuideFontHint">#c5c5c5</color>
 
     <color name="colorWhite">#FFFFFF</color>
     <color name="colorBlack">#000000</color>
