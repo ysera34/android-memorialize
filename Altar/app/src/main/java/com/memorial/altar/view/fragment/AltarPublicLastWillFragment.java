@@ -11,28 +11,21 @@ import android.support.design.widget.BottomSheetBehavior;
 import android.support.design.widget.BottomSheetDialogFragment;
 import android.support.design.widget.CoordinatorLayout;
 import android.support.v7.app.AlertDialog;
-import android.support.v7.widget.ListViewCompat;
-import android.support.v7.widget.RecyclerView;
-import android.support.v7.widget.Toolbar;
 import android.text.Editable;
 import android.text.TextWatcher;
 import android.util.DisplayMetrics;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.Window;
+import android.view.WindowManager;
+import android.view.inputmethod.InputMethodManager;
 import android.widget.EditText;
-import android.widget.ProgressBar;
+import android.widget.ImageView;
 import android.widget.TextView;
 
 import com.memorial.altar.R;
-import com.memorial.altar.model.Contact;
 import com.memorial.altar.util.UserSharedPreferences;
 import com.memorial.altar.view.activity.BillingStarActivity;
-
-import java.util.ArrayList;
-
-import static android.icu.lang.UCharacter.GraphemeClusterBreak.L;
-import static com.memorial.altar.R.id.altar_public_last_will_limit_text_view;
 
 /**
  * Created by yoon on 2017. 9. 6..
@@ -79,7 +72,8 @@ public class AltarPublicLastWillFragment extends BottomSheetDialogFragment
         }
     };
 
-    private Toolbar mAltarPublicLastWillToolbar;
+    private InputMethodManager mInputMethodManager;
+    private ImageView mAltarPublicLastWillCompleteImageView;
     private TextView mAltarPublicLastWillLimitTextView;
     private TextView mAltarPublicLastWillCountTextView;
     private AltarPublicLastWillEditTextWatcher mEditTextWatcher;
@@ -94,6 +88,8 @@ public class AltarPublicLastWillFragment extends BottomSheetDialogFragment
         super.onCreate(savedInstanceState);
         mAltarPublicLastWillMessage = getArguments().getString(ARG_PUBLIC_LAST_WILL_MESSAGE, null);
         mStarCount = UserSharedPreferences.getStoredStar(getActivity());
+        mInputMethodManager = (InputMethodManager) getActivity().getSystemService(Context.INPUT_METHOD_SERVICE);
+        getDialog().getWindow().setSoftInputMode(WindowManager.LayoutParams.SOFT_INPUT_ADJUST_RESIZE);
     }
 
     @Override
@@ -101,8 +97,8 @@ public class AltarPublicLastWillFragment extends BottomSheetDialogFragment
         super.setupDialog(dialog, style);
         LayoutInflater layoutInflater = LayoutInflater.from(getActivity());
         View view = layoutInflater.inflate(R.layout.fragment_dialog_altar_public_last_will, null);
-        mAltarPublicLastWillToolbar = view.findViewById(R.id.altar_public_last_will_toolbar);
-        mAltarPublicLastWillToolbar.setTitle(R.string.altar_create_public_last_will);
+        mAltarPublicLastWillCompleteImageView = view.findViewById(R.id.altar_public_last_will_complete_image_view);
+        mAltarPublicLastWillCompleteImageView.setOnClickListener(this);
         mAltarPublicLastWillLimitTextView = view.findViewById(R.id.altar_public_last_will_limit_text_view);
         mAltarPublicLastWillLimitTextView.setOnClickListener(this);
         mAltarPublicLastWillCountTextView = view.findViewById(R.id.altar_public_last_will_text_count_text_view);
@@ -130,9 +126,13 @@ public class AltarPublicLastWillFragment extends BottomSheetDialogFragment
     public void onClick(View view) {
         switch (view.getId()) {
             case R.id.altar_public_last_will_limit_text_view:
+                characterCountLimitShowDialog();
                 break;
             case R.id.altar_public_last_will_confirm_button_text_view:
                 publicLastWillConfirmShowDialog();
+                break;
+            case R.id.altar_public_last_will_complete_image_view:
+                mInputMethodManager.hideSoftInputFromWindow(mAltarPublicLastWillEditText.getWindowToken(), 0);
                 break;
         }
     }
@@ -187,6 +187,23 @@ public class AltarPublicLastWillFragment extends BottomSheetDialogFragment
         dialog.show();
     }
 
+    private void characterCountLimitShowDialog() {
+        AlertDialog.Builder builder = new AlertDialog.Builder(getActivity());
+        builder.setTitle(getString(R.string.dialog_title_information));
+        builder.setIcon(R.drawable.ic_error_outline_grey_300_24dp);
+        builder.setMessage(getString(R.string.dialog_message_character_count_limit));
+        builder.setCancelable(false);
+        builder.setPositiveButton(R.string.billing_star, new DialogInterface.OnClickListener() {
+            @Override
+            public void onClick(DialogInterface dialogInterface, int i) {
+                startActivity(BillingStarActivity.newIntent(getActivity()));
+            }
+        });
+        builder.setNegativeButton(android.R.string.no, null);
+        AlertDialog dialog = builder.create();
+        dialog.show();
+    }
+
     private class AltarPublicLastWillEditTextWatcher implements TextWatcher {
 
         @Override
@@ -197,6 +214,9 @@ public class AltarPublicLastWillFragment extends BottomSheetDialogFragment
         @Override
         public void onTextChanged(CharSequence charSequence, int i, int i1, int i2) {
             setAltarPublicLastWillCountTextView();
+            if (charSequence.length() == 200) {
+                characterCountLimitShowDialog();
+            }
         }
 
         @Override

@@ -126,8 +126,7 @@
         android:layout_gravity="center_horizontal"
         android:layout_marginTop="29dp"
         android:gravity="center_horizontal"
-        android:text="회원가입 시 이용약관 및 개인정보 취급방침에
-        동의하는 것으로 간주 됩니다."
+        android:text="회원가입 시 이용약관 및 개인정보 취급방침에\n동의하는 것으로 간주 됩니다."
         android:textColor="@color/colorFont"
         android:textSize="10sp"/>
 

@@ -187,9 +187,9 @@ public class AltarCreateFragment extends Fragment
                     user.setGroupParents(mGroupParents);
                     user.setPublicLastWillMessage(mLastWillTextView.getText().toString());
 
-                    ((HomeActivity)getActivity())
+                    ((HomeActivity) getActivity())
                             .startActivityForResult(AltarActivity.newIntent(getActivity(), user),
-                            ALTAR_CREATE_PREVIEW_REQUEST_CODE);
+                                    ALTAR_CREATE_PREVIEW_REQUEST_CODE);
                 }
                 break;
         }

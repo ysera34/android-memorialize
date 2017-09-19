@@ -46,6 +46,8 @@ public class SignUpActivity extends AppCompatActivity implements View.OnClickLis
     public void onClick(View view) {
         switch (view.getId()) {
             case R.id.sign_up_button_text_view:
+                startActivity(HomeActivity.newIntent(getApplicationContext()));
+                finish();
                 break;
         }
     }

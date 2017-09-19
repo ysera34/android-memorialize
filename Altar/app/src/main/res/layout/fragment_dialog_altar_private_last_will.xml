@@ -6,20 +6,38 @@
     android:layout_height="match_parent"
     android:background="@color/colorBlack">
 
-    <android.support.v7.widget.Toolbar
-        android:id="@+id/altar_private_last_will_toolbar"
+    <RelativeLayout
+        android:id="@+id/altar_private_last_will_toolbar_layout"
         android:layout_width="match_parent"
-        android:layout_height="@dimen/toolbar_height"
-        android:background="?attr/colorPrimary"
-        android:minHeight="?attr/actionBarSize"
-        android:theme="@style/ThemeOverlay.AppCompat.Dark.ActionBar"
-        app:popupTheme="@style/ThemeOverlay.AppCompat.Light"/>
+        android:layout_height="@dimen/toolbar_height">
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/altar_create_private_last_will"
+            android:textColor="@color/colorFont"
+            android:layout_marginStart="16dp"
+            android:textSize="16sp"
+            android:layout_alignParentStart="true"
+            android:layout_centerVertical="true"/>
+
+        <ImageView
+            android:id="@+id/altar_private_last_will_complete_image_view"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentEnd="true"
+            android:layout_centerVertical="true"
+            android:layout_marginEnd="16dp"
+            android:padding="8dp"
+            android:src="@drawable/ic_check_grey_300_24dp"/>
+
+    </RelativeLayout>
 
     <RelativeLayout
         android:id="@+id/altar_private_last_will_limit_layout"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_below="@+id/altar_private_last_will_toolbar"
+        android:layout_below="@+id/altar_private_last_will_toolbar_layout"
         android:padding="12dp">
 
         <TextView

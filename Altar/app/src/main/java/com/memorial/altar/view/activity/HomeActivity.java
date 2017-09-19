@@ -44,6 +44,7 @@ import static com.memorial.altar.common.Common.NAV_REQUEST_SETTINGS;
 import static com.memorial.altar.view.fragment.AltarCreateFragment.ALTAR_CREATE_CONTACT_PERMISSION_REQUEST;
 import static com.memorial.altar.view.fragment.AltarCreateFragment.ALTAR_CREATE_STORAGE_PERMISSION_REQUEST;
 import static com.memorial.altar.view.fragment.AltarPrivateLastWillListFragment.ALTAR_PRIVATE_LAST_WILL_CONTACT_PERMISSION_REQUEST;
+import static com.memorial.altar.view.fragment.HomeObituaryFragment.OBITUARY_SUBMIT_STORAGE_PERMISSION_REQUEST;
 
 public class HomeActivity extends AppCompatActivity
         implements View.OnClickListener, NavigationView.OnNavigationItemSelectedListener,
@@ -256,6 +257,10 @@ public class HomeActivity extends AppCompatActivity
                 break;
             case ALTAR_PRIVATE_LAST_WILL_CONTACT_PERMISSION_REQUEST:
                 ((AltarCreateFragment) mHomeViewPagerAdapter.getItem(1))
+                        .onPermissionCallback(requestCode, requestPermissionId, isGranted);
+                break;
+            case OBITUARY_SUBMIT_STORAGE_PERMISSION_REQUEST:
+                ((HomeObituaryFragment) mHomeViewPagerAdapter.getItem(2))
                         .onPermissionCallback(requestCode, requestPermissionId, isGranted);
                 break;
         }  

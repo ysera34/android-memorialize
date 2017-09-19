@@ -69,9 +69,12 @@ public class SignInActivity extends AppCompatActivity implements View.OnClickLis
                 break;
 
             case R.id.sign_in_button_text_view:
+                startActivity(HomeActivity.newIntent(getApplicationContext()));
+                finish();
                 break;
             case R.id.sign_up_button_text_view:
                 startActivity(SignUpActivity.newIntent(getApplicationContext()));
+                finish();
                 break;
         }
     }

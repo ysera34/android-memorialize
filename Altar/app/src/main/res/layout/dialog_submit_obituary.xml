@@ -13,6 +13,7 @@
         android:layout_height="match_parent">
 
         <android.support.design.widget.TextInputEditText
+            android:id="@+id/obituary_submit_name_text_input_edit_text"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:hint="@string/obituary_submit_name"/>
@@ -24,6 +25,7 @@
         android:layout_height="match_parent">
 
         <android.support.design.widget.TextInputEditText
+            android:id="@+id/obituary_submit_name_2_text_input_edit_text"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:hint="@string/obituary_submit_name_2"/>
@@ -35,6 +37,7 @@
         android:layout_height="match_parent">
 
         <android.support.design.widget.TextInputEditText
+            android:id="@+id/obituary_submit_relations_text_input_edit_text"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:hint="@string/obituary_submit_relations"/>
@@ -46,6 +49,7 @@
         android:layout_height="match_parent">
 
         <android.support.design.widget.TextInputEditText
+            android:id="@+id/obituary_submit_contacts_text_input_edit_text"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:hint="@string/obituary_submit_contacts"/>
@@ -53,10 +57,18 @@
     </android.support.design.widget.TextInputLayout>
 
     <Button
+        android:id="@+id/obituary_submit_image_button"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:text="@string/obituary_submit_image"
         android:textColor="@color/colorWhite"
         android:backgroundTint="@color/colorGray800"/>
+
+    <TextView
+        android:id="@+id/obituary_submit_image_path_text_view"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="4dp"
+        android:layout_gravity="center_horizontal"/>
 
 </LinearLayout>
