@@ -11,7 +11,6 @@ import android.support.v4.widget.NestedScrollView;
 import android.support.v7.app.AlertDialog;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
-import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -70,6 +69,7 @@ public class AltarReadFragment extends Fragment implements View.OnClickListener 
     private NestedScrollView mAltarReadNestedScrollView;
     private ImageView mAltarUserImageView;
     private TextView mAltarReadContributionButtonTextView;
+    private TextView mAltarReadStarTextView;
     private TextView mAltarUserNameTextView;
     private TextView mAltarUserBirthTextView;
     private TextView mAltarUserGenderTextView;
@@ -89,7 +89,6 @@ public class AltarReadFragment extends Fragment implements View.OnClickListener 
     @Override
     public void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        Log.i(TAG, "onCreate: ");
         mAltarUserId = getArguments().getInt(ARG_ALTAR_USER_ID);
         mAltarUser = (User) getArguments().getSerializable(ARG_ALTAR_USER);
         mInputMethodManager = (InputMethodManager) getActivity().getSystemService(Context.INPUT_METHOD_SERVICE);
@@ -104,6 +103,7 @@ public class AltarReadFragment extends Fragment implements View.OnClickListener 
         mAltarUserImageView = view.findViewById(R.id.altar_read_user_image_view);
         mAltarReadContributionButtonTextView = view.findViewById(R.id.altar_read_contribution_button_text_view);
         mAltarReadContributionButtonTextView.setOnClickListener(this);
+        mAltarReadStarTextView = view.findViewById(R.id.altar_read_star_text_view);
         mAltarUserNameTextView = view.findViewById(R.id.altar_user_name_text_view);
         mAltarUserBirthTextView = view.findViewById(R.id.altar_user_birth_text_view);
         mAltarUserGenderTextView = view.findViewById(R.id.altar_user_gender_text_view);
@@ -151,6 +151,8 @@ public class AltarReadFragment extends Fragment implements View.OnClickListener 
                             mDialog.dismiss();
                         }
                         contributionConfirmShowDialog();
+                        int star2 = Integer.valueOf(mAltarReadStarTextView.getText().toString());
+                        mAltarReadStarTextView.setText(String.valueOf(star + star2));
                     } else {
                         Toast.makeText(getActivity(), R.string.not_enough_star_message, Toast.LENGTH_SHORT).show();
                     }

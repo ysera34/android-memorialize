@@ -150,6 +150,7 @@
     <string name="altar_user_account_holder_hint">예금주</string>
     <string name="altar_user_account_number_hint">계좌번호</string>
     <string name="friend_list_ready_message">내 모바일 분향소를 완성하면\n지인 목록이 표시됩니다.</string>
+    <string name="altar_update_button">수정하기</string>
 
     <string-array name="add_friend_group_scope">
         <item>elementary school</item>

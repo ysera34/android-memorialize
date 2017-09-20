@@ -37,12 +37,13 @@
                         android:src="@drawable/ic_large_star"/>
 
                     <TextView
+                        android:id="@+id/altar_read_star_text_view"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:layout_below="@+id/altar_read_star_image_view"
                         android:layout_centerHorizontal="true"
                         android:layout_marginBottom="20dp"
-                        android:text="123123"
+                        android:text="3850"
                         android:textColor="@color/colorFont"
                         android:textSize="20sp"/>
 
@@ -156,6 +157,8 @@
                     android:layout_marginTop="10dp"
                     android:gravity="center_horizontal"
                     android:lineSpacingExtra="3sp"
+                    android:paddingEnd="20dp"
+                    android:paddingStart="20dp"
                     android:textColor="@color/colorFont"
                     android:textSize="14sp"/>
 
