@@ -10,16 +10,18 @@ import android.view.ViewGroup;
 import com.memorial.altar.R;
 
 /**
- * Created by yoon on 2017. 8. 26..
+ * Created by yoon on 2017. 9. 20..
  */
 
-public class HomeAltarFragment extends Fragment {
+public class FriendReadyFragment extends Fragment {
 
-    public static HomeAltarFragment newInstance() {
+    private static final String TAG = FriendReadyFragment.class.getSimpleName();
+
+    public static FriendReadyFragment newInstance() {
 
         Bundle args = new Bundle();
 
-        HomeAltarFragment fragment = new HomeAltarFragment();
+        FriendReadyFragment fragment = new FriendReadyFragment();
         fragment.setArguments(args);
         return fragment;
     }
@@ -33,7 +35,7 @@ public class HomeAltarFragment extends Fragment {
     @Override
     public View onCreateView(LayoutInflater inflater,
                              @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
-        View view = inflater.inflate(R.layout.fragment_home_altar, container, false);
+        View view = inflater.inflate(R.layout.fragment_friend_ready, container, false);
         return view;
     }
 

@@ -22,6 +22,7 @@ import android.widget.ListView;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.bumptech.glide.Glide;
 import com.memorial.altar.R;
 import com.memorial.altar.model.Friend;
 import com.memorial.altar.view.activity.AltarActivity;
@@ -31,18 +32,19 @@ import java.util.Collections;
 import java.util.Comparator;
 
 import static com.memorial.altar.R.id.friend_group_name_text_view;
+import static com.memorial.altar.common.Common.URL_HOST;
 
 /**
  * Created by yoon on 2017. 8. 26..
  */
 
-public class HomeFriendListFragment extends Fragment implements View.OnClickListener {
+public class FriendListFragment extends Fragment implements View.OnClickListener {
 
-    public static HomeFriendListFragment newInstance() {
+    public static FriendListFragment newInstance() {
 
         Bundle args = new Bundle();
 
-        HomeFriendListFragment fragment = new HomeFriendListFragment();
+        FriendListFragment fragment = new FriendListFragment();
         fragment.setArguments(args);
         return fragment;
     }
@@ -74,7 +76,7 @@ public class HomeFriendListFragment extends Fragment implements View.OnClickList
     @Override
     public View onCreateView(LayoutInflater inflater,
                              @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
-        View view = inflater.inflate(R.layout.fragment_home_friend_list, container, false);
+        View view = inflater.inflate(R.layout.fragment_friend_list, container, false);
         mFriendNestedScrollView = view.findViewById(R.id.friend_nested_scroll_view);
         mFriendNestedScrollView.setOnScrollChangeListener(new NestedScrollView.OnScrollChangeListener() {
             @Override
@@ -173,10 +175,11 @@ public class HomeFriendListFragment extends Fragment implements View.OnClickList
         public void bindFriend(Friend friend) {
             mFriend = friend;
             if (mFriend.getObitDate() != null) {
-                mPhotoImageView.setImageResource(R.drawable.img_person);
+                Glide.with(getActivity()).load(URL_HOST + mFriend.getImagePath()).into(mPhotoImageView);
+//                mPhotoImageView.setImageResource(R.drawable.img_person);
                 mObitDateTextView.setText(mFriend.getObitDate());
                 mNameTextView.setText(mFriend.getName());
-                mAgeTextView.setText(mFriend.getAge());
+                mAgeTextView.setText(mFriend.getBirth());
                 mCommentTextView.setText(R.string.cherish_comment);
                 if (mFriend.isCommented()) {
                     mCommentTextView.setBackgroundResource(R.drawable.ic_commented_true);
@@ -194,7 +197,7 @@ public class HomeFriendListFragment extends Fragment implements View.OnClickList
         @Override
         public void onClick(View view) {
             if (mFriend.getObitDate() != null) {
-                startMemorialFriendActivity(mFriend.getId());
+                startMemorialFriendActivity(mFriend.getId() + 1);
             }
         }
 
@@ -207,21 +210,42 @@ public class HomeFriendListFragment extends Fragment implements View.OnClickList
         }
     }
 
+//    private ArrayList<Friend> getFriends() {
+//        ArrayList<Friend> friends = new ArrayList<>();
+//        for (int i = 0; i < 20; i++) {
+//            Friend friend = new Friend();
+//            friend.setId(i);
+//            friend.setBirth("향년 " + (i + 50) + "세");
+//            friend.setName("name " + i);
+//            if (i <= 9) {
+//                friend.setObitDate("2017-" + "9-" + i);
+//            }
+//            friend.setCommented(i % 2 == 0);
+//            friends.add(friend);
+//        }
+//        return friends;
+//    }
+
     private ArrayList<Friend> getFriends() {
+        String[] obituarySampleFriendNameArr = getResources().getStringArray(R.array.obituary_sample_friend_name);
+        String[] obituarySampleImagePathArr = getResources().getStringArray(R.array.obituary_sample_friend_image_path);
+        String[] obituarySampleFriendBirthArr = getResources().getStringArray(R.array.obituary_sample_friend_birth);
         ArrayList<Friend> friends = new ArrayList<>();
         for (int i = 0; i < 20; i++) {
             Friend friend = new Friend();
             friend.setId(i);
-            friend.setAge("향년 " + (i + 50) + "세");
-            friend.setName("name " + i);
+            friend.setCommented(i % 2 == 0);
             if (i <= 9) {
+                friend.setName(obituarySampleFriendNameArr[i]);
+                friend.setImagePath(obituarySampleImagePathArr[i]);
+                friend.setBirth(obituarySampleFriendBirthArr[i]);
                 friend.setObitDate("2017-" + "9-" + i);
             }
-            friend.setCommented(i % 2 == 0);
             friends.add(friend);
         }
         return friends;
     }
+
 
     private void showAddFriendGroupTextView() {
         mAddFriendGroupButtonTextView.animate().translationY(0)
@@ -520,10 +544,11 @@ public class HomeFriendListFragment extends Fragment implements View.OnClickList
         public void bindAddedFriend(Friend addedFriend) {
             mAddedFriend = addedFriend;
             if (mAddedFriend.getObitDate() != null) {
-                mPhotoImageView.setImageResource(R.drawable.img_person);
+                Glide.with(getActivity()).load(URL_HOST + mAddedFriend.getImagePath()).into(mPhotoImageView);
+//                mPhotoImageView.setImageResource(R.drawable.img_person);
                 mObitDateTextView.setText(mAddedFriend.getObitDate());
                 mNameTextView.setText(mAddedFriend.getName());
-                mAgeTextView.setText(mAddedFriend.getAge());
+                mAgeTextView.setText(mAddedFriend.getBirth());
                 mCommentTextView.setText(R.string.cherish_comment);
                 if (mAddedFriend.isCommented()) {
                     mCommentTextView.setBackgroundResource(R.drawable.ic_commented_true);
@@ -540,7 +565,7 @@ public class HomeFriendListFragment extends Fragment implements View.OnClickList
 
         @Override
         public void onClick(View view) {
-            startMemorialFriendActivity(mAddedFriend.getId());
+            startMemorialFriendActivity(mAddedFriend.getId() + 1);
         }
 
         @Override

@@ -102,7 +102,6 @@ public class AltarPrivateLastWillFragment extends BottomSheetDialogFragment
 
         mStarCount = UserSharedPreferences.getStoredStar(getActivity());
         mInputMethodManager = (InputMethodManager) getActivity().getSystemService(Context.INPUT_METHOD_SERVICE);
-        getDialog().getWindow().setSoftInputMode(WindowManager.LayoutParams.SOFT_INPUT_ADJUST_RESIZE);
     }
 
     @Override

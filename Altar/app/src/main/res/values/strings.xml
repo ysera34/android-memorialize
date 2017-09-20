@@ -142,6 +142,14 @@
     <string name="submit_image_path_not_exist_format">Source File not exist : %s</string>
     <string name="dialog_message_character_count_limit">작성 글자수를 늘리시려면 별이 필요합니다.</string>
     <string name="menu_action_completed">완료</string>
+    <string name="dialog_message_contribution">소유하고 있는 별 : %s</string>
+    <string name="dialog_message_contribution_confirm">기부해주셔서 감사합니다. 당신의 조의금은 고인과 가족들에게 큰 힘이 됩니다.</string>
+    <string name="not_enough_star_message">별이 부족합니다.</string>
+    <string name="altar_user_contribution">조의금 계좌 등록</string>
+    <string name="altar_user_bank_hint">은행명</string>
+    <string name="altar_user_account_holder_hint">예금주</string>
+    <string name="altar_user_account_number_hint">계좌번호</string>
+    <string name="friend_list_ready_message">내 모바일 분향소를 완성하면\n지인 목록이 표시됩니다.</string>
 
     <string-array name="add_friend_group_scope">
         <item>elementary school</item>
@@ -158,5 +166,67 @@
         <item>@string/altar_user_company</item>
         <item>@string/altar_user_society</item>
     </string-array>
+    
+    <string-array name="comment_sample_writers">
+        <item>김미화</item>
+        <item>양일석</item>
+        <item>이일우</item>
+        <item>김석근</item>
+        <item>최미향</item>
+    </string-array>
 
+    <string-array name="comment_sample_date">
+        <item>2017년 9월 3일</item>
+        <item>2017년 9월 4일</item>
+        <item>2017년 9월 7일</item>
+        <item>2017년 9월 13일</item>
+        <item>2017년 9월 17일</item>
+    </string-array>
+
+    <string-array name="comment_sample_message">
+        <item>너무 그립고 보고 싶어요. 밥이라도 같이 제대로 먹어볼걸</item>
+        <item>며칠전 다투고 화해도 못했는데 이렇게 보내게 되서 내 마음이 찢어진다 친구야</item>
+        <item>너는 분명 천국에 갔을꺼야 친구야 사랑한다.</item>
+        <item>선배님 이제 편히 쉬세요 항상 밥 챙겨주셔서 감사했습니다. 자주 들르겠습니다.</item>
+        <item>미국에 있어서 장례식에도 못갔어 너무 미안해 ㅜ 너랑 학창시절 때 놀던 때가 그립구나</item>
+    </string-array>
+
+    <string-array name="obituary_sample_friend_name">
+        <item>홍민수</item>
+        <item>이아름</item>
+        <item>남강수</item>
+        <item>오세미</item>
+        <item>강만식</item>
+        <item>이은혜</item>
+        <item>한석진</item>
+        <item>한미숙</item>
+        <item>남현곤</item>
+        <item>홍숙희</item>
+    </string-array>
+
+    <string-array name="obituary_sample_friend_image_path">
+        <item>user01@korea.com.jpg</item>
+        <item>user02@korea.com.jpg</item>
+        <item>user03@korea.com.jpg</item>
+        <item>user04@korea.com.jpg</item>
+        <item>user05@korea.com.jpg</item>
+        <item>user06@korea.com.jpg</item>
+        <item>user07@korea.com.jpg</item>
+        <item>user08@korea.com.jpg</item>
+        <item>user09@korea.com.jpg</item>
+        <item>user10@korea.com.jpg</item>
+    </string-array>
+
+    <string-array name="obituary_sample_friend_birth">
+        <item>1995년생</item>
+        <item>1998년생</item>
+        <item>1989년생</item>
+        <item>1992년생</item>
+        <item>1982년생</item>
+        <item>1988년생</item>
+        <item>1973년생</item>
+        <item>1977년생</item>
+        <item>1956년생</item>
+        <item>1960년생</item>
+    </string-array>
 </resources>

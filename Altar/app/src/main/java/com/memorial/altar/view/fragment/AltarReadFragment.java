@@ -4,6 +4,7 @@ import android.content.Context;
 import android.content.DialogInterface;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
+import android.support.design.widget.TextInputEditText;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentManager;
 import android.support.v4.widget.NestedScrollView;
@@ -16,16 +17,21 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.view.animation.AccelerateInterpolator;
 import android.view.inputmethod.InputMethodManager;
+import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.TextView;
+import android.widget.Toast;
 
+import com.bumptech.glide.Glide;
 import com.memorial.altar.R;
-import com.memorial.altar.model.GroupChild;
 import com.memorial.altar.model.User;
+import com.memorial.altar.util.UserSharedPreferences;
+import com.memorial.altar.view.activity.BillingStarActivity;
 
 import java.util.ArrayList;
-import java.util.List;
+
+import static com.memorial.altar.common.Common.URL_HOST;
 
 /**
  * Created by yoon on 2017. 9. 2..
@@ -63,6 +69,7 @@ public class AltarReadFragment extends Fragment implements View.OnClickListener 
 
     private NestedScrollView mAltarReadNestedScrollView;
     private ImageView mAltarUserImageView;
+    private TextView mAltarReadContributionButtonTextView;
     private TextView mAltarUserNameTextView;
     private TextView mAltarUserBirthTextView;
     private TextView mAltarUserGenderTextView;
@@ -72,6 +79,8 @@ public class AltarReadFragment extends Fragment implements View.OnClickListener 
 
     private FragmentManager mCommentFragmentManager;
 
+    private AlertDialog mDialog;
+    private TextInputEditText mStarEditText;
     private InputMethodManager mInputMethodManager;
     private TextView mAltarCommentReadButtonTextView;
     private TextView mAltarCommentCreateButtonTextView;
@@ -93,6 +102,8 @@ public class AltarReadFragment extends Fragment implements View.OnClickListener 
         View view = inflater.inflate(R.layout.fragment_altar_read, container, false);
         mAltarReadNestedScrollView = view.findViewById(R.id.altar_read_nested_scroll_view);
         mAltarUserImageView = view.findViewById(R.id.altar_read_user_image_view);
+        mAltarReadContributionButtonTextView = view.findViewById(R.id.altar_read_contribution_button_text_view);
+        mAltarReadContributionButtonTextView.setOnClickListener(this);
         mAltarUserNameTextView = view.findViewById(R.id.altar_user_name_text_view);
         mAltarUserBirthTextView = view.findViewById(R.id.altar_user_birth_text_view);
         mAltarUserGenderTextView = view.findViewById(R.id.altar_user_gender_text_view);
@@ -119,6 +130,9 @@ public class AltarReadFragment extends Fragment implements View.OnClickListener 
     @Override
     public void onClick(View view) {
         switch (view.getId()) {
+            case R.id.altar_read_contribution_button_text_view:
+                contributionShowDialog();
+                break;
             case R.id.altar_comment_read_button_text_view:
 //                Toast.makeText(getApplicationContext(), "show altar comment", Toast.LENGTH_SHORT).show();
 //                Fragment fragment = mAltarFragmentManager.findFragmentById(R.id.altar_container);
@@ -128,6 +142,25 @@ public class AltarReadFragment extends Fragment implements View.OnClickListener 
                 break;
             case R.id.altar_comment_create_button_text_view:
                 createCommentShowDialog();
+                break;
+            case R.id.contribution_star_button:
+                if (mStarEditText.getText().length() > 0) {
+                    int star = Integer.valueOf(mStarEditText.getText().toString());
+                    if (UserSharedPreferences.getStoredStar(getActivity()) >= star) {
+                        if (mDialog.isShowing()) {
+                            mDialog.dismiss();
+                        }
+                        contributionConfirmShowDialog();
+                    } else {
+                        Toast.makeText(getActivity(), R.string.not_enough_star_message, Toast.LENGTH_SHORT).show();
+                    }
+                }
+                break;
+            case R.id.billing_star_button:
+                if (mDialog.isShowing()) {
+                    mDialog.dismiss();
+                }
+                startActivity(BillingStarActivity.newIntent(getActivity()));
                 break;
         }
     }
@@ -154,14 +187,14 @@ public class AltarReadFragment extends Fragment implements View.OnClickListener 
             mAltarUser = user;
         } else {
 
-            ArrayList<String> groupNames = new ArrayList<>();
-            for (int i = 0; i < mAltarUser.getGroupParents().size(); i++) {
-                List<GroupChild> groupChildren = mAltarUser.getGroupParents().get(i).getChildList();
-                for (int j = 0; j < groupChildren.size(); j++) {
-                    groupNames.add(groupChildren.get(j).getName());
-                }
-            }
-            mAltarUser.setGroupNames(groupNames);
+//            ArrayList<String> groupNames = new ArrayList<>();
+//            for (int i = 0; i < mAltarUser.getGroupParents().size(); i++) {
+//                List<GroupChild> groupChildren = mAltarUser.getGroupParents().get(i).getChildList();
+//                for (int j = 0; j < groupChildren.size(); j++) {
+//                    groupNames.add(groupChildren.get(j).getName());
+//                }
+//            }
+//            mAltarUser.setGroupNames(groupNames);
         }
         mUserGroupNameAdapter = new UserGroupNameAdapter(mAltarUser.getGroupNames());
         mAltarUserGroupNameRecyclerView.setAdapter(mUserGroupNameAdapter);
@@ -172,6 +205,7 @@ public class AltarReadFragment extends Fragment implements View.OnClickListener 
         if (mUserGroupNameAdapter != null) {
             mUserGroupNameAdapter.notifyDataSetChanged();
         }
+        Glide.with(getActivity()).load(URL_HOST + mAltarUser.getImagePath()).into(mAltarUserImageView);
         mAltarUserNameTextView.setText(String.valueOf(mAltarUser.getName()));
         mAltarUserBirthTextView.setText(String.valueOf(mAltarUser.getBirth()));
         mAltarUserGenderTextView.setText(String.valueOf(mAltarUser.getGender()));
@@ -246,7 +280,6 @@ public class AltarReadFragment extends Fragment implements View.OnClickListener 
             mAltarUserGroupName = altarUserGroup;
             mAltarUserGroupNameTextView.setText(String.valueOf(mAltarUserGroupName));
         }
-
     }
 
     private void hideCommentButtonTextView() {
@@ -258,6 +291,34 @@ public class AltarReadFragment extends Fragment implements View.OnClickListener 
                 mAltarCommentReadButtonTextView.setVisibility(View.GONE);
             }
         }, 250);
+    }
+
+    private void contributionShowDialog() {
+        LayoutInflater layoutInflater = LayoutInflater.from(getActivity());
+        View view = layoutInflater.inflate(R.layout.dialog_altar_contribution, null);
+        AlertDialog.Builder builder = new AlertDialog.Builder(getActivity());
+
+        mStarEditText = view.findViewById(R.id.contribution_star_edit_text);
+        Button contributionStarButton = view.findViewById(R.id.contribution_star_button);
+        contributionStarButton.setOnClickListener(this);
+        Button billingStarButton = view.findViewById(R.id.billing_star_button);
+        billingStarButton.setOnClickListener(this);
+
+        builder.setMessage(getString(R.string.dialog_message_contribution,
+                String.valueOf(UserSharedPreferences.getStoredStar(getActivity()))));
+        builder.setView(view);
+
+        mDialog = builder.create();
+        mDialog.show();
+    }
+
+    private void contributionConfirmShowDialog() {
+        AlertDialog.Builder builder = new AlertDialog.Builder(getActivity());
+
+        builder.setMessage(R.string.dialog_message_contribution_confirm);
+        builder.setPositiveButton(android.R.string.ok, null);
+        AlertDialog dialog = builder.create();
+        dialog.show();
     }
 
     private void createCommentShowDialog() {

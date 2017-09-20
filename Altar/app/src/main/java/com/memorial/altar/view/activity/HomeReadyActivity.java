@@ -24,14 +24,13 @@ import android.widget.TextView;
 import com.memorial.altar.R;
 import com.memorial.altar.model.LastWill;
 import com.memorial.altar.model.User;
-import com.memorial.altar.util.UserSharedPreferences;
 import com.memorial.altar.view.fragment.AltarContactFragment;
 import com.memorial.altar.view.fragment.AltarCreateFragment;
 import com.memorial.altar.view.fragment.AltarPrivateLastWillFragment;
 import com.memorial.altar.view.fragment.AltarPublicLastWillFragment;
 import com.memorial.altar.view.fragment.AltarReadFragment;
-import com.memorial.altar.view.fragment.AltarUpdateFragment;
 import com.memorial.altar.view.fragment.FriendListFragment;
+import com.memorial.altar.view.fragment.FriendReadyFragment;
 import com.memorial.altar.view.fragment.ObituaryFragment;
 import com.memorial.altar.view.fragment.PermissionHeadlessFragment;
 
@@ -47,17 +46,17 @@ import static com.memorial.altar.view.fragment.AltarCreateFragment.ALTAR_CREATE_
 import static com.memorial.altar.view.fragment.AltarPrivateLastWillListFragment.ALTAR_PRIVATE_LAST_WILL_CONTACT_PERMISSION_REQUEST;
 import static com.memorial.altar.view.fragment.ObituaryFragment.OBITUARY_SUBMIT_STORAGE_PERMISSION_REQUEST;
 
-public class HomeActivity extends AppCompatActivity
+public class HomeReadyActivity extends AppCompatActivity
         implements View.OnClickListener, NavigationView.OnNavigationItemSelectedListener,
         PermissionHeadlessFragment.PermissionCallbackListener,
         AltarContactFragment.OnAltarContactDialogDismissListener,
         AltarPublicLastWillFragment.OnAltarPublicLastWillDialogDismissListener,
         AltarPrivateLastWillFragment.OnAltarPrivateLastWillDialogDismissListener {
 
-    private static final String TAG = HomeActivity.class.getSimpleName();
+    private static final String TAG = HomeReadyActivity.class.getSimpleName();
 
     public static Intent newIntent(Context packageContext) {
-        Intent intent = new Intent(packageContext, HomeActivity.class);
+        Intent intent = new Intent(packageContext, HomeReadyActivity.class);
         return intent;
     }
 
@@ -72,7 +71,7 @@ public class HomeActivity extends AppCompatActivity
         super.onCreate(savedInstanceState);
 
 //        if (!UserSharedPreferences.getStoredHomeIntroSlide(getApplicationContext())) {
-//            startActivity(HomeInfoActivity.newIntent(getApplicationContext()));
+            startActivity(HomeInfoActivity.newIntent(getApplicationContext()));
 //        }
 
         setContentView(R.layout.activity_home);
@@ -142,8 +141,8 @@ public class HomeActivity extends AppCompatActivity
 //        mHomeViewPagerAdapter.addFragment(ObituaryFragment.newInstance(), getString(R.string.title_obituary));
         ArrayList<Fragment> fragments = new ArrayList<>();
         ArrayList<String> fragmentTitles = new ArrayList<>();
-        fragments.add(FriendListFragment.newInstance());
-        fragments.add(AltarUpdateFragment.newInstance());
+        fragments.add(FriendReadyFragment.newInstance());
+        fragments.add(AltarCreateFragment.newInstance());
         fragments.add(ObituaryFragment.newInstance());
         fragmentTitles.add(getString(R.string.title_friends));
         fragmentTitles.add(getString(R.string.title_altar));

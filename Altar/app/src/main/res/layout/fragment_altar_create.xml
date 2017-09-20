@@ -132,6 +132,21 @@
                 android:textColorHint="@color/colorFont"
                 android:textSize="18sp"/>
 
+            <TextView
+                android:id="@+id/altar_create_user_contribution_text_view"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="10dp"
+                android:background="@drawable/edit_text_under_line_focus_false"
+                android:clickable="true"
+                android:ellipsize="end"
+                android:hint="@string/altar_user_contribution"
+                android:maxLines="1"
+                android:padding="8dp"
+                android:textColor="@color/colorFont"
+                android:textColorHint="@color/colorFont"
+                android:textSize="18sp"/>
+
         </LinearLayout>
 
         <TextView

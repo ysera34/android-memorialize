@@ -10,7 +10,7 @@ public class Friend {
     private int mGroupId;
     private String mImagePath;
     private String mName;
-    private String mAge;
+    private String mBirth;
     private String mObitDate;
     private boolean mIsCommented;
 
@@ -50,12 +50,12 @@ public class Friend {
         mName = name;
     }
 
-    public String getAge() {
-        return mAge;
+    public String getBirth() {
+        return mBirth;
     }
 
-    public void setAge(String age) {
-        mAge = age;
+    public void setBirth(String birth) {
+        mBirth = birth;
     }
 
     public String getObitDate() {

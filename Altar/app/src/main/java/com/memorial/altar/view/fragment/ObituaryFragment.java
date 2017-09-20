@@ -25,6 +25,7 @@ import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.bumptech.glide.Glide;
 import com.memorial.altar.R;
 import com.memorial.altar.model.Friend;
 import com.memorial.altar.util.ImageHandler;
@@ -40,26 +41,27 @@ import java.util.Calendar;
 import java.util.GregorianCalendar;
 
 import static android.app.Activity.RESULT_OK;
+import static com.memorial.altar.common.Common.URL_HOST;
 import static com.memorial.altar.view.fragment.PermissionHeadlessFragment.STORAGE_PERMISSION_REQUEST;
 
 /**
  * Created by yoon on 2017. 8. 26..
  */
 
-public class HomeObituaryFragment extends Fragment implements View.OnClickListener {
+public class ObituaryFragment extends Fragment implements View.OnClickListener {
 
-    private static final String TAG = HomeObituaryFragment.class.getSimpleName();
+    private static final String TAG = ObituaryFragment.class.getSimpleName();
 
     public static final int OBITUARY_SUBMIT_STORAGE_PERMISSION_REQUEST = 3001;
 
     private static final int CAMERA_CAPTURE_IMAGE_REQUEST_CODE = 3100;
     private static final int GALLERY_IMAGE_REQUEST_CODE = 3101;
 
-    public static HomeObituaryFragment newInstance() {
+    public static ObituaryFragment newInstance() {
 
         Bundle args = new Bundle();
 
-        HomeObituaryFragment fragment = new HomeObituaryFragment();
+        ObituaryFragment fragment = new ObituaryFragment();
         fragment.setArguments(args);
         return fragment;
     }
@@ -87,7 +89,7 @@ public class HomeObituaryFragment extends Fragment implements View.OnClickListen
     @Override
     public View onCreateView(LayoutInflater inflater,
                              @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
-        View view = inflater.inflate(R.layout.fragment_home_obituary, container, false);
+        View view = inflater.inflate(R.layout.fragment_obituary, container, false);
         mObituarySearchEditText = view.findViewById(R.id.obituary_search_edit_text);
         mObituarySearchEditText.addTextChangedListener(new TextWatcher() {
             @Override
@@ -192,7 +194,9 @@ public class HomeObituaryFragment extends Fragment implements View.OnClickListen
 
         public void bindSearchedFriend(Friend searchedFriend) {
             mSearchedFriend = searchedFriend;
+            Glide.with(getActivity()).load(URL_HOST + mSearchedFriend.getImagePath()).into(mPhotoImageView);
             mNameTextView.setText(String.valueOf(mSearchedFriend.getName()));
+            mBirthTextView.setText(String.valueOf(mSearchedFriend.getBirth()));
         }
 
         @Override
@@ -233,7 +237,7 @@ public class HomeObituaryFragment extends Fragment implements View.OnClickListen
     }
 
     private void obituarySubmitShowDialog() {
-        View view = LayoutInflater.from(getContext()).inflate(R.layout.dialog_submit_obituary, null);
+        View view = LayoutInflater.from(getContext()).inflate(R.layout.dialog_obituary_submit, null);
         TextInputEditText nameTextInputEditText = view.findViewById(R.id.obituary_submit_name_text_input_edit_text);
         TextInputEditText name2TextInputEditText = view.findViewById(R.id.obituary_submit_name_2_text_input_edit_text);
         TextInputEditText relationsTextInputEditText = view.findViewById(R.id.obituary_submit_relations_text_input_edit_text);
@@ -357,10 +361,15 @@ public class HomeObituaryFragment extends Fragment implements View.OnClickListen
     }
 
     private ArrayList<Friend> getSearchedFriends() {
+        String[] obituarySampleFriendNameArr = getResources().getStringArray(R.array.obituary_sample_friend_name);
+        String[] obituarySampleImagePathArr = getResources().getStringArray(R.array.obituary_sample_friend_image_path);
+        String[] obituarySampleFriendBirthArr = getResources().getStringArray(R.array.obituary_sample_friend_birth);
         ArrayList<Friend> friends = new ArrayList<>();
         for (int i = 0; i < 10; i++) {
             Friend friend = new Friend();
-            friend.setName("name : " + i);
+            friend.setName(obituarySampleFriendNameArr[i]);
+            friend.setImagePath(obituarySampleImagePathArr[i]);
+            friend.setBirth(obituarySampleFriendBirthArr[i]);
             friends.add(friend);
         }
         return friends;

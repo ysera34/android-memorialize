@@ -83,6 +83,7 @@ public class AltarCreateFragment extends Fragment
     private ArrayList<GroupParent> mGroupParents;
     private TextView mContactFriendButtonTextView;
     private TextView mLastWillTextView;
+    private TextView mContributionTextView;
     private TextView mConfirmButtonTextView;
 
     private boolean mIsPickUserImage;
@@ -118,6 +119,8 @@ public class AltarCreateFragment extends Fragment
         mContactFriendButtonTextView.setOnClickListener(this);
         mLastWillTextView = view.findViewById(R.id.altar_create_user_last_will_text_view);
         mLastWillTextView.setOnClickListener(this);
+        mContributionTextView = view.findViewById(R.id.altar_create_user_contribution_text_view);
+        mContributionTextView.setOnClickListener(this);
         mConfirmButtonTextView = view.findViewById(R.id.altar_create_confirm_button_text_view);
         mConfirmButtonTextView.setOnClickListener(this);
         return view;
@@ -173,6 +176,9 @@ public class AltarCreateFragment extends Fragment
                 break;
             case R.id.altar_create_user_last_will_text_view:
                 createLastWillTypeButtonShowDialog();
+                break;
+            case R.id.altar_create_user_contribution_text_view:
+                createContributionShowDialog();
                 break;
             case R.id.altar_create_confirm_button_text_view:
                 if (createAltarConfirmValidate()) {
@@ -560,6 +566,35 @@ public class AltarCreateFragment extends Fragment
                     altarPrivateLastWillListFragment.show(getChildFragmentManager(), "altar_private_last_will_list");
                 } else {
                     Toast.makeText(getActivity(), R.string.altar_last_will_select_message, Toast.LENGTH_SHORT).show();
+                }
+            }
+        });
+        builder.setNegativeButton(android.R.string.no, null);
+
+        mDialog = builder.create();
+        mDialog.show();
+    }
+
+    private void createContributionShowDialog() {
+        LayoutInflater layoutInflater = LayoutInflater.from(getActivity());
+        View view = layoutInflater.inflate(R.layout.dialog_create_user_contribution, null);
+
+        final TextInputEditText bankName = view.findViewById(R.id.create_user_bank_name_edit_text);
+        final TextInputEditText accountHolder = view.findViewById(R.id.create_user_account_holder_edit_text);
+        final TextInputEditText accountNumber = view.findViewById(R.id.create_user_account_number_edit_text);
+
+        AlertDialog.Builder builder = new AlertDialog.Builder(getActivity());
+        builder.setView(view);
+        builder.setPositiveButton(android.R.string.ok, new DialogInterface.OnClickListener() {
+            @Override
+            public void onClick(DialogInterface dialogInterface, int i) {
+                if (bankName.getText().length() > 0 && accountHolder.getText().length() > 0
+                        && accountNumber.getText().length() > 0) {
+                    mContributionTextView.setText(bankName.getText().toString() + " "
+                            + accountHolder.getText().toString() + " "
+                            + accountNumber.getText().toString());
+                } else {
+                    Toast.makeText(getActivity(), R.string.check_the_input_window, Toast.LENGTH_SHORT).show();
                 }
             }
         });

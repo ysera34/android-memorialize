@@ -25,9 +25,10 @@
                 android:layout_marginBottom="13dp"
                 android:layout_marginEnd="13dp"
                 android:layout_marginStart="10dp"
-                android:layout_marginTop="20dp"
+                android:layout_marginTop="10dp"
                 android:scaleType="centerCrop"
                 android:src="@drawable/img_person"/>
+            <!--android:layout_marginTop="20dp"-->
 
             <ImageView
                 android:layout_width="match_parent"

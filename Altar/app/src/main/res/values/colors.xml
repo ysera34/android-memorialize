@@ -2,7 +2,7 @@
 <resources>
     <color name="colorPrimary">@color/colorBlack</color>
     <color name="colorPrimaryDark">@color/colorBlack</color>
-    <color name="colorAccent">@color/colorTeal500</color>
+    <color name="colorAccent">@color/colorGuideAccent</color>
     <color name="colorMainBackground">@color/colorGray500</color>
     <color name="colorTabLayout">@color/colorGray900</color>
     <color name="colorSelectedTrueIndicator">@color/colorAccent</color>

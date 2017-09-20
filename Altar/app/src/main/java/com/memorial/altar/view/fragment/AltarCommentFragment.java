@@ -62,14 +62,16 @@ public class AltarCommentFragment extends Fragment {
     private void requestComments() {
 
         ArrayList<Comment> comments = new ArrayList<>();
+        String[] sampleWritersArr = getResources().getStringArray(R.array.comment_sample_writers);
+        String[] sampleDateArr = getResources().getStringArray(R.array.comment_sample_date);
+        String[] sampleMessageArr = getResources().getStringArray(R.array.comment_sample_message);
+
         for (int i = 0; i < 5; i++) {
             Comment comment = new Comment();
-            comment.setWriter("sample writer");
-            comment.setDate("sample date");
-            comment.setMessage(
-                    "sample message sample message " + i + "\n" +
-                    "sample message sample message sample message \n" +
-                    "sample message sample message sample message sample message");
+            comment.setId(i);
+            comment.setWriter(sampleWritersArr[i]);
+            comment.setDate(sampleDateArr[i]);
+            comment.setMessage(sampleMessageArr[i]);
             comments.add(comment);
         }
 
