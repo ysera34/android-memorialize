@@ -236,12 +236,17 @@ public class ObituaryFragment extends Fragment implements View.OnClickListener {
         dialog.show();
     }
 
+    private String mSender;
+    private String mRecipient;
+    private String mRelations;
+    private String mContacts;
+
     private void obituarySubmitShowDialog() {
         View view = LayoutInflater.from(getContext()).inflate(R.layout.dialog_obituary_submit, null);
-        TextInputEditText nameTextInputEditText = view.findViewById(R.id.obituary_submit_name_text_input_edit_text);
-        TextInputEditText name2TextInputEditText = view.findViewById(R.id.obituary_submit_name_2_text_input_edit_text);
-        TextInputEditText relationsTextInputEditText = view.findViewById(R.id.obituary_submit_relations_text_input_edit_text);
-        TextInputEditText contactsTextInputEditText = view.findViewById(R.id.obituary_submit_contacts_text_input_edit_text);
+        final TextInputEditText nameTextInputEditText = view.findViewById(R.id.obituary_submit_name_text_input_edit_text);
+        final TextInputEditText name2TextInputEditText = view.findViewById(R.id.obituary_submit_name_2_text_input_edit_text);
+        final TextInputEditText relationsTextInputEditText = view.findViewById(R.id.obituary_submit_relations_text_input_edit_text);
+        final TextInputEditText contactsTextInputEditText = view.findViewById(R.id.obituary_submit_contacts_text_input_edit_text);
         Button submitImageButton = view.findViewById(R.id.obituary_submit_image_button);
         mImagePathTextView = view.findViewById(R.id.obituary_submit_image_path_text_view);
         submitImageButton.setOnClickListener(new View.OnClickListener() {
@@ -264,8 +269,13 @@ public class ObituaryFragment extends Fragment implements View.OnClickListener {
             @Override
             public void onClick(DialogInterface dialogInterface, int i) {
 
+                mSender = nameTextInputEditText.getText().toString();
+                mRecipient = name2TextInputEditText.getText().toString();
+                mRelations = relationsTextInputEditText.getText().toString();
+                mContacts = contactsTextInputEditText.getText().toString();
+
                 if (mImageStoragePath != null) {
-                    new UploadImageTask().execute(mImageStoragePath);
+                    new UploadImageTask().execute(mImageStoragePath, mSender, mRecipient, mRelations, mContacts);
                 }
 //            obituaryConfirmMessageShowDialog();
             }
@@ -381,11 +391,18 @@ public class ObituaryFragment extends Fragment implements View.OnClickListener {
         protected void onPreExecute() {
             super.onPreExecute();
             mProgressDialog.show();
+            mProgressDialog.setMessage(getString(R.string.dialog_message_please_wait));
+            mProgressDialog.setCancelable(false);
         }
 
         @Override
         protected String doInBackground(String... strings) {
-            return requestUploadImage(strings[0]);
+//            Log.i(TAG, "doInBackground: string[0] : " + strings[0]);
+//            Log.i(TAG, "doInBackground: string[1] : " + strings[1]);
+//            Log.i(TAG, "doInBackground: string[2] : " + strings[2]);
+//            Log.i(TAG, "doInBackground: string[3] : " + strings[3]);
+//            Log.i(TAG, "doInBackground: string[4] : " + strings[4]);
+            return requestUploadImage(strings[0], strings[1], strings[2], strings[3], strings[4]);
         }
 
         @Override
@@ -396,7 +413,8 @@ public class ObituaryFragment extends Fragment implements View.OnClickListener {
         }
     }
 
-    private String requestUploadImage(String imageStoragePath) {
+    private String requestUploadImage(String imageStoragePath, String sender,
+                                      String recipient, String relations, String contacts) {
 
         int day, month, year;
         int second, minute, hour;
@@ -409,9 +427,12 @@ public class ObituaryFragment extends Fragment implements View.OnClickListener {
         minute = date.get(Calendar.MINUTE);
         hour = date.get(Calendar.HOUR);
 
-        String name = (hour + "" + minute + "" + second + "" + day + "" + (month + 1) + "" + year);
-        String tag = name + ".jpg";
-        String fileName = imageStoragePath.replace(imageStoragePath, tag);
+//        String[] filePathArr = imageStoragePath.split(".");
+//        String extension = filePathArr[filePathArr.length - 1];
+//        String name = (hour + "" + minute + "" + second + "" + day + "" + (month + 1) + "" + year);
+//        String tag = name + "." + extension;
+//        String fileName = imageStoragePath.replace(imageStoragePath, tag);
+        String fileName = imageStoragePath;
 
         HttpURLConnection conn = null;
         DataOutputStream dos = null;
@@ -440,7 +461,7 @@ public class ObituaryFragment extends Fragment implements View.OnClickListener {
             try {
                 // open a URL connection to the Servlet
                 FileInputStream fileInputStream = new FileInputStream(sourceFile);
-                URL url = new URL("http://211.108.3.4:3000/upload");
+                URL url = new URL("http://211.108.3.4:5000/api/obituary");
 
                 // Open a HTTP  connection to  the URL
                 conn = (HttpURLConnection) url.openConnection();
@@ -451,14 +472,68 @@ public class ObituaryFragment extends Fragment implements View.OnClickListener {
                 conn.setRequestProperty("Connection", "Keep-Alive");
                 conn.setRequestProperty("ENCTYPE", "multipart/form-data");
                 conn.setRequestProperty("Content-Type", "multipart/form-data;boundary=" + boundary);
-                conn.setRequestProperty("uploaded_file", fileName);
+//                conn.setRequestProperty("uploaded_file", fileName);
 
                 dos = new DataOutputStream(conn.getOutputStream());
 
+                // send multipart form data necessary after file data...
                 dos.writeBytes(twoHyphens + boundary + lineEnd);
-                dos.writeBytes("Content-Disposition: form-data; name=\"img\";filename=\""
+
+                dos.writeBytes("Content-Disposition: form-data; name=\"sender\"" + lineEnd);
+                dos.writeBytes("Content-Type: text/plain;charset=UTF-8" + lineEnd);
+                dos.writeBytes("Content-Length: " + sender.length() + lineEnd);
+                dos.writeBytes(lineEnd + sender + lineEnd);
+                dos.writeBytes(twoHyphens + boundary + lineEnd);
+
+                dos.writeBytes("Content-Disposition: form-data; name=\"recipient\"" + lineEnd + lineEnd
+                        + recipient + lineEnd);
+                dos.writeBytes(twoHyphens + boundary + lineEnd);
+
+                dos.writeBytes("Content-Disposition: form-data; name=\"relations\"" + lineEnd + lineEnd
+                        + relations + lineEnd);
+                dos.writeBytes(twoHyphens + boundary + lineEnd);
+
+                dos.writeBytes("Content-Disposition: form-data; name=\"contacts\"" + lineEnd + lineEnd
+                        + contacts + lineEnd);
+                dos.writeBytes(twoHyphens + boundary + lineEnd);
+
+                dos.writeBytes("Content-Disposition: form-data; name=\"obituaryimage\";filename=\""
                         + fileName + "\"" + lineEnd);
+//                dos.writeBytes("Content-Type: image/*" + lineEnd + lineEnd + lineEnd);
                 dos.writeBytes(lineEnd);
+
+                /*
+                ------WebKitFormBoundary7MA4YWxkTrZu0gW\r\n
+                Content-Disposition: form-data; name=\"obituaryimage\"; filename=\"Photo_4.jpeg\"\r\n
+                Content-Type: image/jpeg\r\n\r\n\r\n
+                ------WebKitFormBoundary7MA4YWxkTrZu0gW\r\n
+                Content-Disposition: form-data; name=\"sender\"\r\n\r\nsample web tester\r\n
+                ------WebKitFormBoundary7MA4YWxkTrZu0gW\r\n
+                Content-Disposition: form-data; name=\"recipient\"\r\n\r\nsample recipiend\r\n
+                ------WebKitFormBoundary7MA4YWxkTrZu0gW\r\n
+                Content-Disposition: form-data; name=\"contacts\"\r\n\r\nsample contact\r\n
+                ------WebKitFormBoundary7MA4YWxkTrZu0gW\r\n
+                Content-Disposition: form-data; name=\"relations\"\r\n\r\nsample relations\r\n
+                ------WebKitFormBoundary7MA4YWxkTrZu0gW--
+                */
+
+//                dos.writeBytes(lineEnd);
+//                dos.writeBytes(twoHyphens + boundary + twoHyphens + lineEnd);
+
+                /*
+                ------WebKitFormBoundary7MA4YWxkTrZu0gW\r\n
+                Content-Disposition: form-data; name=\"obituaryimage\"; filename=\"Photo_4.jpeg\"\r\n
+                Content-Type: image/jpeg\r\n\r\n\r\n
+                ------WebKitFormBoundary7MA4YWxkTrZu0gW\r\n
+                Content-Disposition: form-data; name=\"sender\"\r\n\r\nsample web tester\r\n
+                ------WebKitFormBoundary7MA4YWxkTrZu0gW\r\n
+                Content-Disposition: form-data; name=\"recipient\"\r\n\r\nsample recipiend\r\n
+                ------WebKitFormBoundary7MA4YWxkTrZu0gW\r\n
+                Content-Disposition: form-data; name=\"contacts\"\r\n\r\nsample contact\r\n
+                ------WebKitFormBoundary7MA4YWxkTrZu0gW\r\n
+                Content-Disposition: form-data; name=\"relations\"\r\n\r\nsample relations\r\n
+                ------WebKitFormBoundary7MA4YWxkTrZu0gW--
+                */
 
                 // create a buffer of  maximum size
                 bytesAvailable = fileInputStream.available();
@@ -476,7 +551,6 @@ public class ObituaryFragment extends Fragment implements View.OnClickListener {
                     bytesRead = fileInputStream.read(buffer, 0, bufferSize);
                 }
 
-                // send multipart form data necesssary after file data...
                 dos.writeBytes(lineEnd);
                 dos.writeBytes(twoHyphens + boundary + twoHyphens + lineEnd);
 
