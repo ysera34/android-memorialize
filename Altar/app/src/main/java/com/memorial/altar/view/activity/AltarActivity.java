@@ -152,7 +152,7 @@ public class AltarActivity extends AppCompatActivity {
             while ((line = reader.readLine()) != null) {
                 result.append(line);
             }
-            Log.i(TAG, "requestAltarUser: reslut to string " + result.toString());
+            Log.i(TAG, "requestAltarUser: result to string " + result.toString());
             reader.close();
             user = parseAltarUser(result.toString());
 

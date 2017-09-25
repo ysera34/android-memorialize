@@ -1,7 +1,9 @@
 package com.memorial.altar.view.activity;
 
+import android.app.ProgressDialog;
 import android.content.Context;
 import android.content.Intent;
+import android.os.AsyncTask;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.v7.app.AppCompatActivity;
@@ -29,6 +31,7 @@ public class SignUpActivity extends AppCompatActivity implements View.OnClickLis
     private EditText mPasswordEditText;
     private EditText mConfirmPasswordEditText;
     private TextView mSignUpButtonTextView;
+    private ProgressDialog mProgressDialog;
 
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
@@ -40,15 +43,38 @@ public class SignUpActivity extends AppCompatActivity implements View.OnClickLis
         mConfirmPasswordEditText = (EditText) findViewById(R.id.sign_up_confirm_password_edit_text);
         mSignUpButtonTextView = (TextView) findViewById(R.id.sign_up_button_text_view);
         mSignUpButtonTextView.setOnClickListener(this);
+        mProgressDialog = new ProgressDialog(SignUpActivity.this);
     }
 
     @Override
     public void onClick(View view) {
         switch (view.getId()) {
             case R.id.sign_up_button_text_view:
-                startActivity(HomeReadyActivity.newIntent(getApplicationContext()));
-                finish();
+
+//                startActivity(HomeReadyActivity.newIntent(getApplicationContext()));
+//                finish();
                 break;
+        }
+    }
+
+    private class SignUpTask extends AsyncTask<String, Void, String> {
+
+        @Override
+        protected void onPreExecute() {
+            super.onPreExecute();
+            mProgressDialog.show();
+        }
+
+        @Override
+        protected String doInBackground(String... strings) {
+
+            return null;
+        }
+
+        @Override
+        protected void onPostExecute(String s) {
+            super.onPostExecute(s);
+            mProgressDialog.dismiss();
         }
     }
 }

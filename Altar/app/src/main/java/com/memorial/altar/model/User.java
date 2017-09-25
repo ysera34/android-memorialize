@@ -81,4 +81,18 @@ public class User implements Serializable {
     public void setPublicLastWillMessage(String publicLastWillMessage) {
         mPublicLastWillMessage = publicLastWillMessage;
     }
+
+    @Override
+    public String toString() {
+        return "User{" +
+                "mId=" + mId +
+                ", mImagePath='" + mImagePath + '\'' +
+                ", mName='" + mName + '\'' +
+                ", mBirth='" + mBirth + '\'' +
+                ", mGender='" + mGender + '\'' +
+                ", mGroupNames=" + mGroupNames +
+                ", mGroupParents=" + mGroupParents +
+                ", mPublicLastWillMessage='" + mPublicLastWillMessage + '\'' +
+                '}';
+    }
 }

@@ -24,7 +24,6 @@ import android.widget.TextView;
 import com.memorial.altar.R;
 import com.memorial.altar.model.LastWill;
 import com.memorial.altar.model.User;
-import com.memorial.altar.util.UserSharedPreferences;
 import com.memorial.altar.view.fragment.AltarContactFragment;
 import com.memorial.altar.view.fragment.AltarCreateFragment;
 import com.memorial.altar.view.fragment.AltarPrivateLastWillFragment;
@@ -56,8 +55,16 @@ public class HomeActivity extends AppCompatActivity
 
     private static final String TAG = HomeActivity.class.getSimpleName();
 
+    private static final String EXTRA_USER = "com.memorial.altar.extra_user";
+
     public static Intent newIntent(Context packageContext) {
         Intent intent = new Intent(packageContext, HomeActivity.class);
+        return intent;
+    }
+
+    public static Intent newIntent(Context packageContext, User user) {
+        Intent intent = new Intent(packageContext, HomeActivity.class);
+        intent.putExtra(EXTRA_USER, user);
         return intent;
     }
 
@@ -67,9 +74,13 @@ public class HomeActivity extends AppCompatActivity
     private ViewPager mViewPager;
     private HomeViewPagerAdapter mHomeViewPagerAdapter;
 
+    private User mUser;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+
+        mUser = (User) getIntent().getSerializableExtra(EXTRA_USER);
 
 //        if (!UserSharedPreferences.getStoredHomeIntroSlide(getApplicationContext())) {
 //            startActivity(HomeInfoActivity.newIntent(getApplicationContext()));
@@ -143,7 +154,11 @@ public class HomeActivity extends AppCompatActivity
         ArrayList<Fragment> fragments = new ArrayList<>();
         ArrayList<String> fragmentTitles = new ArrayList<>();
         fragments.add(FriendListFragment.newInstance());
-        fragments.add(AltarUpdateFragment.newInstance());
+        if (mUser == null) {
+            fragments.add(AltarCreateFragment.newInstance());
+        } else {
+            fragments.add(AltarUpdateFragment.newInstance(mUser));
+        }
         fragments.add(ObituaryFragment.newInstance());
         fragmentTitles.add(getString(R.string.title_friends));
         fragmentTitles.add(getString(R.string.title_altar));
