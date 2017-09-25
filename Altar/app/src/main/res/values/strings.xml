@@ -153,6 +153,7 @@
     <string name="altar_update_button">수정하기</string>
     <string name="dialog_message_please_wait">잠시만 기다려주세요.</string>
     <string name="sign_in_fail_message">로그인 정보가 잘못되었습니다.</string>
+    <string name="sign_up_fail_message">회원가입 정보가 잘못되었습니다.</string>
 
     <string-array name="add_friend_group_scope">
         <item>elementary school</item>

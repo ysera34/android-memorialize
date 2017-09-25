@@ -56,6 +56,8 @@ public class AltarCreateFragment extends Fragment
 
     private static final String TAG = AltarCreateFragment.class.getSimpleName();
 
+    private static final String ARG_UPDATE_USER = "update_user";
+
     public static final int ALTAR_CREATE_STORAGE_PERMISSION_REQUEST = 1001;
     public static final int ALTAR_CREATE_CONTACT_PERMISSION_REQUEST = 1002;
 
@@ -65,6 +67,16 @@ public class AltarCreateFragment extends Fragment
     public static AltarCreateFragment newInstance() {
 
         Bundle args = new Bundle();
+
+        AltarCreateFragment fragment = new AltarCreateFragment();
+        fragment.setArguments(args);
+        return fragment;
+    }
+
+    public static AltarCreateFragment newInstance(User user) {
+
+        Bundle args = new Bundle();
+        args.putSerializable(ARG_UPDATE_USER, user);
 
         AltarCreateFragment fragment = new AltarCreateFragment();
         fragment.setArguments(args);
@@ -90,9 +102,12 @@ public class AltarCreateFragment extends Fragment
     private boolean mIsBirthValidateInfoConfirmed;
     private boolean mIsBirthNumberValidated;
 
+    private User mUser;
+
     @Override
     public void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+        mUser = (User) getArguments().getSerializable(ARG_UPDATE_USER);
         mImageHandler = new ImageHandler(getActivity());
         mGroupParents = new ArrayList<>();
     }
@@ -131,6 +146,14 @@ public class AltarCreateFragment extends Fragment
         super.onViewCreated(view, savedInstanceState);
         mGroupParents = getGroupParents();
         mGroupAdapter.setParentList(mGroupParents, true);
+
+        if (mUser != null) {
+            bindUser(mUser);
+        }
+    }
+
+    private void bindUser(User user) {
+        mNameTextView.setText(String.valueOf(user.getName()));
     }
 
     @Override

@@ -16,6 +16,7 @@ import android.widget.TextView;
 import com.bumptech.glide.Glide;
 import com.memorial.altar.R;
 import com.memorial.altar.model.User;
+import com.memorial.altar.view.activity.HomeUpdateActivity;
 
 import java.util.ArrayList;
 
@@ -119,7 +120,7 @@ public class AltarUpdateFragment extends Fragment implements View.OnClickListene
     public void onClick(View view) {
         switch (view.getId()) {
             case R.id.altar_update_button_text_view:
-
+                startActivity(HomeUpdateActivity.newIntent(getActivity(), mAltarUser));
                 break;
         }
     }
