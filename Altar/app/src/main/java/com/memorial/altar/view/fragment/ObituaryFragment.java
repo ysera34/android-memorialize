@@ -36,6 +36,7 @@ import java.io.FileInputStream;
 import java.net.HttpURLConnection;
 import java.net.MalformedURLException;
 import java.net.URL;
+import java.net.URLEncoder;
 import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.GregorianCalendar;
@@ -290,12 +291,7 @@ public class ObituaryFragment extends Fragment implements View.OnClickListener {
         builder.setIcon(R.drawable.ic_error_outline_grey_300_24dp);
         builder.setTitle(R.string.dialog_title_information);
         builder.setMessage(getString(R.string.obituary_confirm_message));
-        builder.setPositiveButton(android.R.string.ok, new DialogInterface.OnClickListener() {
-            @Override
-            public void onClick(DialogInterface dialogInterface, int i) {
-
-            }
-        });
+        builder.setPositiveButton(android.R.string.ok, null);
         AlertDialog dialog = builder.create();
         dialog.show();
     }
@@ -356,7 +352,12 @@ public class ObituaryFragment extends Fragment implements View.OnClickListener {
             case CAMERA_CAPTURE_IMAGE_REQUEST_CODE:
                 if (resultCode == RESULT_OK) {
 //                    mImageHandler.handleCameraImage(mUserImageView);
-
+//                    Bitmap photo = (Bitmap) data.getExtras().get("data");
+//                    Uri selectedImageUri = mImageHandler.getImageUri(photo);
+//                    mImageStoragePath = mImageHandler.getRealPathFromURI(selectedImageUri);
+//                    mImagePathTextView.setText(getString(R.string.submit_image_path_format, mImageStoragePath));
+                    mImageStoragePath = mImageHandler.getCurrentImageAbsolutePath();
+                    mImagePathTextView.setText(getString(R.string.submit_image_path_format, mImageStoragePath));
                 }
                 break;
             case GALLERY_IMAGE_REQUEST_CODE:
@@ -408,8 +409,14 @@ public class ObituaryFragment extends Fragment implements View.OnClickListener {
         @Override
         protected void onPostExecute(String s) {
             super.onPostExecute(s);
-            mProgressDialog.dismiss();
-            mImagePathTextView.setText(s);
+            if (mProgressDialog.isShowing()) {
+                mProgressDialog.dismiss();
+            }
+            if (s.equals("File Upload Completed.")) {
+                obituaryConfirmMessageShowDialog();
+            } else {
+                Toast.makeText(getActivity(), R.string.obituary_fail_message, Toast.LENGTH_SHORT).show();
+            }
         }
     }
 
@@ -436,6 +443,7 @@ public class ObituaryFragment extends Fragment implements View.OnClickListener {
 
         HttpURLConnection conn = null;
         DataOutputStream dos = null;
+//        PrintWriter writer = null;
         String lineEnd = "\r\n";
         String twoHyphens = "--";
         String boundary = "*****";
@@ -468,72 +476,81 @@ public class ObituaryFragment extends Fragment implements View.OnClickListener {
                 conn.setDoInput(true); // Allow Inputs
                 conn.setDoOutput(true); // Allow Outputs
                 conn.setUseCaches(false); // Don't use a Cached Copy
+                conn.setConnectTimeout(15000);
+                conn.setReadTimeout(15000);
                 conn.setRequestMethod("POST");
                 conn.setRequestProperty("Connection", "Keep-Alive");
+                conn.setRequestProperty("Accept-Charset", "UTF-8");
                 conn.setRequestProperty("ENCTYPE", "multipart/form-data");
                 conn.setRequestProperty("Content-Type", "multipart/form-data;boundary=" + boundary);
+                conn.setRequestProperty("Content-Language", "ko-KR");
 //                conn.setRequestProperty("uploaded_file", fileName);
 
                 dos = new DataOutputStream(conn.getOutputStream());
+//                writer = new PrintWriter(new OutputStreamWriter(dos, "UTF-8"), true);
 
                 // send multipart form data necessary after file data...
                 dos.writeBytes(twoHyphens + boundary + lineEnd);
 
                 dos.writeBytes("Content-Disposition: form-data; name=\"sender\"" + lineEnd);
-                dos.writeBytes("Content-Type: text/plain;charset=UTF-8" + lineEnd);
+                dos.writeBytes("Content-Type: text/plain; charset=UTF-8" + lineEnd);
                 dos.writeBytes("Content-Length: " + sender.length() + lineEnd);
-                dos.writeBytes(lineEnd + sender + lineEnd);
+                dos.writeBytes(lineEnd + URLEncoder.encode(sender, "UTF-8") + lineEnd);
                 dos.writeBytes(twoHyphens + boundary + lineEnd);
 
-                dos.writeBytes("Content-Disposition: form-data; name=\"recipient\"" + lineEnd + lineEnd
-                        + recipient + lineEnd);
+                dos.writeBytes("Content-Disposition: form-data; name=\"recipient\"" + lineEnd);
+                dos.writeBytes("Content-Type: text/plain; charset=UTF-8" + lineEnd);
+                dos.writeBytes("Content-Length: " + recipient.length() + lineEnd);
+                dos.writeBytes(lineEnd + URLEncoder.encode(recipient, "UTF-8") + lineEnd);
                 dos.writeBytes(twoHyphens + boundary + lineEnd);
 
-                dos.writeBytes("Content-Disposition: form-data; name=\"relations\"" + lineEnd + lineEnd
-                        + relations + lineEnd);
+                dos.writeBytes("Content-Disposition: form-data; name=\"relations\"" + lineEnd);
+                dos.writeBytes("Content-Type: text/plain; charset=UTF-8" + lineEnd);
+                dos.writeBytes("Content-Length: " + relations.length() + lineEnd);
+                dos.writeBytes(lineEnd + URLEncoder.encode(relations, "UTF-8") + lineEnd);
                 dos.writeBytes(twoHyphens + boundary + lineEnd);
 
-                dos.writeBytes("Content-Disposition: form-data; name=\"contacts\"" + lineEnd + lineEnd
-                        + contacts + lineEnd);
+                dos.writeBytes("Content-Disposition: form-data; name=\"contacts\"" + lineEnd);
+                dos.writeBytes("Content-Type: text/plain; charset=UTF-8" + lineEnd);
+                dos.writeBytes("Content-Length: " + contacts.length() + lineEnd);
+                dos.writeBytes(lineEnd + URLEncoder.encode(contacts, "UTF-8") + lineEnd);
                 dos.writeBytes(twoHyphens + boundary + lineEnd);
 
                 dos.writeBytes("Content-Disposition: form-data; name=\"obituaryimage\";filename=\""
                         + fileName + "\"" + lineEnd);
-//                dos.writeBytes("Content-Type: image/*" + lineEnd + lineEnd + lineEnd);
+//                dos.writeBytes("Content-Type: image*//*" + lineEnd + lineEnd + lineEnd);
                 dos.writeBytes(lineEnd);
 
-                /*
-                ------WebKitFormBoundary7MA4YWxkTrZu0gW\r\n
-                Content-Disposition: form-data; name=\"obituaryimage\"; filename=\"Photo_4.jpeg\"\r\n
-                Content-Type: image/jpeg\r\n\r\n\r\n
-                ------WebKitFormBoundary7MA4YWxkTrZu0gW\r\n
-                Content-Disposition: form-data; name=\"sender\"\r\n\r\nsample web tester\r\n
-                ------WebKitFormBoundary7MA4YWxkTrZu0gW\r\n
-                Content-Disposition: form-data; name=\"recipient\"\r\n\r\nsample recipiend\r\n
-                ------WebKitFormBoundary7MA4YWxkTrZu0gW\r\n
-                Content-Disposition: form-data; name=\"contacts\"\r\n\r\nsample contact\r\n
-                ------WebKitFormBoundary7MA4YWxkTrZu0gW\r\n
-                Content-Disposition: form-data; name=\"relations\"\r\n\r\nsample relations\r\n
-                ------WebKitFormBoundary7MA4YWxkTrZu0gW--
-                */
+                /*writer.append(twoHyphens); writer.append(boundary); writer.append(lineEnd);
 
-//                dos.writeBytes(lineEnd);
-//                dos.writeBytes(twoHyphens + boundary + twoHyphens + lineEnd);
+                writer.append("Content-Disposition: form-data; name=\"sender\""); writer.append(lineEnd);
+                writer.append("Content-Type: text/plain; charset=UTF-8"); writer.append(lineEnd);
+                writer.append("Content-Length: "); writer.append(String.valueOf(sender.length())); writer.append(lineEnd);
+                writer.append(lineEnd); writer.append(sender); writer.append(lineEnd);
+                writer.append(twoHyphens); writer.append(boundary); writer.append(lineEnd);
 
-                /*
-                ------WebKitFormBoundary7MA4YWxkTrZu0gW\r\n
-                Content-Disposition: form-data; name=\"obituaryimage\"; filename=\"Photo_4.jpeg\"\r\n
-                Content-Type: image/jpeg\r\n\r\n\r\n
-                ------WebKitFormBoundary7MA4YWxkTrZu0gW\r\n
-                Content-Disposition: form-data; name=\"sender\"\r\n\r\nsample web tester\r\n
-                ------WebKitFormBoundary7MA4YWxkTrZu0gW\r\n
-                Content-Disposition: form-data; name=\"recipient\"\r\n\r\nsample recipiend\r\n
-                ------WebKitFormBoundary7MA4YWxkTrZu0gW\r\n
-                Content-Disposition: form-data; name=\"contacts\"\r\n\r\nsample contact\r\n
-                ------WebKitFormBoundary7MA4YWxkTrZu0gW\r\n
-                Content-Disposition: form-data; name=\"relations\"\r\n\r\nsample relations\r\n
-                ------WebKitFormBoundary7MA4YWxkTrZu0gW--
-                */
+                writer.append("Content-Disposition: form-data; name=\"recipient\""); writer.append(lineEnd);
+                writer.append("Content-Type: text/plain; charset=UTF-8"); writer.append(lineEnd);
+                writer.append("Content-Length: "); writer.append(String.valueOf(recipient.length())); writer.append(lineEnd);
+                writer.append(lineEnd); writer.append(recipient); writer.append(lineEnd);
+                writer.append(twoHyphens); writer.append(boundary); writer.append(lineEnd);
+
+                writer.append("Content-Disposition: form-data; name=\"relations\""); writer.append(lineEnd);
+                writer.append("Content-Type: text/plain; charset=UTF-8"); writer.append(lineEnd);
+                writer.append("Content-Length: "); writer.append(String.valueOf(relations.length())); writer.append(lineEnd);
+                writer.append(lineEnd); writer.append(relations); writer.append(lineEnd);
+                writer.append(twoHyphens); writer.append(boundary); writer.append(lineEnd);
+
+                writer.append("Content-Disposition: form-data; name=\"contacts\""); writer.append(lineEnd);
+                writer.append("Content-Type: text/plain; charset=UTF-8"); writer.append(lineEnd);
+                writer.append("Content-Length: "); writer.append(String.valueOf(contacts.length())); writer.append(lineEnd);
+                writer.append(lineEnd); writer.append(contacts); writer.append(lineEnd);
+                writer.append(twoHyphens); writer.append(boundary); writer.append(lineEnd);
+
+                writer.append("Content-Disposition: form-data; name=\"obituaryimage\";filename=\""
+                        + fileName + "\"" + lineEnd);
+//                dos.writeBytes("Content-Type: image*//**//*" + lineEnd + lineEnd + lineEnd);
+                writer.append(lineEnd);*/
 
                 // create a buffer of  maximum size
                 bytesAvailable = fileInputStream.available();
@@ -553,6 +570,9 @@ public class ObituaryFragment extends Fragment implements View.OnClickListener {
 
                 dos.writeBytes(lineEnd);
                 dos.writeBytes(twoHyphens + boundary + twoHyphens + lineEnd);
+
+//                writer.append(lineEnd);
+//                dos.writeBytes(twoHyphens + boundary + twoHyphens + lineEnd);
 
                 // Responses from the server (code and message)
                 int serverResponseCode = conn.getResponseCode();
@@ -577,6 +597,8 @@ public class ObituaryFragment extends Fragment implements View.OnClickListener {
                 fileInputStream.close();
                 dos.flush();
                 dos.close();
+
+//                writer.flush();
 
             } catch (MalformedURLException ex) {
 

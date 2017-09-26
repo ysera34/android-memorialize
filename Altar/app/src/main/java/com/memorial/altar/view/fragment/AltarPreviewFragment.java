@@ -1,5 +1,7 @@
 package com.memorial.altar.view.fragment;
 
+import android.graphics.Bitmap;
+import android.graphics.BitmapFactory;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.v4.app.Fragment;
@@ -114,6 +116,9 @@ public class AltarPreviewFragment extends Fragment implements View.OnClickListen
         if (mUserGroupNameAdapter != null) {
             mUserGroupNameAdapter.notifyDataSetChanged();
         }
+
+        Bitmap bitmap = BitmapFactory.decodeFile(mAltarUser.getImagePath());
+        mAltarPreviewUserImageView.setImageBitmap(bitmap);
         mAltarPreviewUserNameTextView.setText(String.valueOf(mAltarUser.getName()));
         mAltarPreviewUserBirthTextView.setText(String.valueOf(mAltarUser.getBirth()));
         mAltarPreviewUserGenderTextView.setText(String.valueOf(mAltarUser.getGender()));

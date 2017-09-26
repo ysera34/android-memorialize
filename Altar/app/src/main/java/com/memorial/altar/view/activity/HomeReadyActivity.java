@@ -28,8 +28,6 @@ import com.memorial.altar.view.fragment.AltarContactFragment;
 import com.memorial.altar.view.fragment.AltarCreateFragment;
 import com.memorial.altar.view.fragment.AltarPrivateLastWillFragment;
 import com.memorial.altar.view.fragment.AltarPublicLastWillFragment;
-import com.memorial.altar.view.fragment.AltarReadFragment;
-import com.memorial.altar.view.fragment.FriendListFragment;
 import com.memorial.altar.view.fragment.FriendReadyFragment;
 import com.memorial.altar.view.fragment.ObituaryFragment;
 import com.memorial.altar.view.fragment.PermissionHeadlessFragment;
@@ -136,7 +134,7 @@ public class HomeReadyActivity extends AppCompatActivity
     private void setupViewPager(ViewPager viewPager) {
         mHomeViewPagerAdapter = new HomeViewPagerAdapter(getSupportFragmentManager());
 //        mHomeViewPagerAdapter.addFragment(FriendListFragment.newInstance(), getString(R.string.title_friends));
-//        adapter.addFragment(AltarUpdateFragment.newInstance(), getString(R.string.title_altar));
+//        adapter.addFragment(AltarFragment.newInstance(), getString(R.string.title_altar));
 //        mHomeViewPagerAdapter.addFragment(AltarCreateFragment.newInstance(), getString(R.string.title_altar));
 //        mHomeViewPagerAdapter.addFragment(ObituaryFragment.newInstance(), getString(R.string.title_obituary));
         ArrayList<Fragment> fragments = new ArrayList<>();
@@ -226,22 +224,20 @@ public class HomeReadyActivity extends AppCompatActivity
                     Log.i(TAG, "onActivityResult: resultCode" + resultCode);
                     User user = (User) data.getSerializableExtra(ALTAR_PREVIEW_RESULT);
 
-                    ArrayList<Fragment> fragments = new ArrayList<>();
-                    ArrayList<String> fragmentTitles = new ArrayList<>();
-                    fragments.add(FriendListFragment.newInstance());
-                    fragments.add(AltarReadFragment.newInstance(user));
-                    fragments.add(ObituaryFragment.newInstance());
-                    fragmentTitles.add(getString(R.string.title_friends));
-                    fragmentTitles.add(getString(R.string.title_altar));
-                    fragmentTitles.add(getString(R.string.title_obituary));
-                    mHomeViewPagerAdapter.setFragments(fragments, fragmentTitles);
-                    setupTabLayoutIcons();
-//                    mHomeViewPagerAdapter.mFragmentList.set(1, altarReadFragment);
-//                    mHomeViewPagerAdapter.mFragmentManager.beginTransaction()
-//                            .remove(mHomeViewPagerAdapter.mFragmentList.get(1))
-//                            .add(altarReadFragment, "altar_read")
-//                            .commit();
-//                    mViewPager.invalidate();
+//                    ArrayList<Fragment> fragments = new ArrayList<>();
+//                    ArrayList<String> fragmentTitles = new ArrayList<>();
+//                    fragments.add(FriendListFragment.newInstance());
+//                    fragments.add(AltarReadFragment.newInstance(user));
+//                    fragments.add(ObituaryFragment.newInstance());
+//                    fragmentTitles.add(getString(R.string.title_friends));
+//                    fragmentTitles.add(getString(R.string.title_altar));
+//                    fragmentTitles.add(getString(R.string.title_obituary));
+//                    mHomeViewPagerAdapter.setFragments(fragments, fragmentTitles);
+//                    setupTabLayoutIcons();
+
+                    startActivity(HomeActivity.newIntent(getApplicationContext(), user));
+                    finish();
+
                 }
                 break;
         }

@@ -29,8 +29,8 @@ import com.memorial.altar.view.fragment.AltarCreateFragment;
 import com.memorial.altar.view.fragment.AltarPrivateLastWillFragment;
 import com.memorial.altar.view.fragment.AltarPublicLastWillFragment;
 import com.memorial.altar.view.fragment.AltarReadFragment;
+import com.memorial.altar.view.fragment.AltarUpdateFragment;
 import com.memorial.altar.view.fragment.FriendListFragment;
-import com.memorial.altar.view.fragment.FriendReadyFragment;
 import com.memorial.altar.view.fragment.ObituaryFragment;
 import com.memorial.altar.view.fragment.PermissionHeadlessFragment;
 
@@ -111,6 +111,7 @@ public class HomeUpdateActivity extends AppCompatActivity
         setupViewPager(mViewPager);
         mTabLayout.setupWithViewPager(mViewPager);
         setupTabLayoutIcons();
+        mViewPager.setCurrentItem(1);
     }
 
     @Override
@@ -148,13 +149,13 @@ public class HomeUpdateActivity extends AppCompatActivity
     private void setupViewPager(ViewPager viewPager) {
         mHomeViewPagerAdapter = new HomeViewPagerAdapter(getSupportFragmentManager());
 //        mHomeViewPagerAdapter.addFragment(FriendListFragment.newInstance(), getString(R.string.title_friends));
-//        adapter.addFragment(AltarUpdateFragment.newInstance(), getString(R.string.title_altar));
+//        adapter.addFragment(AltarFragment.newInstance(), getString(R.string.title_altar));
 //        mHomeViewPagerAdapter.addFragment(AltarCreateFragment.newInstance(), getString(R.string.title_altar));
 //        mHomeViewPagerAdapter.addFragment(ObituaryFragment.newInstance(), getString(R.string.title_obituary));
         ArrayList<Fragment> fragments = new ArrayList<>();
         ArrayList<String> fragmentTitles = new ArrayList<>();
-        fragments.add(FriendReadyFragment.newInstance());
-        fragments.add(AltarCreateFragment.newInstance(mUser));
+        fragments.add(FriendListFragment.newInstance());
+        fragments.add(AltarUpdateFragment.newInstance(mUser));
         fragments.add(ObituaryFragment.newInstance());
         fragmentTitles.add(getString(R.string.title_friends));
         fragmentTitles.add(getString(R.string.title_altar));

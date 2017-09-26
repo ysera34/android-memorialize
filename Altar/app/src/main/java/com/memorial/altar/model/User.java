@@ -17,6 +17,7 @@ public class User implements Serializable {
     private ArrayList<String> mGroupNames;
     private ArrayList<GroupParent> mGroupParents;
     private String mPublicLastWillMessage;
+    private String mBankInfo;
 
     public int getId() {
         return mId;
@@ -80,6 +81,14 @@ public class User implements Serializable {
 
     public void setPublicLastWillMessage(String publicLastWillMessage) {
         mPublicLastWillMessage = publicLastWillMessage;
+    }
+
+    public String getBankInfo() {
+        return mBankInfo;
+    }
+
+    public void setBankInfo(String bankInfo) {
+        mBankInfo = bankInfo;
     }
 
     @Override

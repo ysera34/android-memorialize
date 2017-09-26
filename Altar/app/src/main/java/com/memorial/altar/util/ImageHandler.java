@@ -18,6 +18,7 @@ import android.widget.ImageView;
 
 import com.memorial.altar.R;
 
+import java.io.ByteArrayOutputStream;
 import java.io.File;
 import java.io.IOException;
 import java.text.SimpleDateFormat;
@@ -226,6 +227,13 @@ public class ImageHandler {
         Log.d(TAG, "rotateImage >> " + "rotatedBitmap width : " + rotatedBitmap.getWidth() +
                 " | rotatedBitmap height : " + rotatedBitmap.getHeight());
         return rotatedBitmap;
+    }
+
+    public Uri getImageUri(Bitmap bitmap) {
+        ByteArrayOutputStream byteArrayOutputStream = new ByteArrayOutputStream();
+        bitmap.compress(Bitmap.CompressFormat.JPEG, 100, byteArrayOutputStream);
+        String imagePath = MediaStore.Images.Media.insertImage(mContext.getContentResolver(), bitmap, "Title", null);
+        return Uri.parse(imagePath);
     }
 
     public String getRealPathFromURI(Uri uri) {

@@ -47,6 +47,7 @@
             android:background="@null"
             android:hint="@string/sign_in_email"
             android:inputType="textEmailAddress"
+            android:text="user01@korea.com"
             android:textColor="@color/colorFont"
             android:textColorHint="@color/colorFontHint"
             android:textSize="14sp"/>
@@ -81,6 +82,7 @@
             android:background="@null"
             android:hint="@string/sign_in_password"
             android:inputType="textPassword"
+            android:text="01"
             android:textColor="@color/colorFont"
             android:textColorHint="@color/colorFontHint"
             android:textSize="14sp"/>

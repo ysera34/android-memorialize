@@ -3,6 +3,7 @@ package com.memorial.altar.view.fragment;
 import android.content.Context;
 import android.content.DialogInterface;
 import android.content.Intent;
+import android.net.Uri;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
@@ -35,7 +36,6 @@ import com.memorial.altar.model.LastWill;
 import com.memorial.altar.model.User;
 import com.memorial.altar.util.ImageHandler;
 import com.memorial.altar.view.activity.AltarActivity;
-import com.memorial.altar.view.activity.HomeActivity;
 
 import java.util.ArrayList;
 import java.util.Calendar;
@@ -86,6 +86,7 @@ public class AltarCreateFragment extends Fragment
     private ImageHandler mImageHandler;
     private AlertDialog mDialog;
     private ImageView mUserImageView;
+    private String mImageStoragePath;
     private TextView mNameTextView;
     private TextView mBirthTextView;
     private RadioButton mFemaleRadioButton;
@@ -206,6 +207,7 @@ public class AltarCreateFragment extends Fragment
             case R.id.altar_create_confirm_button_text_view:
                 if (createAltarConfirmValidate()) {
                     User user = new User();
+                    user.setImagePath(mImageStoragePath);
                     user.setName(mNameTextView.getText().toString());
                     if (mFemaleRadioButton.isChecked()) {
                         user.setGender(mFemaleRadioButton.getText().toString());
@@ -215,9 +217,8 @@ public class AltarCreateFragment extends Fragment
                     user.setBirth(mBirthTextView.getText().toString());
                     user.setGroupParents(mGroupParents);
                     user.setPublicLastWillMessage(mLastWillTextView.getText().toString());
-
-                    ((HomeActivity) getActivity())
-                            .startActivityForResult(AltarActivity.newIntent(getActivity(), user),
+                    user.setBankInfo(mContributionTextView.getText().toString());
+                    getActivity().startActivityForResult(AltarActivity.newIntent(getActivity(), user),
                                     ALTAR_CREATE_PREVIEW_REQUEST_CODE);
                 }
                 break;
@@ -231,11 +232,14 @@ public class AltarCreateFragment extends Fragment
             case CAMERA_CAPTURE_IMAGE_REQUEST_CODE:
                 if (resultCode == RESULT_OK) {
                     mImageHandler.handleCameraImage(mUserImageView);
+                    mImageStoragePath = mImageHandler.getCurrentImageAbsolutePath();
                     mIsPickUserImage = true;
                 }
                 break;
             case GALLERY_IMAGE_REQUEST_CODE:
                 if (resultCode == RESULT_OK) {
+                    Uri selectedImageUri = data.getData();
+                    mImageStoragePath = mImageHandler.getRealPathFromURI(selectedImageUri);
                     mImageHandler.handleGalleryImage(data, mUserImageView);
                     mIsPickUserImage = true;
                 }
@@ -900,6 +904,10 @@ public class AltarCreateFragment extends Fragment
         }
         if (mLastWillTextView.getText().toString().length() <= 0) {
             Toast.makeText(getActivity(), "마지막 한마디를 입력해주세요.", Toast.LENGTH_SHORT).show();
+            return false;
+        }
+        if (mContributionTextView.getText().toString().length() <= 0) {
+            Toast.makeText(getActivity(), "계좌정보를 입력해주세요.", Toast.LENGTH_SHORT).show();
             return false;
         }
         return true;

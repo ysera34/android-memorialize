@@ -18,6 +18,8 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import com.memorial.altar.R;
+import com.memorial.altar.model.GroupChild;
+import com.memorial.altar.model.GroupParent;
 import com.memorial.altar.model.User;
 
 import org.json.JSONObject;
@@ -276,17 +278,46 @@ public class SignInActivity extends AppCompatActivity implements View.OnClickLis
                     String[] companyArr = userJSONObject.getString("company").split(", ");
                     String[] societyArr = userJSONObject.getString("society").split(", ");
                     ArrayList<String> groupNames = new ArrayList<>();
-                    for (int i = 0; i < schoolArr.length; i++) {
-                        groupNames.add(schoolArr[i]);
+                    ArrayList<GroupParent> groupParents = new ArrayList<>();
+                    if (schoolArr.length > 0) {
+                        GroupParent groupParent = new GroupParent();
+                        for (int i = 0; i < schoolArr.length; i++) {
+                            groupNames.add(schoolArr[i]);
+                            GroupChild groupChild = new GroupChild();
+                            groupChild.setName(schoolArr[i]);
+                            groupParent.getChildList().add(groupChild);
+                        }
+                        groupParent.setName(getString(R.string.altar_user_school));
+                        groupParents.add(groupParent);
                     }
-                    for (int i = 0; i < companyArr.length; i++) {
-                        groupNames.add(companyArr[i]);
+                    if (companyArr.length > 0) {
+                        GroupParent groupParent = new GroupParent();
+                        for (int i = 0; i < companyArr.length; i++) {
+                            groupNames.add(companyArr[i]);
+                            GroupChild groupChild = new GroupChild();
+                            groupChild.setName(companyArr[i]);
+                            groupParent.getChildList().add(groupChild);
+                        }
+                        groupParent.setName(getString(R.string.altar_user_company));
+                        groupParents.add(groupParent);
                     }
-                    for (int i = 0; i < societyArr.length; i++) {
-                        groupNames.add(societyArr[i]);
+                    if (societyArr.length > 0) {
+                        GroupParent groupParent = new GroupParent();
+                        for (int i = 0; i < societyArr.length; i++) {
+                            groupNames.add(societyArr[i]);
+                            GroupChild groupChild = new GroupChild();
+                            groupChild.setName(societyArr[i]);
+                            groupParent.getChildList().add(groupChild);
+                        }
+                        groupParent.setName(getString(R.string.altar_user_society));
+                        groupParents.add(groupParent);
+
                     }
                     mUser.setGroupNames(groupNames);
+                    mUser.setGroupParents(groupParents);
+
                     mUser.setPublicLastWillMessage(userJSONObject.getString("lastwill"));
+                    mUser.setBankInfo(userJSONObject.getString("bank"));
                 }
             } else {
                 resultMessage = "fail";

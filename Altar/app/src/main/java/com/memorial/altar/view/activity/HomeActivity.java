@@ -26,10 +26,10 @@ import com.memorial.altar.model.LastWill;
 import com.memorial.altar.model.User;
 import com.memorial.altar.view.fragment.AltarContactFragment;
 import com.memorial.altar.view.fragment.AltarCreateFragment;
+import com.memorial.altar.view.fragment.AltarFragment;
 import com.memorial.altar.view.fragment.AltarPrivateLastWillFragment;
 import com.memorial.altar.view.fragment.AltarPublicLastWillFragment;
 import com.memorial.altar.view.fragment.AltarReadFragment;
-import com.memorial.altar.view.fragment.AltarUpdateFragment;
 import com.memorial.altar.view.fragment.FriendListFragment;
 import com.memorial.altar.view.fragment.ObituaryFragment;
 import com.memorial.altar.view.fragment.PermissionHeadlessFragment;
@@ -148,7 +148,7 @@ public class HomeActivity extends AppCompatActivity
     private void setupViewPager(ViewPager viewPager) {
         mHomeViewPagerAdapter = new HomeViewPagerAdapter(getSupportFragmentManager());
 //        mHomeViewPagerAdapter.addFragment(FriendListFragment.newInstance(), getString(R.string.title_friends));
-//        adapter.addFragment(AltarUpdateFragment.newInstance(), getString(R.string.title_altar));
+//        adapter.addFragment(AltarFragment.newInstance(), getString(R.string.title_altar));
 //        mHomeViewPagerAdapter.addFragment(AltarCreateFragment.newInstance(), getString(R.string.title_altar));
 //        mHomeViewPagerAdapter.addFragment(ObituaryFragment.newInstance(), getString(R.string.title_obituary));
         ArrayList<Fragment> fragments = new ArrayList<>();
@@ -157,7 +157,7 @@ public class HomeActivity extends AppCompatActivity
         if (mUser == null) {
             fragments.add(AltarCreateFragment.newInstance());
         } else {
-            fragments.add(AltarUpdateFragment.newInstance(mUser));
+            fragments.add(AltarFragment.newInstance(mUser));
         }
         fragments.add(ObituaryFragment.newInstance());
         fragmentTitles.add(getString(R.string.title_friends));
