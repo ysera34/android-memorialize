@@ -50,6 +50,13 @@ public class UserSharedPreferences {
                 .apply();
     }
 
+    public static void removeStoredUserEamil(Context context) {
+        PreferenceManager.getDefaultSharedPreferences(context)
+                .edit()
+                .remove(PREF_USER_EMAIL)
+                .apply();
+    }
+
     public static String getStoredUserPassword(Context context) {
         return PreferenceManager.getDefaultSharedPreferences(context)
                 .getString(PREF_USER_PASSWORD, null);

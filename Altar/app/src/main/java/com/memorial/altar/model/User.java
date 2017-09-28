@@ -13,6 +13,7 @@ public class User implements Serializable {
     private String mImagePath;
     private String mName;
     private String mBirth;
+    private String mEmail;
     private String mGender;
     private ArrayList<String> mGroupNames;
     private ArrayList<GroupParent> mGroupParents;
@@ -49,6 +50,14 @@ public class User implements Serializable {
 
     public void setBirth(String birth) {
         mBirth = birth;
+    }
+
+    public String getEmail() {
+        return mEmail;
+    }
+
+    public void setEmail(String email) {
+        mEmail = email;
     }
 
     public String getGender() {

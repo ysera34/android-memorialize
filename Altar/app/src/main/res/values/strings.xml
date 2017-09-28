@@ -145,7 +145,7 @@
     <string name="dialog_message_contribution">소유하고 있는 별 : %s</string>
     <string name="dialog_message_contribution_confirm">기부해주셔서 감사합니다. 당신의 조의금은 고인과 가족들에게 큰 힘이 됩니다.</string>
     <string name="not_enough_star_message">별이 부족합니다.</string>
-    <string name="altar_user_contribution">조의금 계좌 등록</string>
+    <string name="altar_user_contribution_create">조의금 계좌 등록</string>
     <string name="altar_user_bank_hint">은행명</string>
     <string name="altar_user_account_holder_hint">예금주</string>
     <string name="altar_user_account_number_hint">계좌번호</string>
@@ -155,6 +155,7 @@
     <string name="sign_in_fail_message">로그인 정보가 잘못되었습니다.</string>
     <string name="sign_up_fail_message">회원가입 정보가 잘못되었습니다.</string>
     <string name="obituary_fail_message">부고 알림 서버가 응답하지 않습니다. 잠시후 다시 요청해주세요.</string>
+    <string name="altar_user_contribution">조의금 계좌 정보</string>
 
     <string-array name="add_friend_group_scope">
         <item>elementary school</item>
@@ -207,6 +208,19 @@
         <item>한미숙</item>
         <item>남현곤</item>
         <item>홍숙희</item>
+    </string-array>
+
+    <string-array name="obituary_sample_friend_email">
+        <item>user01@korea.com</item>
+        <item>user02@korea.com</item>
+        <item>user03@korea.com</item>
+        <item>user04@korea.com</item>
+        <item>user05@korea.com</item>
+        <item>user06@korea.com</item>
+        <item>user07@korea.com</item>
+        <item>user08@korea.com</item>
+        <item>user09@korea.com</item>
+        <item>user10@korea.com</item>
     </string-array>
 
     <string-array name="obituary_sample_friend_image_path">

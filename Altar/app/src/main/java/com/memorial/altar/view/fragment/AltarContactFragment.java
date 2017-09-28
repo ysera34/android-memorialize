@@ -89,8 +89,8 @@ public class AltarContactFragment extends BottomSheetDialogFragment
         super.setupDialog(dialog, style);
         LayoutInflater layoutInflater = LayoutInflater.from(getActivity());
         View view = layoutInflater.inflate(R.layout.fragment_dialog_altar_contact, null);
-        mAltarContactToolbar = view.findViewById(R.id.altar_contact_toolbar);
-        mAltarContactToolbar.setTitle(R.string.altar_user_contact_people);
+//        mAltarContactToolbar = view.findViewById(R.id.altar_contact_toolbar);
+//        mAltarContactToolbar.setTitle(R.string.altar_user_contact_people);
 
         mAltarContactCountTextView = view.findViewById(R.id.altar_contact_count_text_view);
         mAltarContactCountTextView.setOnClickListener(this);

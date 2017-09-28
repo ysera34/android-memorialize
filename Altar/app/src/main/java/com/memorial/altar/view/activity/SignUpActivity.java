@@ -14,6 +14,7 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import com.memorial.altar.R;
+import com.memorial.altar.util.UserSharedPreferences;
 
 import org.json.JSONObject;
 
@@ -151,6 +152,9 @@ public class SignUpActivity extends AppCompatActivity implements View.OnClickLis
                 Log.i(TAG, "requestAltarUser: result to string " + result.toString());
                 reader.close();
                 resultMessage = parseSignUp(result.toString());
+
+                UserSharedPreferences.removeStoredUserEamil(getApplicationContext());
+                UserSharedPreferences.setStoredUserEmail(getApplicationContext(), email);
             }
             connection.disconnect();
         } catch (Exception e) {
@@ -198,6 +202,9 @@ public class SignUpActivity extends AppCompatActivity implements View.OnClickLis
 //                    mUser.setGroupNames(groupNames);
 //                    mUser.setPublicLastWillMessage(userJSONObject.getString("lastwill"));
 //                }
+
+
+
             } else {
                 resultMessage = "fail";
             }

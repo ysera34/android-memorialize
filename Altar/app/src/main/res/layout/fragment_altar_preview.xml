@@ -105,6 +105,26 @@
                     android:textColor="@color/colorFont"
                     android:textSize="14sp"/>
 
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center_horizontal"
+                    android:text="@string/altar_user_contribution"
+                    android:textColor="@color/colorFont"
+                    android:textSize="20sp"/>
+
+                <TextView
+                    android:id="@+id/altar_preview_user_contribution_text_view"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center_horizontal"
+                    android:layout_marginBottom="16dp"
+                    android:layout_marginTop="10dp"
+                    android:gravity="center_horizontal"
+                    android:lineSpacingExtra="3sp"
+                    android:textColor="@color/colorFont"
+                    android:textSize="14sp"/>
+
             </LinearLayout>
 
         </LinearLayout>

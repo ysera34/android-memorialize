@@ -21,6 +21,7 @@ import com.memorial.altar.R;
 import com.memorial.altar.model.GroupChild;
 import com.memorial.altar.model.GroupParent;
 import com.memorial.altar.model.User;
+import com.memorial.altar.util.UserSharedPreferences;
 
 import org.json.JSONObject;
 
@@ -272,6 +273,7 @@ public class SignInActivity extends AppCompatActivity implements View.OnClickLis
                     mUser.setId(userJSONObject.getInt("id"));
                     mUser.setName(userJSONObject.getString("name"));
                     mUser.setBirth(userJSONObject.getString("birth"));
+                    mUser.setEmail(userJSONObject.getString("email"));
                     mUser.setImagePath(userJSONObject.getString("imagepath"));
                     mUser.setGender(userJSONObject.getString("gender"));
                     String[] schoolArr = userJSONObject.getString("school").split(", ");
@@ -318,6 +320,9 @@ public class SignInActivity extends AppCompatActivity implements View.OnClickLis
 
                     mUser.setPublicLastWillMessage(userJSONObject.getString("lastwill"));
                     mUser.setBankInfo(userJSONObject.getString("bank"));
+
+                    UserSharedPreferences.removeStoredUserEamil(getApplicationContext());
+                    UserSharedPreferences.setStoredUserEmail(getApplicationContext(), mUser.getEmail());
                 }
             } else {
                 resultMessage = "fail";

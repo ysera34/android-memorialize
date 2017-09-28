@@ -9,6 +9,7 @@ public class Friend {
     private int mId;
     private int mGroupId;
     private String mImagePath;
+    private String mEmail;
     private String mName;
     private String mBirth;
     private String mObitDate;
@@ -40,6 +41,14 @@ public class Friend {
 
     public void setImagePath(String imagePath) {
         mImagePath = imagePath;
+    }
+
+    public String getEmail() {
+        return mEmail;
+    }
+
+    public void setEmail(String email) {
+        mEmail = email;
     }
 
     public String getName() {

@@ -25,6 +25,7 @@ import android.widget.Toast;
 import com.bumptech.glide.Glide;
 import com.memorial.altar.R;
 import com.memorial.altar.model.Friend;
+import com.memorial.altar.util.UserSharedPreferences;
 import com.memorial.altar.view.activity.AltarActivity;
 
 import java.util.ArrayList;
@@ -228,6 +229,7 @@ public class FriendListFragment extends Fragment implements View.OnClickListener
 
     private ArrayList<Friend> getFriends() {
         String[] obituarySampleFriendNameArr = getResources().getStringArray(R.array.obituary_sample_friend_name);
+        String[] obituarySampleFriendEmailArr = getResources().getStringArray(R.array.obituary_sample_friend_email);
         String[] obituarySampleImagePathArr = getResources().getStringArray(R.array.obituary_sample_friend_image_path);
         String[] obituarySampleFriendBirthArr = getResources().getStringArray(R.array.obituary_sample_friend_birth);
         ArrayList<Friend> friends = new ArrayList<>();
@@ -237,12 +239,25 @@ public class FriendListFragment extends Fragment implements View.OnClickListener
             friend.setCommented(i % 2 == 0);
             if (i <= 9) {
                 friend.setName(obituarySampleFriendNameArr[i]);
+                friend.setEmail(obituarySampleFriendEmailArr[i]);
                 friend.setImagePath(obituarySampleImagePathArr[i]);
                 friend.setBirth(obituarySampleFriendBirthArr[i]);
                 friend.setObitDate("2017-" + "9-" + i);
             }
             friends.add(friend);
         }
+
+        String userEmail = UserSharedPreferences.getStoredUserEmail(getActivity());
+        if (userEmail != null) {
+            int size = friends.size();
+            for (int i = 0; i < size; i++) {
+                if (friends.get(i).getEmail().equals(userEmail)) {
+                    friends.remove(i);
+                    break;
+                }
+            }
+        }
+
         return friends;
     }
 

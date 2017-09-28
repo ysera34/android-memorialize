@@ -52,6 +52,7 @@ public class AltarPreviewFragment extends Fragment implements View.OnClickListen
     private RecyclerView mAltarPreviewUserGroupNameRecyclerView;
     private UserGroupNameAdapter mUserGroupNameAdapter;
     private TextView mAltarPreviewUserPublicLastWillMessageTextView;
+    private TextView mAltarPreviewUserContributionTextView;
 
     private TextView mAltarPreviewConfirmButtonTextView;
 
@@ -77,6 +78,7 @@ public class AltarPreviewFragment extends Fragment implements View.OnClickListen
         mAltarPreviewUserPublicLastWillMessageTextView = view.findViewById(R.id.altar_preview_user_public_last_will_message_text_view);
         mAltarPreviewConfirmButtonTextView = view.findViewById(R.id.altar_preview_confirm_button_text_view);
         mAltarPreviewConfirmButtonTextView.setOnClickListener(this);
+        mAltarPreviewUserContributionTextView = view.findViewById(R.id.altar_preview_user_contribution_text_view);
         return view;
     }
 
@@ -123,6 +125,7 @@ public class AltarPreviewFragment extends Fragment implements View.OnClickListen
         mAltarPreviewUserBirthTextView.setText(String.valueOf(mAltarUser.getBirth()));
         mAltarPreviewUserGenderTextView.setText(String.valueOf(mAltarUser.getGender()));
         mAltarPreviewUserPublicLastWillMessageTextView.setText(String.valueOf(mAltarUser.getPublicLastWillMessage()));
+        mAltarPreviewUserContributionTextView.setText(String.valueOf(mAltarUser.getBankInfo()));
     }
 
     private class UserGroupNameAdapter extends RecyclerView.Adapter<UserGroupNameViewHolder> {

@@ -140,7 +140,7 @@
                 android:background="@drawable/edit_text_under_line_focus_false"
                 android:clickable="true"
                 android:ellipsize="end"
-                android:hint="@string/altar_user_contribution"
+                android:hint="@string/altar_user_contribution_create"
                 android:maxLines="1"
                 android:padding="8dp"
                 android:textColor="@color/colorFont"
